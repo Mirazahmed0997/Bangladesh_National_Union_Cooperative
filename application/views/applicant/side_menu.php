@@ -9,7 +9,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="<?php if(!empty($login_user_info_all->r_image)){ echo base_url('assets/uploads/applicant/'.$login_user_info_all->r_image); } else { echo base_url('assets/backend/dist/img/user.jpg'); }?>" class="img-circle elevation-2" alt="User Image">
             </div>
@@ -18,7 +18,7 @@
                                             echo $login_user_info_all->r_first_name.' '.$login_user_info_all->r_last_name;
                                             ?></a>
             </div>
-        </div>
+        </div> -->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -30,11 +30,34 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                            <!--								<i class="right fas fa-angle-left"></i>-->
+                            <!--<i class="right fas fa-angle-left"></i>-->
                         </p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview <?= active_open('applicant_cv', $main_nav); ?>">
+
+
+                <li class="nav-item has-treeview <?= active_open('members_list', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('members_list', $main_nav); ?>">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            সদস্য ব্যবস্থাপনা
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Applicant/members_list/members_list') ?>" class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>সদস্য সংখ্যা </p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+
+
+                <!-- <li class="nav-item has-treeview <?= active_open('applicant_cv', $main_nav); ?>">
                     <a href="#" class="nav-link <?= active_nav('applicant_cv', $main_nav); ?>">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
@@ -97,7 +120,7 @@
                             পাসওয়ার্ড পরিবর্তন
                         </p>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </nav>

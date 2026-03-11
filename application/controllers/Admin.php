@@ -14,24 +14,36 @@ class Admin extends CI_Controller
 		$this->serverDateTime = $date->format('Y-m-d H:i') . "\n";
 		if ($this->session->userdata('currentActiveId') == 1) {
 		} else {
-			$this->session->set_flashdata('login_failed', 'Link is broken');
-			redirect('admin');
+			// $this->session->set_flashdata('login_failed', 'Link is broken');
+			// redirect('admin');
 		}
 	}
 
+	// public function index()
+
 	public function index()
 	{
-		$data = $this->engine->store_nav('admin', 'Nothing', 'Welcome to dashboard');
-		$president = $this->Common->get_data('president')->result();
-		$data['total_president'] = count($president);
-		$secretary = $this->Common->get_data('secretary')->result();
-		$data['total_secretary'] = count($secretary);
-		$jointsecretary = $this->Common->get_data('jointsecretary')->result();
-		$data['total_jointsecretary'] = count($jointsecretary);
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
-		$path = 'admin/dashboard';
+		// Get member count
+		$data['member_count'] = $this->db->count_all('members_n');
+
+		$path = 'applicant/dashboard';
+
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
+	// {
+	// 	$data = $this->engine->store_nav('admin', 'Nothing', 'Welcome to dashboard');
+	// 	$president = $this->Common->get_data('president')->result();
+	// 	$data['total_president'] = count($president);
+	// 	$secretary = $this->Common->get_data('secretary')->result();
+	// 	$data['total_secretary'] = count($secretary);
+	// 	$jointsecretary = $this->Common->get_data('jointsecretary')->result();
+	// 	$data['total_jointsecretary'] = count($jointsecretary);
+
+	// 	$path = 'admin/dashboard';
+	// 	$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	// }
 	public function president_list()
 	{
 		$data = $this->engine->store_nav('homepage', 'president_list', 'চান্দ্রা শিক্ষিত বেকার যুব বহুমূখী সমবায় সমিতি লিঃ');
@@ -322,7 +334,7 @@ class Admin extends CI_Controller
 			$data = array(
 				'name' => $this->input->post("title", true),
 				'about' => $this->input->post("pageditor"),
-				'fileName'    => $president_image,
+				'fileName' => $president_image,
 
 			);
 			$id = $this->input->post('id');
@@ -498,7 +510,7 @@ class Admin extends CI_Controller
 			$data = array(
 				'name' => $this->input->post("title", true),
 				'about' => $this->input->post("pageditor"),
-				'fileName'    => $president_image,
+				'fileName' => $president_image,
 
 			);
 			$id = $this->input->post('id');
@@ -560,7 +572,7 @@ class Admin extends CI_Controller
 			$data = array(
 				'name' => $this->input->post("title", true),
 				'about' => $this->input->post("pageditor"),
-				'fileName'    => $secretary_image,
+				'fileName' => $secretary_image,
 
 			);
 			$id = $this->input->post('id');
@@ -1668,7 +1680,7 @@ class Admin extends CI_Controller
 			$data = array(
 				'title' => $this->input->post("title", true),
 				'description' => $this->input->post("pageditor"),
-				'filename'    => $fileName,
+				'filename' => $fileName,
 				'status' => 1,
 				'publish_date' => $publish_date,
 			);
@@ -1741,7 +1753,7 @@ class Admin extends CI_Controller
 			$data = array(
 				'title' => $this->input->post("title", true),
 				'description' => $this->input->post("pageditor"),
-				'filename'    => $fileName,
+				'filename' => $fileName,
 				'status' => 1,
 				'publish_date' => $publish_date,
 			);
@@ -1912,15 +1924,15 @@ class Admin extends CI_Controller
 			redirect("Admin/gallery_create", "location");
 		} else {
 			$total_img = count($_FILES['filename']['name']);
-			$asd_datas=array();
+			$asd_datas = array();
 			$i = 0;
-			for($i=0; $i<$total_img; $i++) {
-				
-				$_FILES['file']['name']       = $_FILES['filename']['name'][$i];
-				$_FILES['file']['type']       = $_FILES['filename']['type'][$i];
-				$_FILES['file']['tmp_name']   = $_FILES['filename']['tmp_name'][$i];
-				$_FILES['file']['error']      = $_FILES['filename']['error'][$i];
-				$_FILES['file']['size']       = $_FILES['filename']['size'][$i];
+			for ($i = 0; $i < $total_img; $i++) {
+
+				$_FILES['file']['name'] = $_FILES['filename']['name'][$i];
+				$_FILES['file']['type'] = $_FILES['filename']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['filename']['tmp_name'][$i];
+				$_FILES['file']['error'] = $_FILES['filename']['error'][$i];
+				$_FILES['file']['size'] = $_FILES['filename']['size'][$i];
 
 
 				$file_path_user_image = 'assets/uploads/gallery/';
@@ -1931,11 +1943,11 @@ class Admin extends CI_Controller
 					'gallery_album_id' => $this->input->post("gallery_album_id", true),
 					'title' => $this->input->post("title", true),
 					'photo' => $gallery_image,
-					'status'=> 1,
+					'status' => 1,
 				);
 				$asd_datas[] = $asd_data;
 			}
-			$this->Common->set_data_batch('gallery_photo',$asd_datas);
+			$this->Common->set_data_batch('gallery_photo', $asd_datas);
 
 			// $file_path_user_image = 'assets/uploads/gallery/';
 			// $preFileName = time();
@@ -2001,7 +2013,7 @@ class Admin extends CI_Controller
 				'gallery_album_id' => $this->input->post("gallery_album_id", true),
 				'title' => $this->input->post("title", true),
 				'photo' => $gallery_image,
-				'status'=> 1,
+				'status' => 1,
 			);
 			$id = $this->input->post('id');
 			$album_id = $this->input->post('album_id');
@@ -2716,7 +2728,7 @@ class Admin extends CI_Controller
 		$delete_arr = array();
 		if (!empty($pre_rcd_id)) {
 			foreach ($pre_rcd_id as $pkey => $pvalue) {
-				$delete_arr[] = array('id' => $pvalue,);
+				$delete_arr[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('recruitment_committee_details', 'rcd_id', $delete_arr);
 		}
@@ -2908,7 +2920,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_icd_id)) {
 			$delete_arr = array();
 			foreach ($pre_icd_id as $pkey => $pvalue) {
-				$delete_arr[] = array('id' => $pvalue,);
+				$delete_arr[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('interview_committee_details', 'icd_id', $delete_arr);
 		}
@@ -3447,7 +3459,7 @@ class Admin extends CI_Controller
 	{
 		$config = array(
 			'protocol' => 'smtp',
-			'smtp_crypto'   => 'ssl',
+			'smtp_crypto' => 'ssl',
 			'smtp_host' => 'mail.sbcl.coop',
 			'smtp_port' => 465,
 			'smtp_user' => 'dcar@sbcl.coop',
@@ -3918,7 +3930,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_ae_id)) {
 			$delete_arr = array();
 			foreach ($pre_ae_id as $pkey => $pvalue) {
-				$delete_arr[] = array('id' => $pvalue,);
+				$delete_arr[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_education', 'ae_id', $delete_arr);
 		}
@@ -3957,7 +3969,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_at_id)) {
 			$delete_arr_at = array();
 			foreach ($pre_at_id as $pkey => $pvalue) {
-				$delete_arr_at[] = array('id' => $pvalue,);
+				$delete_arr_at[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_training', 'at_id', $delete_arr_at);
 		}
@@ -3998,7 +4010,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_ac_id)) {
 			$delete_arr_ac = array();
 			foreach ($pre_ac_id as $pkey => $pvalue) {
-				$delete_arr_ac[] = array('id' => $pvalue,);
+				$delete_arr_ac[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_certification', 'ac_id', $delete_arr_ac);
 		}
@@ -4034,7 +4046,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_aeh_id)) {
 			$delete_arr_aeh = array();
 			foreach ($pre_aeh_id as $pkey => $pvalue) {
-				$delete_arr_aeh[] = array('id' => $pvalue,);
+				$delete_arr_aeh[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_employment_history', 'aeh_id', $delete_arr_aeh);
 		}
@@ -4076,7 +4088,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_ar_id)) {
 			$delete_arr_ar = array();
 			foreach ($pre_ar_id as $pkey => $pvalue) {
-				$delete_arr_ar[] = array('id' => $pvalue,);
+				$delete_arr_ar[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_reference', 'ar_id', $delete_arr_ar);
 		}
@@ -4117,7 +4129,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_al_id)) {
 			$delete_arr_al = array();
 			foreach ($pre_al_id as $pkey => $pvalue) {
-				$delete_arr_al[] = array('id' => $pvalue,);
+				$delete_arr_al[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_language', 'al_id', $delete_arr_al);
 		}
@@ -4151,7 +4163,7 @@ class Admin extends CI_Controller
 		if (!empty($pre_as_id)) {
 			$delete_arr_as = array();
 			foreach ($pre_as_id as $pkey => $pvalue) {
-				$delete_arr_as[] = array('id' => $pvalue,);
+				$delete_arr_as[] = array('id' => $pvalue, );
 			}
 			$this->Common->delete_batch('applicant_skill', 'as_id', $delete_arr_as);
 		}
@@ -4410,7 +4422,7 @@ class Admin extends CI_Controller
 		Success. Data has been submitted successfully.
 	  	</div>');
 
-		redirect($url.'/'.$parameter);
+		redirect($url . '/' . $parameter);
 	}
 	public function do_upload($file, $preFileName, $file_path)
 	{
@@ -4448,7 +4460,7 @@ class Admin extends CI_Controller
 	public function videoc_upload($prefix = 'video')
 	{
 		$config['upload_path'] = 'assets/uploads/videos/';
-		$config['allowed_types']  = 'mp4|webm|ogg';
+		$config['allowed_types'] = 'mp4|webm|ogg';
 		$config['max_size'] = '';
 		$config['max_width'] = '200000000';
 		$config['max_height'] = '1000000000000';
