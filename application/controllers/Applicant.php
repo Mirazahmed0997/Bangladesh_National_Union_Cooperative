@@ -52,12 +52,10 @@ class Applicant extends CI_Controller
 
     public function view_member($id = null)
     {
-        //  Redirect if no ID
         if (empty($id)) {
             redirect(base_url('Applicant/members_list'));
         }
 
-        //  Set dashboard navigation & page title
         $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
         // Fetch the specific member
@@ -65,7 +63,7 @@ class Applicant extends CI_Controller
 
         //  Check if member exists
         if (!$data['member']) {
-            show_404(); // member not found
+            show_404(); 
         }
 
         //  Render the member details inside dashboard layout
@@ -79,7 +77,6 @@ class Applicant extends CI_Controller
 
     public function form_view($id = null)
     {
-        //  Redirect if no ID
         if (empty($id)) {
             redirect(base_url('Applicant/members_list'));
         }
@@ -90,15 +87,15 @@ class Applicant extends CI_Controller
         // Fetch the specific member
         $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
 
-        //  Check if member exists
         if (!$data['member']) {
-            show_404(); // member not found
+            show_404(); 
         }
 
         //  Render the member details inside dashboard layout
         $path = 'Applicant/members_list/form_view';
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
+  
 
     // ---------------------get all members-----------------
 
@@ -134,12 +131,10 @@ class Applicant extends CI_Controller
             $where_data['branch_name'] = $branch_name;
         }
 
-        // 4️⃣ Apply the filters to the query
         if (!empty($where_data)) {
             $this->db->where($where_data);
         }
 
-        // 5️⃣ Apply date range filter if provided
         if (!empty($from_date)) {
             $this->db->where('created_at >=', $from_date);
         }
@@ -148,13 +143,55 @@ class Applicant extends CI_Controller
             $this->db->where('created_at <=', $to_date);
         }
 
-        // 6️⃣ Fetch filtered members
         $data['members'] = $this->db->get('members_n')->result();
 
-        // 7️⃣ Load the view
         $path = 'Applicant/members_list/members_list';
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
+
+
+      // -------------------Update member details---------------------
+
+    public function edit_member($id = null)
+    {
+        if (empty($id)) {
+            redirect(base_url('Applicant/members_list'));
+        }
+
+        //  Set dashboard navigation & page title
+        $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
+
+        // Fetch the specific member
+        $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+
+        //  Check if member exists
+        if (!$data['member']) {
+            show_404();
+        }
+
+        //  Render the member details inside dashboard layout
+        $path = 'Applicant/members_list/updateForm';
+        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+    }
+
+
+    // ---------------------Delete single members-----------------
+
+
+	public function delete_member($id)
+	{
+		$this->Common->delete_data('members_n', 'id', $id);
+		redirect('members');
+	}
+
+
+ 
+
+
+
+
+
+
 
 
 

@@ -46,9 +46,9 @@
                 <label>লিঙ্গ</label>
                 <select name="gender" >
                     <option value="">নির্বাচন করুন</option>
-                    <option value="male">পুরুষ</option>
-                    <option value="female">মহিলা</option>
-                    <option value="other">অন্যান্য</option>
+                    <option value="পুরুষ">পুরুষ</option>
+                    <option value="মহিলা">মহিলা</option>
+                    <option value="অন্যান্য">অন্যান্য</option>
                 </select>
             </div>
             <div class="form-group">
@@ -69,15 +69,15 @@
             </div>
             <div class="form-group">
                 <label>সমিতিতে পদবী</label>
-                <input type="text" name="branch_designation" placeholder="সমিতিতে পদবী..." >
+                <input type="text" name="association_designation" placeholder="সমিতিতে পদবী..." >
             </div>
             <div class="form-group">
                 <label>সমিতি জেলা</label>
-                <input type="text" name="branch_district" placeholder="সমিতি জেলা..." >
+                <input type="text" name="association_district" placeholder="সমিতি জেলা..." >
             </div>
             <div class="form-group">
                 <label>সমিতি নাম</label>
-                <input type="text" name="branch_work_name" placeholder="সমিতি নাম..." >
+                <input type="text" name="association_name" placeholder="সমিতি নাম..." >
             </div>
             <div class="form-group">
                 <label>টাকার পরিমাণ</label>
@@ -97,56 +97,56 @@
         <div class="grid-container">
             <div class="form-group">
                 <label>সমিতির নাম</label>
-                <input type="text" name="branch_name" placeholder="নিবন্ধিত সমিতির নাম" >
+                <input type="text" name="Cooperative_association_name" placeholder="নিবন্ধিত সমিতির নাম" >
             </div>
             <div class="form-group">
                 <label>সমিতির মোবাইল নম্বর</label>
-                <input type="tel" name="branch_mobile_number" pattern="^\d{11}$" placeholder="017XXXXXXXX" >
+                <input type="tel" name="Cooperative_association_number" pattern="^\d{11}$" placeholder="017XXXXXXXX" >
             </div>
             <div class="form-group">
                 <label>সমিতির নিবন্ধিত ঠিকানা</label>
-                <textarea rows="3" name="branch_registration_address" placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা"></textarea>
+                <textarea rows="3" name="Cooperative_association_registration_address" placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা"></textarea>
             </div>
             <div class="form-group">
                 <label>বর্তমান ঠিকানা</label>
-                <textarea rows="3" name="branch_address" placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা"></textarea>
+                <textarea rows="3" name="Cooperative_association_address" placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা"></textarea>
             </div>
             <div class="form-group">
                 <label>সভাপতি</label>
-                <input type="text" name="branch_chairman" >
+                <input type="text" name="Cooperative_association_chairman" >
             </div>
             <div class="form-group">
                 <label>সম্পাদক</label>
-                <input type="text" name="branch_secretary" >
+                <input type="text" name="Cooperative_association_secretary" >
             </div>
             <div class="form-group">
                 <label>সমিতির রেজিষ্ট্রেশন নং</label>
-                <input type="text" name="branch_registration_no" >
+                <input type="text" name="Cooperative_association_registration_no" >
             </div>
             <div class="form-group">
                 <label>তারিখ</label>
-                <input type="date" name="branch_registration_date" >
+                <input type="date" name="Cooperative_association_registration_date" >
             </div>
             <div class="form-group">
                 <label>সমিতির শ্রেনি</label>
-                <input type="text" name="branch_class" >
+                <input type="text" name="Cooperative_association_class" >
             </div>
             <div class="form-group">
                 <label>টাইপ</label>
-                <select name="branch_type" >
+                <select name="Cooperative_association_type" >
                     <option value="">নির্বাচন করুন</option>
-                    <option value="male">প্রাথমিক</option>
-                    <option value="other">কেন্দ্রীয়</option>
-                    <option value="female">জাতীয়</option>
+                    <option value="প্রাথমিক">প্রাথমিক</option>
+                    <option value="কেন্দ্রীয়">কেন্দ্রীয়</option>
+                    <option value="জাতীয়">জাতীয়</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>সমিতির সদস্য সংখ্যা</label>
-                <input type="number" name="branch_member" >
+                <input type="number" name="Cooperative_association_member_count" >
             </div>
             <div class="form-group">
                 <label>সমিতির সদস্য নির্বাচনী ও কর্ম এলাকা</label>
-                <input type="text" name="branch_working_area" >
+                <input type="text" name="Cooperative_association_working_area" >
             </div>
         </div>
 

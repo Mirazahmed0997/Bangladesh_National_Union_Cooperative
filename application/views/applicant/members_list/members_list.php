@@ -32,9 +32,9 @@
                             <option value="">সদস্য সমিতির নাম</option>
 
                             <?php foreach ($members as $member): ?>
-                                <option value="<?= $member->branch_name ?>"
-                                    <?= $this->input->get('branch_name') == $member->branch_name ? 'selected' : '' ?>>
-                                    <?= $member->branch_name ?>
+                                <option value="<?= $member->Cooperative_association_name ?>"
+                                    <?= $this->input->get('Cooperative_association_name') == $member->Cooperative_association_name ? 'selected' : '' ?>>
+                                    <?= $member->Cooperative_association_name ?>
                                 </option>
                             <?php endforeach; ?>
 
@@ -106,11 +106,11 @@
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?= $row->id; ?></td>
-                                        <td><?= $row->branch_name; ?></td>
-                                        <td><?= $row->branch_registration_address; ?></td>
-                                        <td><?= $row->branch_registration_no; ?></td>
-                                        <td><?= $row->branch_mobile_number; ?></td>
-                                        <td><?= $row->branch_registration_date; ?></td>
+                                        <td><?= $row->Cooperative_association_name; ?></td>
+                                        <td><?= $row->Cooperative_association_address; ?></td>
+                                        <td><?= $row->Cooperative_association_registration_date; ?></td>
+                                        <td><?= $row->Cooperative_association_number; ?></td>
+                                        <td><?= $row->Cooperative_association_registration_date; ?></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -121,7 +121,9 @@
 
                                             <a href="<?= base_url('Applicant/form_view/' . $row->id); ?>"
                                                 class="btn btn-warning btn-sm">Preview</a>
-                                            <a href="<?= base_url('Site/delete_member/' . $row->id); ?>"
+                                            <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
+                                                class="btn btn-warning btn-sm">Update</a>
+                                            <a href="<?= base_url('Applicant/delete_member/' . $row->id); ?>"
                                                 class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Are you sure?');">Delete</a>
                                         </td>
