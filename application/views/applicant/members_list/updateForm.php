@@ -14,9 +14,9 @@
                 <div class="card-body">
 
                     <form action="<?= base_url('Site/update_member/' . $member->id); ?>" method="POST"
-                        enctype="multipart/form-data">
+                        enctype="multipart/form-data" onsubmit="return validatePassword()">
 
-                        <!-- Sarok Info -->
+
                         <div class="row">
 
                             <div class="col-md-6 form-group">
@@ -29,6 +29,42 @@
                                 <label>তারিখ</label>
                                 <input type="date" class="form-control" name="sarok_date"
                                     value="<?= $member->sarok_date ?>">
+                            </div>
+
+                        </div>
+
+
+                        <!-- authentication Info -->
+                        <div class="row">
+
+                            <div class="col-md-4 form-group">
+                                <label>মোবাইল নম্বর</label>
+                                <input type="text" class="form-control" name="mobile_number"
+                                    value="<?= $member->mobile_number ?>">
+                            </div>
+
+
+                            <div class="col-md-4 form-group">
+                                <label class="text-green">পাসওয়ার্ড পরিবর্তন করুন</label>
+                                <div style="position:relative;">
+                                    <input type="password" name="password" id="password" class="form-control"
+                                        value="<?= $member->password ?>">
+
+                                    <i class="fa fa-eye" onclick="togglePassword('password', this)"
+                                        style="position:absolute; right:10px; top:10px; cursor:pointer;">
+                                    </i>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label class="text-green">কন্ফার্ম পাসওয়ার্ড</label>
+                                <div style="position:relative;">
+                                    <input type="password" name="confirm_password" id="confirm_password"
+                                        class="form-control" value="<?= $member->password ?>">
+
+                                    <i class="fa fa-eye" onclick="togglePassword('confirm_password', this)"
+                                        style="position:absolute; right:10px; top:10px; cursor:pointer;">
+                                    </i>
+                                </div>
                             </div>
 
                         </div>
@@ -67,11 +103,14 @@
                                     value="<?= $member->birth_date ?>">
                             </div>
 
-                            <div class="col-md-4 form-group">
+
+
+                            <!-- <div class="col-md-4 form-group">
                                 <label>মোবাইল নম্বর</label>
                                 <input type="text" class="form-control" name="mobile_number"
                                     value="<?= $member->mobile_number ?>">
-                            </div>
+                            </div> -->
+
 
                             <div class="col-md-4 form-group">
                                 <label>লিঙ্গ</label>
@@ -168,6 +207,10 @@
                                 <input type="text" class="form-control" name="Cooperative_association_number"
                                     value="<?= $member->Cooperative_association_number ?>">
                             </div>
+
+
+
+
                             <div class="col-md-4 form-group">
                                 <label>সভাপতি</label>
                                 <input type="text" class="form-control" name="Cooperative_association_chairman"
@@ -326,3 +369,41 @@
     </section>
 
 </div>
+
+<script>
+    function validatePassword() {
+
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+
+        if (password.length < 8) {
+            alert("পাসওয়ার্ড কমপক্ষে ৮ ডিজিট হতে হবে");
+            return false;
+        }
+        if (password !== confirmPassword) {
+            alert("পাসওয়ার্ড মিলছে না!");
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+    function togglePassword(fieldId, icon) {
+
+        var input = document.getElementById(fieldId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+
+    }
+
+</script>

@@ -224,27 +224,28 @@
                             <li><a href="#">প্রেস রিলিজ</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?php echo base_url('member_registration'); ?>" class="btn-contact">সদস্য আবেদন</a></li>
+                    <li><a href="applicant_dashboard">সদস্য তথ্য</a></li>
+                    <li><a href="<?php echo base_url('member_registration'); ?>" class="btn-contact">নতুন সদস্য আবেদন</a></li>
                 </ul>
             </nav>
 
 
-             <!-- <div class="header-controls">
-                <div class="lang-switch">
-                    <a href="admin"><button  id="langBtn">লগইন</button></a>
+             <div class="header-controls">
+                <div class="">
+                    
                 </div>
-            </div> -->
+            </div>
 
          
 
-            <div class="header-controls">
+            <!-- <div class="header-controls">
                 <div class="lang-switch">
                     <button onclick="toggleLanguage()" id="langBtn">English</button>
                 </div>
                 <div class="menu-toggle" onclick="toggleMenu()">
                     <i class="fas fa-bars"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
     </header>
     <section class="news-ticker">

@@ -8,7 +8,7 @@
     <div class="container job_details">
       <div class="row align-items-center">
         <div class="col-12 text-justify">
-            <form action="<?php echo base_url('Login/authentication_process'); ?>" method="post">
+            <form action="<?php echo base_url('member_login/login_process'); ?>" method="post">
                 <input type="hidden" name="userType" value="2">
                 <input type="hidden" name="login_value" value="1">
             <h1 class="text-center">Applicant Login</h1>
@@ -19,7 +19,7 @@
                 <div class="col-6">
                     <div class="row">
                         <div class="col-4">Mobile No <span style="color:red">*</span></div>
-                        <div class="col-8"><input type="number" name="number" class="form-control" required></div>
+                        <div class="col-8"><input type="number" name="mobile_number" class="form-control" required></div>
                     </div>
                     <div class="row">
                         <div class="col-4">Password <span style="color:red">*</span></div>
@@ -39,4 +39,6 @@
       </div>
     </div>
   </section>
+
+
   <!-- welcome section end -->

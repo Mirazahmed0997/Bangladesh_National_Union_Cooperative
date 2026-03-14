@@ -14,8 +14,8 @@ class Applicant extends CI_Controller
         $this->serverDateTime = $date->format('Y-m-d H:i') . "\n";
         if ($this->session->userdata('current_type') == 2) {
         } else {
-            // $this->session->set_flashdata('login_failed', 'Link is broken');
-            // redirect('applicant_login');
+            $this->session->set_flashdata('login_failed', 'Link is broken');
+            redirect('member_login');
         }
     }
 
@@ -25,21 +25,20 @@ class Applicant extends CI_Controller
     // {
     //     $data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
-    //     // $login_user_info_all = $this->session->userdata('login_user_info_all');
+    //     $login_user_info_all = $this->session->userdata('login_user_info_all');
 
-    //     // $where_data['applicant.ap_r_candidate_id'] = $login_user_info_all->r_candidate_id;
-    //     // $data['applied_list'] = $this->Common->get_data_applicant_list($where_data)->result();
+    //     $where_data['applicant.ap_r_candidate_id'] = $login_user_info_all->r_candidate_id;
+    //     $data['applied_list'] = $this->Common->get_data_applicant_list($where_data)->result();
     //     $path = 'applicant/dashboard';
     //     $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     // }
 
 
 
-    public function index()
+    public function members_count()
     {
         $data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
-        // Get member count
         $data['member_count'] = $this->db->count_all('members_n');
 
         $path = 'applicant/dashboard';

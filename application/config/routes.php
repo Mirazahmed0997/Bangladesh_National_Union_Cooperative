@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Site/index';
 $route['admin'] = 'Login/index';
-$route['applicant_login'] = 'Recruitment/login';
+// $route['applicant_login'] = 'Recruitment/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
 $route['admin_dashboard'] = 'Admin/index';
 
-$route['applicant_dashboard'] = 'Applicant/index';
+$route['applicant_dashboard'] = 'Applicant/members_count';
 $route['applicant_cv'] = 'Applicant/applicant_cv_view';
 
 
@@ -21,6 +21,8 @@ $route['applicant_cv'] = 'Applicant/applicant_cv_view';
 
 $route['member_registration'] = 'Site/member_application';
 $route['member_register'] = 'Site/member_application_save';
+$route['member_login'] = 'Member_login/index';
+
 
 
 // --------------------user dashboard----------------------

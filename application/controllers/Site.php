@@ -13,6 +13,268 @@ class Site extends CI_Controller
 		parent::__construct();
 	}
 
+
+
+
+
+	//   ---------------------------- function for file uploads------------------
+
+	private function upload_file($field_name, $file_path)
+	{
+		$config['upload_path'] = $file_path;
+		$config['allowed_types'] = 'jpg|jpeg|png|pdf';
+		$config['max_size'] = 2048;
+		$config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+
+		if ($this->upload->do_upload($field_name)) {
+			$data = $this->upload->data();
+			return $data['file_name'];
+		} else {
+			return '';
+		}
+	}
+
+
+
+	// ---------------------create member-----------------
+
+		public function member_application()
+	{
+		$data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
+
+		$path = "site/pages/member_application";
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
+
+
+	public function member_application_save()
+	{
+
+		$logo = $this->upload_file('logo', './assets/uploads/project/members/logo/');
+		$document_1 = $this->upload_file('document_1', './assets/uploads/project/members/members_document/');
+		$nomini_sign = $this->upload_file('nomini_sign', './assets/uploads/project/members/nominee_sign/');
+
+		$data = array(
+
+			'sarok_no' => $this->input->post('sarok_no'),
+			'sarok_date' => $this->input->post('sarok_date'),
+
+			'name' => $this->input->post('name'),
+			'father_name' => $this->input->post('father_name'),
+			'mother_name' => $this->input->post('mother_name'),
+			'nid' => $this->input->post('nid'),
+			'birth_date' => $this->input->post('birth_date'),
+			'mobile_number' => $this->input->post('mobile_number'),
+			'gender' => $this->input->post('gender'),
+
+			'village' => $this->input->post('village'),
+			'post' => $this->input->post('post'),
+			'sub_district' => $this->input->post('sub_district'),
+			'district' => $this->input->post('district'),
+
+			'association_designation' => $this->input->post('association_designation'),
+			'association_district' => $this->input->post('association_district'),
+			'association_name' => $this->input->post('association_name'),
+
+			'paid_amount' => $this->input->post('paid_amount'),
+			'voucher_no' => $this->input->post('voucher_no'),
+			'managing_committee_date' => $this->input->post('managing_committee_date'),
+
+			'Cooperative_association_name' => $this->input->post('Cooperative_association_name'),
+			'Cooperative_association_number' => $this->input->post('Cooperative_association_number'),
+			'Cooperative_association_registration_address' => $this->input->post('Cooperative_association_registration_address'),
+			'Cooperative_association_address' => $this->input->post('Cooperative_association_address'),
+			'Cooperative_association_chairman' => $this->input->post('Cooperative_association_chairman'),
+			'Cooperative_association_secretary' => $this->input->post('Cooperative_association_secretary'),
+			'Cooperative_association_registration_no' => $this->input->post('Cooperative_association_registration_no'),
+			'Cooperative_association_registration_date' => $this->input->post('Cooperative_association_registration_date'),
+			'Cooperative_association_class' => $this->input->post('Cooperative_association_class'),
+			'Cooperative_association_type' => $this->input->post('Cooperative_association_type'),
+			'Cooperative_association_member_count' => $this->input->post('Cooperative_association_member_count'),
+			'Cooperative_association_working_area' => $this->input->post('Cooperative_association_working_area'),
+
+			'nomini_name' => $this->input->post('nomini_name'),
+			'nomini_designation' => $this->input->post('nomini_designation'),
+			'nomini_mobile_no' => $this->input->post('nomini_mobile_no'),
+			'nomini_date' => $this->input->post('nomini_date'),
+			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+
+			'logo' => $logo,
+			'document_1' => $document_1,
+			'nomini_sign' => $nomini_sign,
+
+
+		);
+
+		$this->db->insert('members_n', $data);
+
+		redirect('members');
+	}
+
+
+
+	// // ---------------------get all members-----------------
+	// public function members_list()
+	// {
+	// 	$data['members'] = $this->db->get('members_n')->result();
+	// 	$this->load->view('site/members_list/members_list', $data);
+	// }
+
+
+	// // ---------------------get single members-----------------
+
+
+	// public function view_member($id)
+	// {
+	// 	$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+	// 	$this->load->view('site/members_list/member_Details', $data);
+	// }
+
+
+
+
+
+
+	// ---------------------Edit member's Data-----------------
+
+
+	public function edit_member($id)
+	{
+		$data['member'] = $this->db->get_where('members_n', ['id' => $id])->row();
+		$this->load->view('site/members_list/updateForm', $data);
+	}
+
+
+	public function update_member($id)
+	{
+		$member = $this->db->get_where('members_n', ['id' => $id])->row();
+
+		$update_data = [
+			'sarok_no' => $this->input->post('sarok_no'),
+			'sarok_date' => $this->input->post('sarok_date'),
+
+			'name' => $this->input->post('name'),
+			'father_name' => $this->input->post('father_name'),
+			'mother_name' => $this->input->post('mother_name'),
+			'nid' => $this->input->post('nid'),
+			'birth_date' => $this->input->post('birth_date'),
+			'mobile_number' => $this->input->post('mobile_number'),
+			'gender' => $this->input->post('gender'),
+
+			'village' => $this->input->post('village'),
+			'post' => $this->input->post('post'),
+			'sub_district' => $this->input->post('sub_district'),
+			'district' => $this->input->post('district'),
+
+			'association_designation' => $this->input->post('association_designation'),
+			'association_district' => $this->input->post('association_district'),
+			'association_name' => $this->input->post('association_name'),
+
+			'paid_amount' => $this->input->post('paid_amount'),
+			'voucher_no' => $this->input->post('voucher_no'),
+			'managing_committee_date' => $this->input->post('managing_committee_date'),
+
+			'Cooperative_association_name' => $this->input->post('Cooperative_association_name'),
+			'Cooperative_association_number' => $this->input->post('Cooperative_association_number'),
+			'Cooperative_association_registration_address' => $this->input->post('Cooperative_association_registration_address'),
+
+			'Cooperative_association_address' => $this->input->post('Cooperative_association_address'),
+			'Cooperative_association_chairman' => $this->input->post('Cooperative_association_chairman'),
+			'Cooperative_association_secretary' => $this->input->post('Cooperative_association_secretary'),
+			'Cooperative_association_registration_no' => $this->input->post('Cooperative_association_registration_no'),
+			'Cooperative_association_registration_date' => $this->input->post('Cooperative_association_registration_date'),
+			'Cooperative_association_class' => $this->input->post('Cooperative_association_class'),
+			'Cooperative_association_type' => $this->input->post('Cooperative_association_type'),
+			'Cooperative_association_member_count' => $this->input->post('Cooperative_association_member_count'),
+			'Cooperative_association_working_area' => $this->input->post('Cooperative_association_working_area'),
+
+			'nomini_name' => $this->input->post('nomini_name'),
+			'nomini_designation' => $this->input->post('nomini_designation'),
+			'nomini_mobile_no' => $this->input->post('nomini_mobile_no'),
+			'nomini_date' => $this->input->post('nomini_date'),
+			'password' => $this->input->post('password'),
+		];
+
+		// Handle file uploads
+
+
+		function update_file($field_name, $upload_path, $old_file = '', $allowed_types = '*')
+		{
+			$CI =& get_instance();
+
+			if (!empty($_FILES[$field_name]['name'])) {
+
+				$config['upload_path'] = $upload_path;
+				$config['allowed_types'] = $allowed_types;
+				$config['file_name'] = time() . '_' . $_FILES[$field_name]['name'];
+
+				$CI->load->library('upload');
+				$CI->upload->initialize($config);
+
+				if ($CI->upload->do_upload($field_name)) {
+
+					$uploadData = $CI->upload->data();
+					$new_file = $uploadData['file_name'];
+
+					// delete old file
+					if (!empty($old_file) && file_exists($upload_path . $old_file)) {
+						unlink($upload_path . $old_file);
+					}
+
+					return $new_file;
+				}
+			}
+
+			return $old_file;
+		}
+
+
+
+
+
+		$update_data['logo'] = update_file(
+			'logo',
+			'./assets/uploads/project/members/logo/',
+			$member->logo,
+			'jpg|jpeg|png'
+		);
+
+		$update_data['nomini_sign'] = update_file(
+			'nomini_sign',
+			'./assets/uploads/project/members/nominee_sign/',
+			$member->nomini_sign,
+			'jpg|jpeg|png'
+		);
+
+		$update_data['document_1'] = update_file(
+			'document_1',
+			'./assets/uploads/project/members/members_document',
+			$member->document_1,
+			'pdf'
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('members_n', $update_data);
+
+		redirect(base_url('applicant/members_list/member_Details/' . $id));
+	}
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
 	public function index()
 	{
 		$data = $this->engine->store_nav('site', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
@@ -345,13 +607,7 @@ class Site extends CI_Controller
 			force_download($name, $data);
 		}
 	}
-	public function member_application()
-	{
-		$data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
 
-		$path = "site/pages/member_application";
-		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
-	}
 	public function history()
 	{
 		$data = $this->engine->store_nav('site', 'Nothing', 'সংগঠনের ইতিহাস');
@@ -461,246 +717,6 @@ class Site extends CI_Controller
 
 
 
-	//   ---------------------------- function for file uploads------------------
-
-	private function upload_file($field_name, $file_path)
-	{
-		$config['upload_path'] = $file_path;
-		$config['allowed_types'] = 'jpg|jpeg|png|pdf';
-		$config['max_size'] = 2048;
-		$config['encrypt_name'] = TRUE;
-
-		$this->load->library('upload', $config);
-		$this->upload->initialize($config);
-
-		if ($this->upload->do_upload($field_name)) {
-			$data = $this->upload->data();
-			return $data['file_name'];
-		} else {
-			return '';
-		}
-	}
-
-
-
-	// ---------------------create member-----------------
-
-
-	public function member_application_save()
-	{
-
-		$logo = $this->upload_file('logo', './assets/uploads/project/members/logo/');
-		$document_1 = $this->upload_file('document_1', './assets/uploads/project/members/members_document/');
-		$nomini_sign = $this->upload_file('nomini_sign', './assets/uploads/project/members/nominee_sign/');
-
-		$data = array(
-
-			'sarok_no' => $this->input->post('sarok_no'),
-			'sarok_date' => $this->input->post('sarok_date'),
-
-			'name' => $this->input->post('name'),
-			'father_name' => $this->input->post('father_name'),
-			'mother_name' => $this->input->post('mother_name'),
-			'nid' => $this->input->post('nid'),
-			'birth_date' => $this->input->post('birth_date'),
-			'mobile_number' => $this->input->post('mobile_number'),
-			'gender' => $this->input->post('gender'),
-
-			'village' => $this->input->post('village'),
-			'post' => $this->input->post('post'),
-			'sub_district' => $this->input->post('sub_district'),
-			'district' => $this->input->post('district'),
-
-			'association_designation' => $this->input->post('association_designation'),
-			'association_district' => $this->input->post('association_district'),
-			'association_name' => $this->input->post('association_name'),
-
-			'paid_amount' => $this->input->post('paid_amount'),
-			'voucher_no' => $this->input->post('voucher_no'),
-			'managing_committee_date' => $this->input->post('managing_committee_date'),
-
-			'Cooperative_association_name' => $this->input->post('Cooperative_association_name'),
-			'Cooperative_association_number' => $this->input->post('Cooperative_association_number'),
-			'Cooperative_association_registration_address' => $this->input->post('Cooperative_association_registration_address'),
-			'Cooperative_association_address' => $this->input->post('Cooperative_association_address'),
-			'Cooperative_association_chairman' => $this->input->post('Cooperative_association_chairman'),
-			'Cooperative_association_secretary' => $this->input->post('Cooperative_association_secretary'),
-			'Cooperative_association_registration_no' => $this->input->post('Cooperative_association_registration_no'),
-			'Cooperative_association_registration_date' => $this->input->post('Cooperative_association_registration_date'),
-			'Cooperative_association_class' => $this->input->post('Cooperative_association_class'),
-			'Cooperative_association_type' => $this->input->post('Cooperative_association_type'),
-			'Cooperative_association_member_count' => $this->input->post('Cooperative_association_member_count'),
-			'Cooperative_association_working_area' => $this->input->post('Cooperative_association_working_area'),
-
-			'nomini_name' => $this->input->post('nomini_name'),
-			'nomini_designation' => $this->input->post('nomini_designation'),
-			'nomini_mobile_no' => $this->input->post('nomini_mobile_no'),
-			'nomini_date' => $this->input->post('nomini_date'),
-
-			'logo' => $logo,
-			'document_1' => $document_1,
-			'nomini_sign' => $nomini_sign,
-
-
-		);
-
-		$this->db->insert('members_n', $data);
-
-		redirect('members');
-	}
-
-
-
-	// // ---------------------get all members-----------------
-	// public function members_list()
-	// {
-	// 	$data['members'] = $this->db->get('members_n')->result();
-	// 	$this->load->view('site/members_list/members_list', $data);
-	// }
-
-
-	// // ---------------------get single members-----------------
-
-
-	// public function view_member($id)
-	// {
-	// 	$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
-	// 	$this->load->view('site/members_list/member_Details', $data);
-	// }
-
-
-	// // ---------------------Form View-----------------
-
-	// public function form_view($id)
-	// {
-	// 	$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
-	// 	$this->load->view('site/members_list/form_view', $data);
-
-	// }
-
-
-	// ---------------------Edit member's Data-----------------
-
-
-	public function edit_member($id)
-	{
-		$data['member'] = $this->db->get_where('members_n', ['id' => $id])->row();
-		$this->load->view('site/members_list/updateForm', $data);
-	}
-
-
-	public function update_member($id)
-	{
-		$member = $this->db->get_where('members_n', ['id' => $id])->row();
-
-		$update_data = [
-			'sarok_no' => $this->input->post('sarok_no'),
-			'sarok_date' => $this->input->post('sarok_date'),
-
-			'name' => $this->input->post('name'),
-			'father_name' => $this->input->post('father_name'),
-			'mother_name' => $this->input->post('mother_name'),
-			'nid' => $this->input->post('nid'),
-			'birth_date' => $this->input->post('birth_date'),
-			'mobile_number' => $this->input->post('mobile_number'),
-			'gender' => $this->input->post('gender'),
-
-			'village' => $this->input->post('village'),
-			'post' => $this->input->post('post'),
-			'sub_district' => $this->input->post('sub_district'),
-			'district' => $this->input->post('district'),
-
-			'association_designation' => $this->input->post('association_designation'),
-			'association_district' => $this->input->post('association_district'),
-			'association_name' => $this->input->post('association_name'),
-
-			'paid_amount' => $this->input->post('paid_amount'),
-			'voucher_no' => $this->input->post('voucher_no'),
-			'managing_committee_date' => $this->input->post('managing_committee_date'),
-
-			'Cooperative_association_name' => $this->input->post('Cooperative_association_name'),
-			'Cooperative_association_number' => $this->input->post('Cooperative_association_number'),
-			'Cooperative_association_registration_address' => $this->input->post('Cooperative_association_registration_address'),
-
-			'Cooperative_association_address' => $this->input->post('Cooperative_association_address'),
-			'Cooperative_association_chairman' => $this->input->post('Cooperative_association_chairman'),
-			'Cooperative_association_secretary' => $this->input->post('Cooperative_association_secretary'),
-			'Cooperative_association_registration_no' => $this->input->post('Cooperative_association_registration_no'),
-			'Cooperative_association_registration_date' => $this->input->post('Cooperative_association_registration_date'),
-			'Cooperative_association_class' => $this->input->post('Cooperative_association_class'),
-			'Cooperative_association_type' => $this->input->post('Cooperative_association_type'),
-			'Cooperative_association_member_count' => $this->input->post('Cooperative_association_member_count'),
-			'Cooperative_association_working_area' => $this->input->post('Cooperative_association_working_area'),
-
-			'nomini_name' => $this->input->post('nomini_name'),
-			'nomini_designation' => $this->input->post('nomini_designation'),
-			'nomini_mobile_no' => $this->input->post('nomini_mobile_no'),
-			'nomini_date' => $this->input->post('nomini_date'),
-		];
-
-		// Handle file uploads
-
-
-		function update_file($field_name, $upload_path, $old_file = '', $allowed_types = '*')
-		{
-			$CI =& get_instance();
-
-			if (!empty($_FILES[$field_name]['name'])) {
-
-				$config['upload_path'] = $upload_path;
-				$config['allowed_types'] = $allowed_types;
-				$config['file_name'] = time() . '_' . $_FILES[$field_name]['name'];
-
-				$CI->load->library('upload');
-				$CI->upload->initialize($config);
-
-				if ($CI->upload->do_upload($field_name)) {
-
-					$uploadData = $CI->upload->data();
-					$new_file = $uploadData['file_name'];
-
-					// delete old file
-					if (!empty($old_file) && file_exists($upload_path . $old_file)) {
-						unlink($upload_path . $old_file);
-					}
-
-					return $new_file;
-				}
-			}
-
-			return $old_file;
-		}
-
-
-
-
-
-		$update_data['logo'] = update_file(
-			'logo',
-			'./assets/uploads/project/members/logo/',
-			$member->logo,
-			'jpg|jpeg|png'
-		);
-
-		$update_data['nomini_sign'] = update_file(
-			'nomini_sign',
-			'./assets/uploads/project/members/nominee_sign/',
-			$member->nomini_sign,
-			'jpg|jpeg|png'
-		);
-
-		$update_data['document_1'] = update_file(
-			'document_1',
-			'./assets/uploads/project/members/members_document',
-			$member->document_1,
-			'pdf'
-		);
-
-		$this->db->where('id', $id);
-		$this->db->update('members_n', $update_data);
-
-		redirect(base_url('applicant/members_list/member_Details/' . $id));
-	}
 
 
 	// // ---------------------Delete single members-----------------
