@@ -19,12 +19,13 @@ $route['logout'] = 'Admin_login/logout';
 
 
 
-
 // --------------------Admin dashboard-------------------------
 
 $route['admin_dashboard'] = 'Admin/index';
-
-
+$route['members_list'] = 'Admin/members_list/members_list';
+$route['view_member/(:id)'] = 'Admin/view_member/$1';
+$route['edit_member/(:id)'] = 'Admin/edit_member/$1';
+$route['delete_member/(:id)'] = 'Admin/delete_member/$1';
 
 
 

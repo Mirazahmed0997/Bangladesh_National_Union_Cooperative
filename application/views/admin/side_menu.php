@@ -347,34 +347,15 @@
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             আবেদন
-                            <i class="fas fa-angle-left right"></i>
-                            <!-- </?php
-                                $data['ap_status'] = -1;
-                                $table="applicant";
-                                $pending_number_ap = count_pending($table, $data);
-                                if (!empty($pending_number_ap)) {
-                            ?><span class="badge badge-danger right">
-                            </?php
-                            echo $number_count = count($pending_number_ap);
-                            ?></span>
-                        </?php
-                        } ?> -->
-                            
+                            <i class="fas fa-angle-left right"></i>                    
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('Admin/applicant_pending_list') ?>" class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
+                            <a href="<?php echo base_url('admin/members_list/members_list') ?>" class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>আবেদন অ. তালিকা</p>
-                                <!-- </?php
-								if (!empty($pending_number_ap)) {
-								?><span class="badge badge-danger right">
-										</?php
-										echo count($pending_number_ap);
-										?></span>
-								</?php
-								} ?> -->
+                              
                             </a>
                         </li>
                         <li class="nav-item">

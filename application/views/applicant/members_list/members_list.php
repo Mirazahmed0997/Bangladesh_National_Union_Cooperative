@@ -121,7 +121,6 @@
                                         <td><?= $row->widthdrawal_date; ?></td>
                                         <td><?= $row->widthdrawal_approved_by; ?></td>
                                         <td><?= $row->active_status; ?></td>
-                                        <td></td>
 
 
 
@@ -133,9 +132,9 @@
                                                 class="btn btn-warning btn-sm">Preview</a>
                                             <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
                                                 class="btn btn-warning btn-sm">Update</a>
-                                            <a href="<?= base_url('Applicant/delete_member/' . $row->id); ?>"
+                                            <!-- <a href="<?= base_url('Applicant/delete_member/' . $row->id); ?>"
                                                 class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure?');">Delete</a>
+                                                onclick="return confirm('Are you sure?');">Delete</a> -->
                                         </td>
                                     </tr>
                                 <?php } ?>

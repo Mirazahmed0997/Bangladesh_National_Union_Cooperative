@@ -12,12 +12,21 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$date = new DateTime();
 		$this->serverDateTime = $date->format('Y-m-d H:i') . "\n";
-		 if (!$this->session->userdata('login_user_info_all')) {
+		// Check if user is logged in
+		$user = $this->session->userdata('login_user_info_all');
+		if (!$user) {
+			$this->session->set_flashdata('login_failed', 'Please login first');
+			redirect('admin');
+			return;
+		}
 
-            $this->session->set_flashdata('login_failed', 'Please login first');
+		// Check role
+		if (!in_array($user->role, ['admin', 'super_admin'])) {
+			$this->session->set_flashdata('error', 'আপনার এই পৃষ্ঠাটি অ্যাক্সেস করার অনুমতি নেই। অনুগ্রহ করে আপনার অ্যাডমিন ক্রেডেনশিয়াল দিয়ে লগইন করুন।');
+			redirect('admin');
+			return;
+		}
 
-            redirect('admin');
-        }
 	}
 
 
@@ -28,52 +37,10 @@ class Admin extends CI_Controller
 		// Get member count
 		$data['member_count'] = $this->db->count_all('members_n');
 
-		$path = 'applicant/dashboard';
+		$path = 'admin/dashboard';
 
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -85,7 +52,7 @@ class Admin extends CI_Controller
 	{
 		//  Redirect if no ID
 		if (empty($id)) {
-			redirect(base_url('Applicant/members_list'));
+			redirect(base_url('Admin/members_list'));
 		}
 
 		//  Set dashboard navigation & page title
@@ -100,7 +67,7 @@ class Admin extends CI_Controller
 		}
 
 		//  Render the member details inside dashboard layout
-		$path = 'Applicant/members_list/member_Details';
+		$path = 'admin/members_list/member_Details';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
 
@@ -112,7 +79,7 @@ class Admin extends CI_Controller
 	{
 		//  Redirect if no ID
 		if (empty($id)) {
-			redirect(base_url('Applicant/members_list'));
+			redirect(base_url('Admin/members_list'));
 		}
 
 		//  Set dashboard navigation & page title
@@ -127,7 +94,7 @@ class Admin extends CI_Controller
 		}
 
 		//  Render the member details inside dashboard layout
-		$path = 'Applicant/members_list/form_view';
+		$path = 'admin/members_list/form_view';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
 
@@ -179,7 +146,7 @@ class Admin extends CI_Controller
 
 		$data['members'] = $this->db->get('members_n')->result();
 
-		$path = 'Applicant/members_list/members_list';
+		$path = 'admin/members_list/members_list';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
 

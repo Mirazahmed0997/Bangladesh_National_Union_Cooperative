@@ -1,10 +1,16 @@
 <div class="container-fluid mt-4">
 
+    <?php if ($this->session->flashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?php echo $this->session->flashdata('error'); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="row justify-content-center">
         <div class="col-md-5">
 
             <div class="card card-primary shadow">
-                
+
                 <div class="card-header text-center">
                     <h3 class="card-title">
                         <i class="fas fa-user-shield"></i> অ্যাডমিন প্যানেল লগইন
@@ -38,8 +44,8 @@
                                         <i class="fas fa-lock"></i>
                                     </span>
                                 </div>
-                                <input type="password" name="password" class="form-control"
-                                    placeholder="পাসওয়ার্ড" required>
+                                <input type="password" name="password" class="form-control" placeholder="পাসওয়ার্ড"
+                                    required>
                             </div>
                         </div>
 
@@ -55,7 +61,7 @@
 
                     <div class="text-center mt-2">
                         <p>
-                            রেজিস্ট্রেশন করতে 
+                            রেজিস্ট্রেশন করতে
                             <a href="<?php echo base_url('admin_registration_form'); ?>">
                                 এখানে ক্লিক করুন
                             </a>
@@ -76,3 +82,5 @@
     </div>
 
 </div>
+
+

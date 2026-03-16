@@ -106,7 +106,4 @@ class Admin_login extends CI_Controller
     }
 }
 
-
-
-
 ?>
