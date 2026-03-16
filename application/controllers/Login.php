@@ -32,7 +32,36 @@ class Login extends CI_Controller
 
 	public function admin_registration_saved()
 	{
-			
+			$username= $this->input->post('username');
+			$mobile_number= $this->input->post('mobile_number');
+
+			$this->db->where("username", $username);
+			$this->db->where("mobile_number", $mobile_number);
+
+			$isExist= $this->db->get("users")->row();
+			if ($isExist) {
+			$this->session->set_flashdata('error', 'Already registered');
+
+			redirect('admin_dashboard');
+			return;
+		}
+
+
+		$data = array(
+
+			'first_name' => $this->input->post('first_name'),
+			'last_name' => $this->input->post('last_name'),
+
+			'username' => $this->input->post('username'),
+			'mobile_number' => $this->input->post('mobile_number'),
+			'designation' => $this->input->post('designation'),
+			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+		);
+
+		$this->db->insert('users', $data);
+		redirect("admin_dashboard");
+
+
 	}
 
 
@@ -179,7 +208,7 @@ class Login extends CI_Controller
 			}
 		}
 		$this->session->sess_destroy();
-		redirect('applicant_login');
+		redirect('members');
 	}
 	public function forgot_password()
 	{

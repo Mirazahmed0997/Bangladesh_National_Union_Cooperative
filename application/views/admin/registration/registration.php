@@ -79,11 +79,35 @@
 </style>
 
 
+
+
+<?php if ($this->session->flashdata('error')): ?>
+
+<div style="width:500px;margin:20px auto;" class="alert alert-danger">
+    <?php echo $this->session->flashdata('error'); ?>
+</div>
+
+<?php endif; ?>
+
+
+<?php if ($this->session->flashdata('success')): ?>
+
+<div style="width:500px;margin:20px auto;" class="alert alert-success">
+    <?php echo $this->session->flashdata('success'); ?>
+</div>
+
+<?php endif; ?>
+
+
+
+
+
+
 <div class="form-container">
 
     <div class="form-title">Admin Registration</div>
 
-    <form action="<?php echo base_url('Login/admin_registration_saved'); ?>" method="post">
+    <form action="<?php echo base_url('admin_registration'); ?>" method="post" onsubmit="return validatePassword();">
 
         <div class="form-group">
             <label>First Name</label>

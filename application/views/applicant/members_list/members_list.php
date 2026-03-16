@@ -120,7 +120,7 @@
                                         <td><?= $row->approved_by; ?></td>
                                         <td><?= $row->widthdrawal_date; ?></td>
                                         <td><?= $row->widthdrawal_approved_by; ?></td>
-                                        <td><?= $row->is_active; ?></td>
+                                        <td><?= $row->active_status; ?></td>
                                         <td></td>
 
 

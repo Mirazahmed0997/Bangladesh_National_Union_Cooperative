@@ -1,6 +1,6 @@
 <?php
 
-class Member_login extends CI_Controller
+class Admin_login extends CI_Controller
 {
 
 
@@ -11,17 +11,6 @@ class Member_login extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
-        $controller = $this->router->fetch_class();
-        $method = $this->router->fetch_method();
-
-        if (
-            !$this->session->userdata('login_user_info_all')
-            && !($controller == 'Member_login' && in_array($method, ['index', 'login_process']))
-        ) {
-            $this->session->set_flashdata('login_failed', 'Please login first');
-            redirect('member_login');
-        }
     }
 
 
@@ -30,9 +19,51 @@ class Member_login extends CI_Controller
         $data = $this->engine->store_nav('recruitment', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
         $data['homapage_info'] = $this->Common->get_data('job_homepage')->row();
 
-        $path = 'site/pages/login';
+        $path = 'login/login';
         $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
     }
+
+    public function admin_registration()
+	{
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
+
+		$path = 'admin/registration/registration';
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
+
+	public function admin_registration_saved()
+	{
+			$username= $this->input->post('username');
+			$mobile_number= $this->input->post('mobile_number');
+
+			$this->db->where("username", $username);
+			$this->db->where("mobile_number", $mobile_number);
+
+			$isExist= $this->db->get("users")->row();
+			if ($isExist) {
+			$this->session->set_flashdata('error', 'Already registered');
+
+			redirect('admin_registration');
+			return;
+		}
+
+
+		$data = array(
+
+			'first_name' => $this->input->post('first_name'),
+			'last_name' => $this->input->post('last_name'),
+
+			'username' => $this->input->post('username'),
+			'mobile_number' => $this->input->post('mobile_number'),
+			'designation' => $this->input->post('designation'),
+			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+		);
+
+		$this->db->insert('users', $data);
+		redirect("admin");
+
+
+	}
 
     public function login_process()
     {
@@ -41,7 +72,7 @@ class Member_login extends CI_Controller
         $password = $this->input->post('password');
 
         $this->db->where('mobile_number', $mobile_number);
-        $user = $this->db->get('members_n')->row();
+        $user = $this->db->get('users')->row();
 
         if ($user) {
 
@@ -52,29 +83,26 @@ class Member_login extends CI_Controller
                 $this->session->set_userdata('current_type', 2);
                 $this->session->set_userdata('login_user_info_all', $user);
 
-                redirect('members');
+                redirect('admin_dashboard');
 
             } else {
 
                 $this->session->set_flashdata('login_failed', 'Wrong Password');
-                redirect('member_login');
+                redirect('login/login');
 
             }
 
         } else {
 
             $this->session->set_flashdata('login_failed', 'Mobile number not found');
-            redirect('member_login');
+            redirect('login/login');
         }
     }
-
-
-
 
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('member_login');
+        redirect('admin');
     }
 }
 

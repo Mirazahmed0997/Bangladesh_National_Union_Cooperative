@@ -224,7 +224,7 @@
                             <li><a href="#">প্রেস রিলিজ</a></li>
                         </ul>
                     </li>
-                    <li><a href="applicant_dashboard">সদস্য তথ্য</a></li>
+                    <li><a href="Applicant/members_list/members_list">সদস্য তথ্য</a></li>
                     <li><a href="<?php echo base_url('member_registration'); ?>" class="btn-contact">নতুন সদস্য আবেদন</a></li>
                 </ul>
             </nav>

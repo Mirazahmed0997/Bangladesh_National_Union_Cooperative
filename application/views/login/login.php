@@ -1,39 +1,78 @@
-<div class="container">
-    <div class="login-card">
-        <div class="logo-icon"><i class="fas fa-user-shield"></i></div>
-        <h2>অ্যাডমিন প্যানেল</h2>
-        
-        <form id="loginForm" action="<?php echo base_url('Login/authentication_process'); ?>" method="post">
-                <input type="hidden" name="userType" value="1">
-            <div class="input-group">
-                <i class="fas fa-person"></i>
-                <input type="text" name="number" placeholder="ইউজার নাম" required>
-            </div>
-            
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" placeholder="পাসওয়ার্ড" required>
-            </div>
-            <button type="submit" class="login-btn">লগইন করুন</button>
-        </form>
+<div class="container-fluid mt-4">
 
-        <div class="footer-links">
-            <a href="#">পাসওয়ার্ড ভুলে গেছেন?</a>
-        </div>
-          <div class="col-12 text-center">
-                    <br>
-                    <p>please <a href="<?php echo base_url('admin_registration'); ?>">click</a> here for registration</p>
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card card-primary shadow">
+                
+                <div class="card-header text-center">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-shield"></i> অ্যাডমিন প্যানেল লগইন
+                    </h3>
                 </div>
-        
-        <a href="<?php echo base_url(); ?>" class="back-home"><i class="fas fa-arrow-left"></i> মূল ওয়েবসাইটে ফিরে যান</a>
+
+                <div class="card-body">
+
+                    <form action="<?php echo base_url('Admin_login/login_process'); ?>" method="post">
+
+                        <input type="hidden" name="userType" value="1">
+
+                        <div class="form-group">
+                            <label>ইউজার নাম / মোবাইল নাম্বার</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="mobile_number" class="form-control"
+                                    placeholder="ইউজার নাম / মোবাইল নাম্বার" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>পাসওয়ার্ড</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                                <input type="password" name="password" class="form-control"
+                                    placeholder="পাসওয়ার্ড" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            লগইন করুন
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a href="#">পাসওয়ার্ড ভুলে গেছেন?</a>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <p>
+                            রেজিস্ট্রেশন করতে 
+                            <a href="<?php echo base_url('admin_registration_form'); ?>">
+                                এখানে ক্লিক করুন
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <a href="<?php echo base_url(); ?>">
+                            <i class="fas fa-arrow-left"></i> মূল ওয়েবসাইটে ফিরে যান
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
-    <!-- <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // এখানে আপনি আপনার ব্যাকএন্ড লজিক যোগ করবেন
-            alert('লগইন রিকোয়েস্ট পাঠানো হয়েছে!');
-        });
-    </script> -->
-
-</div> 
+</div>

@@ -2,14 +2,31 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Site/index';
-$route['admin'] = 'Login/index';
-// $route['applicant_login'] = 'Recruitment/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
+
+
+
+// --------------------Admin Registration----------------------
+
+$route['admin'] = 'Admin_login/index';
+$route['admin_registration_form'] = 'Admin_login/admin_registration';
+$route['admin_registration'] = 'Admin_login/admin_registration_saved';
+$route['logout'] = 'Admin_login/logout';
+
+
+
+
+
+// --------------------Admin dashboard-------------------------
+
 $route['admin_dashboard'] = 'Admin/index';
-$route['admin_registration'] = 'Login/admin_registration';
+
+
+
+
 
 
 
@@ -21,11 +38,16 @@ $route['admin_registration'] = 'Login/admin_registration';
 $route['member_registration'] = 'Site/member_application';
 $route['member_register'] = 'Site/member_application_save';
 $route['member_login'] = 'Member_login/index';
+$route['member_logout'] = 'Member_login/logout';
+
+// $route['applicant_login'] = 'Member_login/index';
 
 
 
-// --------------------user dashboard----------------------
 
+// --------------------Member dashboard----------------------
+
+$route['applicant_dashboard'] = 'Applicant/members_count';
 $route['members'] = 'Applicant/members_list/members_list';
 $route['view_member/(:id)'] = 'Applicant/view_member/$1';
 $route['edit_member/(:id)'] = 'Applicant/edit_member/$1';
@@ -62,5 +84,3 @@ $route['omen_dev_works'] = 'Site/women_devlopment_works';
 $route['omen_dev_works_details'] = 'Site/women_devlopment_works_details';
 
 
-$route['logout'] = 'Login/authority';
-$route['applicant_logout'] = 'Login/applicant_logout';

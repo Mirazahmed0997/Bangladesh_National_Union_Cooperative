@@ -12,14 +12,14 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$date = new DateTime();
 		$this->serverDateTime = $date->format('Y-m-d H:i') . "\n";
-		if ($this->session->userdata('currentActiveId') != 1) {
-		} else {
-			$this->session->set_flashdata('login_failed', 'Link is broken');
-			redirect('admin');
-		}
+		 if (!$this->session->userdata('login_user_info_all')) {
+
+            $this->session->set_flashdata('login_failed', 'Please login first');
+
+            redirect('admin');
+        }
 	}
 
-	// public function index()
 
 	public function index()
 	{
@@ -34,13 +34,7 @@ class Admin extends CI_Controller
 	}
 
 
-	public function admin_registration()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
-		$path = 'admin/registration/registration';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
 
 
 
