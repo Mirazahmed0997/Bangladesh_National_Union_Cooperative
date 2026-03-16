@@ -12,11 +12,11 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$date = new DateTime();
 		$this->serverDateTime = $date->format('Y-m-d H:i') . "\n";
-		// if ($this->session->userdata('currentActiveId') == 1) {
-		// } else {
-		// 	$this->session->set_flashdata('login_failed', 'Link is broken');
-		// 	redirect('admin');
-		// }
+		if ($this->session->userdata('currentActiveId') != 1) {
+		} else {
+			$this->session->set_flashdata('login_failed', 'Link is broken');
+			redirect('admin');
+		}
 	}
 
 	// public function index()
@@ -34,8 +34,13 @@ class Admin extends CI_Controller
 	}
 
 
-	
+	public function admin_registration()
+	{
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
+		$path = 'admin/registration/registration';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
 
 
 
@@ -78,107 +83,111 @@ class Admin extends CI_Controller
 
 
 
-  public function view_member($id = null)
-    {
-        //  Redirect if no ID
-        if (empty($id)) {
-            redirect(base_url('Applicant/members_list'));
-        }
 
-        //  Set dashboard navigation & page title
-        $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
-        // Fetch the specific member
-        $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
 
-        //  Check if member exists
-        if (!$data['member']) {
-            show_404(); // member not found
-        }
 
-        //  Render the member details inside dashboard layout
-        $path = 'Applicant/members_list/member_Details';
-        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-    }
+	public function view_member($id = null)
+	{
+		//  Redirect if no ID
+		if (empty($id)) {
+			redirect(base_url('Applicant/members_list'));
+		}
 
+		//  Set dashboard navigation & page title
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
+		// Fetch the specific member
+		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
 
-    // -------------------Form View---------------------
+		//  Check if member exists
+		if (!$data['member']) {
+			show_404(); // member not found
+		}
 
-    public function form_view($id = null)
-    {
-        //  Redirect if no ID
-        if (empty($id)) {
-            redirect(base_url('Applicant/members_list'));
-        }
+		//  Render the member details inside dashboard layout
+		$path = 'Applicant/members_list/member_Details';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
 
-        //  Set dashboard navigation & page title
-        $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
-        // Fetch the specific member
-        $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
 
-        //  Check if member exists
-        if (!$data['member']) {
-            show_404(); // member not found
-        }
+	// -------------------Form View---------------------
 
-        //  Render the member details inside dashboard layout
-        $path = 'Applicant/members_list/form_view';
-        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-    }
+	public function form_view($id = null)
+	{
+		//  Redirect if no ID
+		if (empty($id)) {
+			redirect(base_url('Applicant/members_list'));
+		}
 
-    // ---------------------get all members-----------------
+		//  Set dashboard navigation & page title
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
+		// Fetch the specific member
+		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
 
-    public function members_list()
-    {
-        $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		//  Check if member exists
+		if (!$data['member']) {
+			show_404(); // member not found
+		}
 
-        $where_data = array();
+		//  Render the member details inside dashboard layout
+		$path = 'Applicant/members_list/form_view';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
 
-        $id = $this->input->get('id');
-        $branch_registration_no = $this->input->get('branch_registration_no');
-        $mobile_number = $this->input->get('mobile_number');
-        $branch_name = $this->input->get('branch_name');
-        $from_date = $this->input->get('from_date');
-        $to_date = $this->input->get('to_date');
+	// ---------------------get all members-----------------
 
 
+	public function members_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
 
-        if (!empty($id)) {
-            $where_data['id'] = $id;
-        }
+		$where_data = array();
 
-        if (!empty($branch_registration_no)) {
-            $where_data['branch_registration_no'] = $branch_registration_no;
-        }
+		$id = $this->input->get('id');
+		$branch_registration_no = $this->input->get('branch_registration_no');
+		$mobile_number = $this->input->get('mobile_number');
+		$branch_name = $this->input->get('branch_name');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
 
-        if (!empty($mobile_number)) {
-            $where_data['mobile_number'] = $mobile_number;
-        }
 
-        if (!empty($branch_name)) {
-            $where_data['branch_name'] = $branch_name;
-        }
 
-        if (!empty($where_data)) {
-            $this->db->where($where_data);
-        }
+		if (!empty($id)) {
+			$where_data['id'] = $id;
+		}
 
-        if (!empty($from_date)) {
-            $this->db->where('created_at >=', $from_date);
-        }
+		if (!empty($branch_registration_no)) {
+			$where_data['branch_registration_no'] = $branch_registration_no;
+		}
 
-        if (!empty($to_date)) {
-            $this->db->where('created_at <=', $to_date);
-        }
+		if (!empty($mobile_number)) {
+			$where_data['mobile_number'] = $mobile_number;
+		}
 
-        $data['members'] = $this->db->get('members_n')->result();
+		if (!empty($branch_name)) {
+			$where_data['branch_name'] = $branch_name;
+		}
 
-        $path = 'Applicant/members_list/members_list';
-        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-    }
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		$data['members'] = $this->db->get('members_n')->result();
+
+		$path = 'Applicant/members_list/members_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
 
 
 
@@ -212,21 +221,6 @@ class Admin extends CI_Controller
 	// 	$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	// }
 	public function president_list()
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	{
 		$data = $this->engine->store_nav('homepage', 'president_list', 'চান্দ্রা শিক্ষিত বেকার যুব বহুমূখী সমবায় সমিতি লিঃ');
 		$presidents = $this->Common->get_data_desc('president', 'id');

@@ -7,5 +7,6 @@
     </footer>
 
     <script src="<?php echo base_url(); ?>assets/backend/custom/script.js"></script>
+    
 </body>
 </html>

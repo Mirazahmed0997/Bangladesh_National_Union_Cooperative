@@ -20,6 +20,10 @@
         <div class="footer-links">
             <a href="#">পাসওয়ার্ড ভুলে গেছেন?</a>
         </div>
+          <div class="col-12 text-center">
+                    <br>
+                    <p>please <a href="<?php echo base_url('admin_registration'); ?>">click</a> here for registration</p>
+                </div>
         
         <a href="<?php echo base_url(); ?>" class="back-home"><i class="fas fa-arrow-left"></i> মূল ওয়েবসাইটে ফিরে যান</a>
     </div>

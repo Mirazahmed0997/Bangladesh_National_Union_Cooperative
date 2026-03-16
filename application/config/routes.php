@@ -9,9 +9,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['admin_dashboard'] = 'Admin/index';
+$route['admin_registration'] = 'Login/admin_registration';
 
-$route['applicant_dashboard'] = 'Applicant/members_count';
-$route['applicant_cv'] = 'Applicant/applicant_cv_view';
 
 
 

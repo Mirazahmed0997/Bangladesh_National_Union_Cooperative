@@ -3,42 +3,70 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
-    private $main_layout = 'site/master_layout';
-    private $header = 'site/header';
-    private $footer = 'site/footer';
+	private $main_layout = 'site/master_layout';
+	private $header = 'site/header';
+	private $footer = 'site/footer';
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('User');
 	}
 
-    public function index()
-    {
-        $data = $this->engine->store_nav('site', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-		
+	public function index()
+	{
+		$data = $this->engine->store_nav('site', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
+
 		$data['ftchBrakingNws'] = $this->Common->get_data('tbl_breking_news')->result();
-        $path = 'login/login';
-        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
-    }
-	
-    
+		$path = 'login/login';
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
+
+
+
+
+
+	public function admin_registration()
+	{
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
+
+		$path = 'admin/registration/registration';
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function authentication_process()
 	{
 		$userinformation = $this->set_login_information($this->secure_data());
 		$res = $this->User->user_validation("users", $userinformation);
 		$confirm = $this->set_confirmation_msg($res, "Login Success", "Email and Password not match");
-		
+
 		if ($confirm == 1) {
-			
+
 			$this->session->set_userdata('currentActiveId', $res->id);
-			
+
 			redirect('admin_dashboard', 'location');
 		} else {
 			$this->session->set_flashdata('success', 'Username or Password invalid!');
 			redirect('admin', 'location');
 		}
 	}
-    
+
 	private function set_login_information($input_validation)
 	{
 		if ($input_validation) {
@@ -56,7 +84,7 @@ class Login extends CI_Controller
 
 	private function secure_data()
 	{
-		if($this->session->userdata('login_status')) {
+		if ($this->session->userdata('login_status')) {
 			return TRUE;
 		} else {
 			$this->form_validation->set_rules('password', 'Password', 'trim|required');
@@ -68,7 +96,7 @@ class Login extends CI_Controller
 			}
 		}
 	}
-    
+
 	private function set_confirmation_msg($data, $true_msg, $false_msg)
 	{
 		$confirm = 0;
@@ -84,15 +112,15 @@ class Login extends CI_Controller
 	public function authority()
 	{
 		$user_data = $this->session->all_userdata();
-			foreach ($user_data as $key => $value) {
-				if ($key != 'session_id' && $key != 'ip_address' && $key != 'user_agent' && $key != 'last_activity') {
-					$this->session->unset_userdata($key);
-				}
+		foreach ($user_data as $key => $value) {
+			if ($key != 'session_id' && $key != 'ip_address' && $key != 'user_agent' && $key != 'last_activity') {
+				$this->session->unset_userdata($key);
 			}
+		}
 		$this->session->sess_destroy();
 		redirect('admin');
 	}
-	
+
 
 }
 
@@ -150,14 +178,14 @@ class Login extends CI_Controller
 
 // 	}
 // 	public function president_list_store(){
-		
+
 // 		$this->load->library('form_validation');
 // 		$this->form_validation->set_error_delimiters('', '');
 // 		$this->form_validation->set_rules('name', 'name', 'trim|required');
 // 		$this->form_validation->set_rules('time', 'time', 'trim|required');
 // 		$this->form_validation->set_rules('commitee', 'commitee', 'trim|required');
 // 		$this->form_validation->set_rules('type', 'type', 'trim|required');
-		
+
 // 		// $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[teachers.email]');
 
 // 		if ($this->form_validation->run() == false) {
@@ -168,16 +196,16 @@ class Login extends CI_Controller
 // 			$file_path_user_image = 'assets/uploads/photos/';
 // 			$preFileName = time();
 // 			$president_image = $this->do_upload('filename', $preFileName, $file_path_user_image);
-			
+
 // 			$data = array(
 // 				//'login_id' => $this->lib->randomPin(8),
 // 				'title' => $this->input->post("name", true),
 // 				'time' => $this->input->post("time", true),
 // 				'commitee' => $this->input->post("commitee", true),
 // 				'type' => $this->input->post("type", true),
-			
+
 // 				'image' => $president_image,
-				
+
 // 			);
 // 			$new_id = $this->Common->set_data('president', $data);
 
@@ -220,5 +248,5 @@ class Login extends CI_Controller
 // 		}
 // 		return $fileName;
 // 	}
-	
+
 // }
