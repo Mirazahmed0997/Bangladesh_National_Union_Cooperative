@@ -134,7 +134,7 @@
             <label>Designation</label>
             <select name="designation" required>
                 <option value="">Select Designation</option>
-                <option value="Admin">Admin</option>
+                <option value="Admin">Chairman</option>
                 <option value="Manager">Manager</option>
                 <option value="Staff">Staff</option>
             </select>

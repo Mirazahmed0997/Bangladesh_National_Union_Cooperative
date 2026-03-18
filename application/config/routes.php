@@ -14,6 +14,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'Admin_login/index';
 $route['admin_registration_form'] = 'Admin_login/admin_registration';
 $route['admin_registration'] = 'Admin_login/admin_registration_saved';
+$route['update_user_role/(:num)'] = 'Admin/update_users_role/$1';
 $route['logout'] = 'Admin_login/logout';
 
 

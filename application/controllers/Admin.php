@@ -46,7 +46,7 @@ class Admin extends CI_Controller
 
 
 
-
+// --------------single member details------------
 
 	public function view_member($id = null)
 	{
@@ -149,6 +149,117 @@ class Admin extends CI_Controller
 		$path = 'admin/members_list/members_list';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
+
+
+
+
+
+	// ----------------------------users list--------------------
+
+
+
+	public function users_list()
+	{
+		$data = $this->engine->store_nav('users_list', 'users_list', 'সদস্য তালিকা');
+
+		$where_data = array();
+
+		$id = $this->input->get('id');
+		$username = $this->input->get('username');
+		$mobile_number = $this->input->get('mobile_number');
+		$role = $this->input->get('role');
+
+
+
+
+		if (!empty($id)) {
+			$where_data['id'] = $id;
+		}
+
+		if (!empty($username)) {
+			$where_data['username'] = $username;
+		}
+
+		if (!empty($mobile_number)) {
+			$where_data['mobile_number'] = $mobile_number;
+		}
+
+		if (!empty($role)) {
+			$where_data['role'] = $role;
+		}
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+
+
+		$data['users'] = $this->db->get('users')->result();
+
+		$path = 'admin/users_list/users_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+
+
+
+	// -----------------------update users role--------------
+
+	public function update_users_role($id)
+	{
+		$users = $this->db->get_where('users', ['id' => $id])->row();
+
+		$update_data = [
+
+			'role' => $this->input->post('role'),
+		];
+
+
+		$this->db->where('id', $id);
+		$this->db->update('users', $update_data);
+
+		redirect(base_url('admin/users_list/users_list'));
+	}
+
+
+
+	// ---------------single user detail-----------------------
+
+
+		public function view_user($id = null)
+	{
+		//  Redirect if no ID
+		if (empty($id)) {
+			redirect(base_url('Admin/users_list'));
+		}
+
+		//  Set dashboard navigation & page title
+		$data = $this->engine->store_nav('users_list', 'users_list', 'সদস্য বিস্তারিত');
+
+		// Fetch the specific member
+		$data['user'] = $this->Common->get_data_single_conditional('users', 'id', $id)->row();
+
+		//  Check if member exists
+		if (!$data['user']) {
+			show_404(); 
+		}
+
+		//  Render the member details inside dashboard layout
+		$path = 'admin/users_list/users_details';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
