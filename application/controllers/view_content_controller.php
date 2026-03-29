@@ -10,15 +10,15 @@ class View_content_controller extends CI_Controller
         $this->load->database();
     }
 
-    public function view_news()
-    {
-
-        // Fetch all news from the database
-        $data['news'] = $this->db->order_by('created_at', 'DESC')->get('news')->result_array();
-
-        // Load the list view
-        $this->load->view('site/pages/news_headline', $data);
-    }
+    public function get_active_news()
+{
+    $data['news'] = $this->db->order_by('created_at', 'DESC')
+                              ->where('status', 1) 
+                              ->get('news')
+                              ->result_array();
+    
+    return $data['news']; 
+}
 }
 
 

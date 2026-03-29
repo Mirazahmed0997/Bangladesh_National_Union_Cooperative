@@ -20,14 +20,15 @@
         <header>
             <?php $this->load->view('site/pages/navbar'); ?>
         </header>
+
     </div>
     <?php $this->load->view('site/pages/news_headline'); ?>
-
+    
 
 </body>
 
 <style>
-    body{
-         background: linear-gradient(90deg, #32aaba, #feb47b);
+    body {
+        background: linear-gradient(90deg, #32aaba, #feb47b);
     }
 </style>

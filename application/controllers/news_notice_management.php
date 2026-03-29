@@ -111,6 +111,7 @@ class news_notice_management extends CI_Controller
         $data['news'] = $this->db->get('news')->result();
 
         $path = 'admin/news_notice/newz_table';
+
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
 

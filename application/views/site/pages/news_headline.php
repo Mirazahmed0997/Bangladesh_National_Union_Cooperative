@@ -1,3 +1,10 @@
+<?php
+$news = $this->db->order_by('created_at', 'DESC')
+                 ->where('status', 1)
+                 ->get('news')
+                 ->result_array();
+?>
+
 <section class="news-ticker">
     <div class="container">
         <div class="ticker-wrapper">
@@ -8,18 +15,16 @@
             <div class="ticker-content">
                 <ul class="ticker-list">
 
-                    <?php if (!empty($news)) { ?>
-                        <?php foreach ($news as $row) { ?>
+                    <?php if (!empty($news)): ?>
+                        <?php foreach ($news as $row): ?>
                             <li>
                                 <?= $row['headline'] ?>
-                                <a href="<?= base_url('news_details/' . $row['id']); ?>" class="dashed-link">
-                                    see more
-                                </a>
+                                <a href="<?= base_url('news_details/' . $row['id']); ?>" class="dashed-link">see more</a>
                             </li>
-                        <?php } ?>
-                    <?php } else { ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <li>No news available</li>
-                    <?php } ?>
+                    <?php endif; ?>
 
                 </ul>
             </div>
