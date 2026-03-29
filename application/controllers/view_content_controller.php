@@ -10,14 +10,35 @@ class View_content_controller extends CI_Controller
         $this->load->database();
     }
 
+
+    // -----------all active new--------
     public function get_active_news()
+    {
+        $data['news'] = $this->db->order_by('created_at', 'DESC')
+            ->where('status', 1)
+            ->get('news')
+            ->result_array();
+
+        return $data['news'];
+    }
+
+// -------------------newa details------------
+    public function news_details($id = null)
 {
-    $data['news'] = $this->db->order_by('created_at', 'DESC')
-                              ->where('status', 1) 
+    if (!$id) {
+        show_404();
+    }
+
+    $data['news'] = $this->db->where('id', $id)
+                              ->where('status', 1) // only active news
                               ->get('news')
-                              ->result_array();
-    
-    return $data['news']; 
+                              ->row_array();
+
+    if (!$data['news']) {
+        show_404();
+    }
+
+    $this->load->view('site/pages/news_details', $data);
 }
 }
 

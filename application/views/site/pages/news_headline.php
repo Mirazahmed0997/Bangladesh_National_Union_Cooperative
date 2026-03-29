@@ -18,8 +18,8 @@ $news = $this->db->order_by('created_at', 'DESC')
                     <?php if (!empty($news)): ?>
                         <?php foreach ($news as $row): ?>
                             <li>
-                                <?= $row['headline'] ?>
-                                <a href="<?= base_url('news_details/' . $row['id']); ?>" class="dashed-link">see more</a>
+                                <?= $row['headline'] ?>...
+                                <a href="<?= base_url('news_details/' . $row['id']); ?>" class="dashed-link">বিস্তারিত</a>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>

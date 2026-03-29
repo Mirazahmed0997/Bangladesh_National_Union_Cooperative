@@ -88,7 +88,7 @@
 }
 
 .swiper-slide img {
-  width: 300px;
+  width: 250px;
   height: 250px;      
   object-fit: cover; 
 }

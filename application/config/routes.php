@@ -40,6 +40,8 @@ $route['delete_news/(:num)'] = 'news_notice_management/delete_news/$1';
 
 
 $route['view_all_news'] = 'View_content_controller/view_news';
+$route['news_details/(:num)'] = 'View_content_controller/news_details/$1';
+
 
 
 
