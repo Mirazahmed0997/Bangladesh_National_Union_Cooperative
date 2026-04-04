@@ -62,7 +62,7 @@
                             style="width:100%; white-space: nowrap;">
 
                             <button type="button" class="btn btn-success m-2" id="openCreateModal">
-                                <i class="fas fa-edit"></i> Create News
+                                <i class="fas fa-edit"></i> Create new Project
                             </button>
 
                             <thead class="thead-dark">
@@ -84,7 +84,7 @@
                                         <td><?= $row->title; ?></td>
                                         <td><?= $row->details; ?></td>
                                         <td>
-                                            <form action="<?= base_url('update_news_status/' . $row->id); ?>" method="post">
+                                            <form action="<?= base_url('projects_active_status/' . $row->id); ?>" method="post">
                                                 <select name="status" onchange="this.form.submit()"
                                                     class="form-control form-control-sm">
                                                     <option value=1 <?= $row->status == 1 ? 'selected' : '' ?>>Active
@@ -123,11 +123,11 @@
 
 <!-- ---------------------create popup-------------------------- -->
 
-<?php $this->load->view('admin/news_notice/news_create_form'); ?>
+<?php $this->load->view('admin/current_projects/project_create_form'); ?>
 
 <!-- ---------------------update popup-------------------------- -->
 
-<?php $this->load->view('admin/news_notice/update_news_form'); ?>
+<?php $this->load->view('admin/current_projects/project_update_form'); ?>
 
 
 
@@ -176,7 +176,7 @@
         e.preventDefault();
 
     $.ajax({
-        url: "<?= base_url('news_notice_management/update_news'); ?>",
+        url: "<?= base_url('home_Page_managment_controller/update_projects'); ?>",
     type: "POST",
     data: $(this).serialize(),
     success: function (response) {
@@ -195,22 +195,22 @@
     $(document).ready(function () {
         $('.open-charge-modal').on('click', function () {
             var id = $(this).data('id');
-            var headline = $(this).data('headline');
+            var title = $(this).data('title');
             var details = $(this).data('details');
 
             // Set values in modal
-            $('#chargeModal input[name="headline"]').val(headline);
+            $('#chargeModal input[name="title"]').val(title);
             $('#chargeModal textarea[name="details"]').val(details);
 
             // Add hidden input for ID
-            if ($('#chargeModal input[name="news_id"]').length === 0) {
+            if ($('#chargeModal input[name="projects_id"]').length === 0) {
                 $('<input>').attr({
                     type: 'hidden',
-                    name: 'news_id',
+                    name: 'projects_id',
                     value: id
                 }).appendTo('#chargeModal form');
             } else {
-                $('#chargeModal input[name="news_id"]').val(id);
+                $('#chargeModal input[name="projects_id"]').val(id);
             }
 
             // Show the modal

@@ -77,6 +77,8 @@ $route['delete_banner/(:num)'] = 'home_Page_managment_controller/delete_banner/$
 // -----------------------------projects list------------------------
 $route['projects_list'] = 'home_Page_managment_controller/projects_list';
 $route['delete_project/(:num)'] = 'home_Page_managment_controller/delete_project/$1';
+$route['projects_active_status/(:num)'] = 'home_Page_managment_controller/projects_active_status/$1';
+
 
 
 

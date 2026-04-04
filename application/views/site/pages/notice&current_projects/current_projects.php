@@ -1,5 +1,6 @@
 <?php
 $current_projects = $this->db->order_by('created_at', 'DESC')
+    -> where('status',1)
     ->get('current_projects')
     ->result_array();
 ?>

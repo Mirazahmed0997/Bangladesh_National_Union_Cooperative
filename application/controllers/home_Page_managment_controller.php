@@ -626,7 +626,7 @@ class home_Page_managment_controller extends CI_Controller
 
     public function update_projects()
     {
-        $id = $this->input->post('project_id');
+        $id = $this->input->post('projects_id');
 
         $update_data = [
 
@@ -651,10 +651,10 @@ class home_Page_managment_controller extends CI_Controller
 
         $data = $this->engine->store_nav('current_projects', 'current_projects', 'প্রজেক্টস');
 
-        // Fetch the specific news
+        // Fetch the specific data
         $data['single_project'] = $this->Common->get_data_single_conditional('current_projects', 'id', $id)->row();
 
-        // Check if news exists
+        // Check if data exists
         if (!$data['single_project']) {
             show_404();
         }
