@@ -59,9 +59,9 @@ $current_projects = $this->db->order_by('created_at', 'DESC')
     function autoScroll() {
         projectList.scrollTop += scrollSpeed;
 
-        if (projectList.scrollTop >= projectList.scrollHeight / 2) {
-            projectList.scrollTop = 0;
-        }
+       if (projectList.scrollTop >= projectList.scrollHeight / 2) {
+    projectList.scrollTop = 0;
+}
     }
 
     setInterval(autoScroll, 30);

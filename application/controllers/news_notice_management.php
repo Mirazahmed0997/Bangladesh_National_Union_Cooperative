@@ -212,8 +212,7 @@ class news_notice_management extends CI_Controller
 
 
 
-
-    // ---------------------notice method----------------------
+// ---------------------notice method----------------------
 
 
 

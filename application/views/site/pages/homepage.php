@@ -7,7 +7,7 @@
 <?php $this->load->view('site/pages/company_details/details_layout'); ?>
 
 
-<?php $this->load->view('site/pages/success_history/success_history'); ?>
+<?php $this->load->view('site/pages/achievements/achievements_history'); ?>
 
 
 <?php $this->load->view('site/pages/development_work/development_work'); ?>

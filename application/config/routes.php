@@ -80,6 +80,11 @@ $route['delete_project/(:num)'] = 'home_Page_managment_controller/delete_project
 $route['projects_active_status/(:num)'] = 'home_Page_managment_controller/projects_active_status/$1';
 
 
+// -----------------achievements_list------------------
+$route['achievements_list'] = 'home_Page_managment_controller/achievements_list';
+$route['delete_achievement/(:num)'] = 'home_Page_managment_controller/delete_achievement/$1';
+$route['achievement_active_status/(:num)'] = 'home_Page_managment_controller/achievement_active_status/$1';
+
 
 
 
