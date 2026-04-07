@@ -75,7 +75,7 @@ class View_content_controller extends CI_Controller
       // -------------------mamagement_details---------------------
 
 
-    public function mamagement_details($id = null)
+    public function management_details($id)
     {
         if (!$id) {
             show_404();

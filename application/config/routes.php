@@ -24,9 +24,9 @@ $route['logout'] = 'Admin_login/logout';
 
 $route['admin_dashboard'] = 'Admin/index';
 $route['members_list'] = 'Admin/members_list/members_list';
-$route['view_member/(:id)'] = 'Admin/view_member/$1';
-$route['edit_member/(:id)'] = 'Admin/edit_member/$1';
-$route['delete_member/(:id)'] = 'Admin/delete_member/$1';
+$route['view_member/(:num)'] = 'Admin/view_member/$1';
+// $route['edit_member/(:num)'] = 'Admin/edit_member/$1';
+$route['delete_member/(:num)'] = 'Admin/delete_member/$1';
 $route['members_account_details_admin'] = 'Admin/members_account';
 
 
@@ -37,61 +37,61 @@ $route['view_all_news'] = 'View_content_controller/view_news';
 $route['company_details'] = 'View_content_controller/details_description';
 $route['news_details/(:num)'] = 'View_content_controller/news_details/$1';
 $route['notice_details/(:num)'] = 'View_content_controller/notice_details/$1';
-$route['management_details/(:num)'] = 'View_content_controller/mamagement_details/$1';
+$route['management_details/(:num)'] = 'View_content_controller/management_details/$1';
 
 
 
 // -----------------------News managment------------------------
 
 // -----------------------news for Admin view---------------
-$route['news_list'] = 'news_notice_management/news_list';
-$route['update_news_status/(:num)'] = 'news_notice_management/news_active_status/$1';
-$route['delete_news/(:num)'] = 'news_notice_management/delete_news/$1';
+$route['news_list'] = 'News_notice_management/news_list';
+$route['update_news_status/(:num)'] = 'News_notice_management/news_active_status/$1';
+$route['delete_news/(:num)'] = 'News_notice_management/delete_news/$1';
 
 // -----------------------notice for Admin view---------------
 
-$route['notice_list'] = 'news_notice_management/notice_list';
-$route['update_notice_status/(:num)'] = 'news_notice_management/notice_active_status/$1';
-$route['delete_notice/(:num)'] = 'news_notice_management/delete_notice/$1';
+$route['notice_list'] = 'News_notice_management/notice_list';
+$route['update_notice_status/(:num)'] = 'News_notice_management/notice_active_status/$1';
+$route['delete_notice/(:num)'] = 'News_notice_management/delete_notice/$1';
 
 
 // ---------------------Slider managment----------------------
 
 
-$route['slider_list'] = 'home_Page_managment_controller/slider_list';
-$route['update_slider_status/(:num)'] = 'home_Page_managment_controller/slider_active_status/$1';
-$route['delete_slider/(:num)'] = 'home_Page_managment_controller/delete_slider/$1';
+$route['slider_list'] = 'Home_Page_managment_controller/slider_list';
+$route['update_slider_status/(:num)'] = 'Home_Page_managment_controller/slider_active_status/$1';
+$route['delete_slider/(:num)'] = 'Home_Page_managment_controller/delete_slider/$1';
 
 // -----------------------------managment list-----------------------
 
-$route['managment_list'] = 'home_Page_managment_controller/managment_list';
-$route['delete_info/(:num)'] = 'home_Page_managment_controller/delete_info/$1';
+$route['managment_list'] = 'Home_Page_managment_controller/managment_list';
+$route['delete_info/(:num)'] = 'Home_Page_managment_controller/delete_info/$1';
 
 
 
 // --------------------------banner list----------------------------
-$route['banner_list'] = 'home_Page_managment_controller/banner_list';
+$route['banner_list'] = 'Home_Page_managment_controller/banner_list';
 // $route['update_banner/(:num)'] = 'home_Page_managment_controller/banner_list/$1';
-$route['delete_banner/(:num)'] = 'home_Page_managment_controller/delete_banner/$1';
+$route['delete_banner/(:num)'] = 'Home_Page_managment_controller/delete_banner/$1';
 
 // -----------------------------projects list------------------------
-$route['projects_list'] = 'home_Page_managment_controller/projects_list';
-$route['delete_project/(:num)'] = 'home_Page_managment_controller/delete_project/$1';
-$route['projects_active_status/(:num)'] = 'home_Page_managment_controller/projects_active_status/$1';
+$route['projects_list'] = 'Home_Page_managment_controller/projects_list';
+$route['delete_project/(:num)'] = 'Home_Page_managment_controller/delete_project/$1';
+$route['projects_active_status/(:num)'] = 'Home_Page_managment_controller/projects_active_status/$1';
 
 
 // -----------------achievements_list------------------
-$route['achievements_list'] = 'home_Page_managment_controller/achievements_list';
-$route['delete_achievement/(:num)'] = 'home_Page_managment_controller/delete_achievement/$1';
-$route['achievement_active_status/(:num)'] = 'home_Page_managment_controller/achievement_active_status/$1';
+$route['achievements_list'] = 'Home_Page_managment_controller/achievements_list';
+$route['delete_achievement/(:num)'] = 'Home_Page_managment_controller/delete_achievement/$1';
+$route['achievement_active_status/(:num)'] = 'Home_Page_managment_controller/achievement_active_status/$1';
 
 
 // ------------------------gallary list----------------------------
 
-$route['image_gallery_list'] = 'gallary_controller/image_gallery_list';
-$route['all_images'] = 'gallary_controller/all_images';
-$route['image_active_status/(:num)'] = 'gallary_controller/image_active_status/$1';
-$route['delete_image/(:num)'] = 'gallary_controller/delete_image/$1';
+$route['image_gallery_list'] = 'Gallary_controller/image_gallery_list';
+$route['all_images'] = 'Gallary_controller/all_images';
+$route['image_active_status/(:num)'] = 'Gallary_controller/image_active_status/$1';
+$route['delete_image/(:num)'] = 'Gallary_controller/delete_image/$1';
 
 
 
@@ -106,7 +106,7 @@ $route['member_registration'] = 'Site/member_application';
 $route['member_register'] = 'Site/member_application_save';
 $route['member_login'] = 'Member_login/index';
 $route['member_logout'] = 'Member_login/logout';
-$route['change_password/(:id)'] = 'Member_login/change_password/$1';
+$route['change_password/(:num)'] = 'Member_login/change_password/$1';
 
 
 
@@ -115,11 +115,11 @@ $route['change_password/(:id)'] = 'Member_login/change_password/$1';
 
 $route['applicant_dashboard'] = 'Applicant/members_count';
 $route['members'] = 'Applicant/members_list/members_list';
-$route['view_member/(:id)'] = 'Applicant/view_member/$1';
-$route['edit_member/(:id)'] = 'Applicant/edit_member/$1';
-$route['delete_member/(:id)'] = 'Applicant/delete_member/$1';
+$route['single_member/(:num)'] = 'Applicant/view_member/$1';
+$route['edit_member/(:num)'] = 'Applicant/edit_member/$1';
+// $route['delete_member/(:num)'] = 'Applicant/delete_member/$1';
 $route['members_account_details'] = 'Applicant/members_account';
-$route['update_member/(:id)'] = 'Site/update_member/$1';
+$route['update_member/(:num)'] = 'Site/update_member/$1';
 
 
 // ---------------------managment details-------------------
