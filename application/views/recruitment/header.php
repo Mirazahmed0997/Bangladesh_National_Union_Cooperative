@@ -65,98 +65,149 @@
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<link href="<?php echo base_url('') ?>assets/backend/css/family.css" rel="stylesheet">
-	<style>
-		.accounts_profile {
-			font-weight: 900;
-			color: #000 !important;
-		}
-
-		.accounts_profile_menu a:hover {
-			background-color: #007bff;
-			color: #fff;
-		}
-
-		.nav-item {
-			text-align: center;
-		}
-
-		@media screen and (max-width: 600px) {
-
-			.right_side_img {
-				display: none;
-			}
-		}
-	</style>
-</head>
-
-<body class="hold-transition sidebar-mini layout-fixed">
-
-	<div class="wrapper" id="wrapper" class="clearfix">
-		<div class="container-fluid" style="border-bottom: 2px solid #fff;">
-			<div class="row"
-				style="background-image: url(<?php echo base_url(); ?>assets/site/images/background1.png);background-size:cover;">
 
 
 
 
 
+<div class="top-header">
+    <div class="container">
+        <div class="header">
+           <div class="header-flex">
+             <div class="logo">
+                <a href="<?= base_url(); ?>">
+                    <img src="<?= base_url('assets/uploads/project/members/logo/91a0505bc70a4089f271d1f87c828ad0.png'); ?>"
+                        alt="BJSU Logo">
+                </a>
+            </div>
 
-				<div class="col-lg-2 col-md-2 bg-image hover-zoom">
-					<a>
-						<img src="assets/uploads/project/members/logo/91a0505bc70a4089f271d1f87c828ad0.png" alt="">
-					</a>
-				</div>
+            <div class="company_info">
+                <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
+                <h6>৯/ডি, মতিঝিল বাণিজ্যিক এলাকা, ঢাকা-১০০০, বাংলাদেশ।</h6>
+            </div>
+           </div>
+
+            <div class="coop ">
+                <a href="<?= base_url(); ?>">
+                    <img width="200px" src="assets/uploads/coop-removebg-preview.png"
+                        alt="BJSU Logo"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+   .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start; 
+    flex: 1;
+	padding-top: 5px;
+}
+
+    .coop{
+        right:0;
+    }
+
+    .logo {
+        background-color: white;
+        border-radius: 50%;
+        border: none !important;
+    }
+   
+
+    .top-header {
+        border-bottom: 1px solid white;
+        padding: 5px 10px;
+        background: linear-gradient(90deg, #32aaba, #feb47b);
+    }
+
+    .header-flex {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header-flex .logo img {
+        max-height: 100px;
+        width: auto;
+    }
+
+    .header-flex .company_info h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+        padding-bottom: 2px;
+    }
+
+    .header-flex .company_info {
+        font-size: 18px;
+        font-weight: 900;
+        margin: 0;
+        color: white;
+       
+    }/* Responsive adjustments */
+@media (max-width: 992px) {
+    .coop img {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo img {
+        max-height: 60px;
+    }
+
+    .company_info h2 {
+        font-size: 18px;
+    }
+
+    .company_info h6 {
+        font-size: 14px;
+    }
+
+    .coop img {
+        max-width: 120px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        max-height: 50px;
+    }
+
+    .company_info h2 {
+        font-size: 16px;
+    }
+
+    .company_info h6 {
+        font-size: 12px;
+    }
+
+    .coop img {
+        max-width: 100px;
+    }
+    }
+</style>
+		<!-- Header ============================================= -->
 
 
-				<!-- <div class="col-lg-2 col-md-2 bg-image hover-zoom">
-					<a>
-						<img src="<?php
-						if (!empty($homapage_info->h_logo)) {
-							echo base_url('assets/project/members/logo/' . $homapage_info->h_logo);
-						} else {
-							echo base_url('assets/uploads/project/members/logo/1773294665_bjsu.png');
-						}
-						?>" class="img-fluid" alt="Logo">
-					</a>
-				</div> -->
 
-
-
-
-
-				<div class=" company_info">
-					<h1> <?php if (!empty($homapage_info)) {
-						echo $homapage_info->h_company_name;
-					} ?></h1>
-					<p><?php if (!empty($homapage_info)) {
-						echo $homapage_info->h_company_address;
-					} ?> <span style="float:right;" id="google_element"></span></p>
-				</div>
-
-
-
-
-				<!-- <script src="https://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
-				<script>
-					function loadGoogleTranslate() {
-						new google.translate.TranslateElement('google_element');
-					}
-				</script> -->
-
-
-
-				<!-- <div class="col-lg-3 col-md-3 right_side_img">
-					<img <?php if (!empty($homapage_info->h_header_right_image)) { ?> src="<?php echo base_url('assets/site/images/' . $homapage_info->h_header_right_image); ?>" <?php } else { ?> src="<?php echo base_url(); ?>assets/site/images/officer_3.jpg" <?php } ?> style="">
-				</div> -->
-
-
-
-
-			</div>
-		</div>
-		<!-- Header
-		============================================= -->
-		<header id="header recruit_header" class="sticky-style-2 text-center">
+		<!-- <header id="header recruit_header" class="sticky-style-2 text-center">
 			<nav class="navbar navbar-expand-lg navbar-background">
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -202,4 +253,4 @@
 					</ul>
 				</div>
 			</nav>
-		</header><!-- #header end -->
+		</header> -->

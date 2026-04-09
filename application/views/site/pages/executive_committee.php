@@ -1,4 +1,4 @@
-<section class="committee-smart-section">
+<!-- <section class="committee-smart-section">
     <div class="container">
         <div class="section-header">
             <h2>ব্যবস্থাপনা কমিটি</h2>
@@ -84,4 +84,4 @@
             </button>
         </div>
     </div>
-</section>
+</section> -->
