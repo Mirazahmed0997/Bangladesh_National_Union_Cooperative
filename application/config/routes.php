@@ -44,6 +44,13 @@ $route['all_products'] = 'Site/all_products';
 
 
 
+$route['checkout'] = 'Site/checkout';
+
+
+
+
+
+
 // -----------------------News managment------------------------
 
 // -----------------------news for Admin view---------------
@@ -107,6 +114,10 @@ $route['remove_cart_item/(:num)'] = 'Cart_controller/remove_cart_item/$1';
 $route['clear_cart'] = 'Cart_controller/clear_cart';
 $route['my_carts'] = 'Cart_controller/my_carts';
 
+
+// ------------------- order  ------------------
+$route['place_order'] = 'Order_controller/place_order';
+
 // -----------------------------Admin projects list------------------------
 $route['projects_list'] = 'Home_Page_managment_controller/projects_list';
 $route['delete_project/(:num)'] = 'Home_Page_managment_controller/delete_project/$1';
@@ -143,6 +154,9 @@ $route['edit_member/(:num)'] = 'Applicant/edit_member/$1';
 // $route['delete_member/(:num)'] = 'Applicant/delete_member/$1';
 $route['members_account_details'] = 'Applicant/members_account';
 $route['update_member/(:num)'] = 'Site/update_member/$1';
+
+
+$route['my_orders'] = 'Applicant/my_orders';
 
 
 // ---------------------products managment details-------------------

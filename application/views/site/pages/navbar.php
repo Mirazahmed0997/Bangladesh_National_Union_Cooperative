@@ -1,3 +1,19 @@
+<?php
+$user = $this->session->userdata('login_user_info_all');
+
+$cart_count = 0;
+
+if ($user) {
+    $cart_count = $this->db->select_sum('quantity')
+                            ->where('user_id', $user->id)
+                            ->get('cart_items')
+                            ->row()
+                            ->quantity;
+}
+
+?>
+
+
 <div class="container">
     <nav id="navbar">
 
@@ -75,7 +91,7 @@
             <li><a href="<?php echo base_url('member_registration'); ?>" class="btn-contact">নতুন সদস্য
                     আবেদন</a>
             </li>
-            
+
 
             <?php $user = $this->session->userdata('login_user_info_all'); ?>
             <?php if ($user): ?>
@@ -90,25 +106,63 @@
                             </a></li>
                     </ul>
                 </li>
-                <li><a href="<?= base_url('my_carts') ?>"><i class="fas fa-shopping-cart"></i></a></li>
+
+
+
+                <li style="position: relative;">
+                    <a href="<?= base_url('my_carts') ?>">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+
+                    <?php if ($cart_count): ?>
+                        <span style="
+            position:absolute;
+            top:-4px;
+            right:-10px;
+            background:red;
+            color:white;
+            border-radius:50%;
+            padding:2px 6px;
+            font-size:12px;
+        ">
+                            <?= $cart_count ?>
+                        </span>
+                    <?php endif; ?>
+                    <?php if (!$cart_count): ?>
+                        <span style="
+            position:absolute;
+            top:-4px;
+            right:-10px;
+            background:red;
+            color:white;
+            border-radius:50%;
+            padding:2px 6px;
+            font-size:12px;
+        ">
+                            0
+                        </span>
+                    <?php endif; ?>
+                </li>
             <?php else: ?>
+
+
 
                 <!-- Login button -->
                 <a href="<?= base_url('member_login') ?>" class="">
                     LOGIN
                 </a>
-                
+
 
             <?php endif; ?>
 
-            
-               
-
-            
 
 
 
-           
+
+
+
+
+
     </nav>
 </div>
 

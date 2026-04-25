@@ -40,6 +40,7 @@
 
                     <?php
                     $subtotal = $item->price * $item->quantity;
+                    // $total+=$subtotal;
 
                     $img = $this->db->get_where('product_images', [
                         'product_id' => $item->product_id
@@ -47,7 +48,6 @@
                     ?>
 
                     <tr>
-
                         <!-- Image -->
                         <td>
                             <img src="<?= $img 
@@ -56,7 +56,6 @@
                                 width="60" height="60"
                                 style="object-fit:cover;">
                         </td>
-
                         <!-- Name -->
                         <td class="text-start">
                             <?= $item->title ?>
@@ -67,7 +66,6 @@
 
                         <!-- Quantity -->
                         <td>
-
                             <div class="card-footer bg-white border-0">
                             <form action="<?= base_url('update_cart_quantity/'.$item->id) ?>" method="post">
 
@@ -81,9 +79,6 @@
                                     <button type="submit" class="btn btn-sm btn-success qty-plus">+</button>
 
                                 </div>
-
-                               
-
                             </form>
 
                         </div>

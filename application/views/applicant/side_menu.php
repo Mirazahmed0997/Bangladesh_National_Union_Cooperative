@@ -39,6 +39,24 @@
                         
                     </ul>
                 </li>
+                <li class="nav-item has-treeview <?= active_open('members_list', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('members_list', $main_nav); ?>">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            অর্ডার ব্যবস্থাপনা
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('my_orders') ?>" class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>অর্ডার তালিকা</p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
 
 
 

@@ -10,6 +10,11 @@
             <?= $this->session->flashdata('error'); ?>
         </div>
     <?php endif; ?>
+    <?php if ($this->session->flashdata('login_failed')): ?>
+        <div class="alert alert-danger">
+            <?= $this->session->flashdata('login_failed'); ?>
+        </div>
+    <?php endif; ?>
     <div class="container job_details">
         <div class="row align-items-center">
             <div class="col-12 text-justify">

@@ -119,6 +119,13 @@ class Site extends CI_Controller
 		$path = 'site/pages/all_products/product_card';
 		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
 	}
+	public function checkout()
+	{
+		$this->check_login();
+		$data = $this->engine->store_nav('site', 'Nothing', 'products');
+		$path = 'site/pages/checkout/checkout';
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
 
 	// ---------------------create member-----------------
 

@@ -25,6 +25,83 @@ class Applicant extends CI_Controller
 
 
 
+    public function my_orders()
+    {
+        $data = $this->engine->store_nav('my_orders', 'my_orders', 'তালিকা');
+
+        $login_user = $this->session->userdata('login_user_info_all');
+
+        if (!$login_user) {
+            redirect('member_login');
+        }
+
+
+        $this->db->where('id', $login_user->id);
+
+
+        $where_data = array();
+
+        $id = $this->input->get('id');
+        $name = $this->input->get('name');
+        $mobile_number = $this->input->get('mobile_number');
+        $address = $this->input->get('address');
+        $status = $this->input->get('status');
+        $payment_method	 = $this->input->get('payment_method');
+        $total_amount	 = $this->input->get('total_amount');
+        $from_date = $this->input->get('from_date');
+        $to_date = $this->input->get('to_date');
+
+
+
+        if (!empty($id)) {
+            $where_data['id'] = $id;
+        }
+
+        if (!empty($name)) {
+            $where_data['name'] = $name;
+        }
+
+        if (!empty($mobile_number)) {
+            $where_data['mobile_number'] = $mobile_number;
+        }
+
+        if (!empty($address)) {
+            $where_data['address'] = $address;
+        }
+
+
+        if (!empty($status)) {
+            $where_data['status'] = $status;
+        }
+
+        if (!empty($total_amount)) {
+            $where_data['total_amount'] = $total_amount;
+        }
+        if (!empty($payment_method)) {
+            $where_data['payment_method'] = $payment_method;
+        }
+
+
+
+        if (!empty($where_data)) {
+            $this->db->where($where_data);
+        }
+
+        if (!empty($from_date)) {
+            $this->db->where('created_at >=', $from_date);
+        }
+
+        if (!empty($to_date)) {
+            $this->db->where('created_at <=', $to_date);
+        }
+
+        $data['orders'] = $this->db->get('orders_table')->result();
+
+        $path = 'applicant/orders_table/orders_table';
+        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+       
+
+    }
     public function members_count()
     {
         $data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
@@ -207,7 +284,7 @@ class Applicant extends CI_Controller
 
         $data = [
             'payment_status' => 'paid',
-            'payment_year' => date('Y') 
+            'payment_year' => date('Y')
         ];
 
         $this->db->where('id', $id);

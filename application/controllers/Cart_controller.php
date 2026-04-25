@@ -62,7 +62,6 @@ class Cart_controller extends CI_Controller
 
         $this->session->set_flashdata('success', 'Product added to cart');
         redirect('my_carts');
-        // redirect($_SERVER['HTTP_REFERER']);
     }
 
    
@@ -85,13 +84,12 @@ class Cart_controller extends CI_Controller
         $data['items'] = $this->db->get()->result();
 
         // total calculation
-        // $this->db->select_sum('price * quantity', 'total');
+        $this->db->select('SUM(price * quantity) as total');
         $this->db->where('user_id', $user_id);
         $data['total'] = $this->db->get('cart_items')->row()->total ?? 0;
 
-         $path=$this->load->view('site/pages/all_products/my_carts', $data);
-        // $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
-        
+        $path=$this->load->view('site/pages/all_products/my_carts', $data);
+         
     }
 
   
