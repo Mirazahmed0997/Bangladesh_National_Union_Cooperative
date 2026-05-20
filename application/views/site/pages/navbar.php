@@ -14,8 +14,19 @@ if ($user) {
 ?>
 
 
+
+
 <div class="container">
+
+
+    <div class="mobile-bar">
+        <button class="hamburger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars" id="menuIcon"></i>
+        </button>
+    </div>
+
     <nav id="navbar">
+
 
         <ul>
             <li><a href="<?php echo base_url(); ?>" class="active">হোম</a></li>
@@ -155,7 +166,6 @@ if ($user) {
 
 
 
-                <!-- Login button -->
                 <a href="<?= base_url('admin') ?>" class="">
                     LOGIN
                 </a>
@@ -174,104 +184,112 @@ if ($user) {
     </nav>
 </div>
 
-
-
-<!-- ----------------------------- -->
-
-<!-- <style>
-    /* Hide menu toggle on desktop */
-.menu-toggle {
-    display: none;
-    font-size: 26px;
-    cursor: pointer;
-}
-
-/* Mobile styles */
-@media (max-width: 768px) {
-
-    .menu-toggle {
-        display: block;
+<style>
+    .mobile-bar {
+        display: none;
+        padding: 10px;
+        position: relative;
+        z-index: 1001;
+        background: transparent;
+        
     }
 
     #navbar {
-        display: none;
-        width: 100%;
-        background: #fff;
+        position: relative;
+        z-index: 1000;
     }
 
-    #navbar.active {
-        display: block;
+    .hamburger {
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        z-index: 1002;
     }
 
-    #navbar ul {
-        flex-direction: column;
-    }
 
-    #navbar ul li {
-        width: 100%;
-        border-bottom: 1px solid #ddd;
-    }
 
-    /* Submenu hidden by default */
     .submenu {
         display: none;
-        padding-left: 15px;
     }
 
-    .submenu.show {
+    .dropdown.open>.submenu {
         display: block;
     }
-}
+
+    @media (max-width: 768px) {
+
+        .submenu {
+            display: none !important;
+            padding-left: 15px;
+        }
+
+        .dropdown.open>.submenu {
+            display: block !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        .mobile-bar {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+
+            #navbar {
+                display: none;
+                width: 100%;
+                position: relative;
+                z-index: 999;
+                background: #fff;
+            }
+
+            #navbar.active {
+                display: block;
+            }
+        }
+
+        #navbar ul {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        #navbar ul li {
+            width: 100%;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #navbar ul li a {
+            display: block;
+        }
+    }
 </style>
 
-
 <script>
-function toggleMenu() {
-    var nav = document.getElementById("navbar");
-    nav.classList.toggle("active");
-}
+    function toggleMenu() {
+        const navbar = document.getElementById("navbar");
+        const icon = document.getElementById("menuIcon");
 
-// Dropdown toggle for mobile
-function toggleDropdown(element) {
-    if (window.innerWidth <= 768) {
-        var submenu = element.nextElementSibling;
-        submenu.classList.toggle("show");
+        navbar.classList.toggle("active");
+
+        if (navbar.classList.contains("active")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
     }
-}
-</script> -->
 
+    function toggleDropdown(el) {
+        const parent = el.parentElement;
 
-<!-- <nav class="container navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav> -->
+        if (window.innerWidth <= 768) {
+            parent.classList.toggle("open");
+        }
+    }
+</script>

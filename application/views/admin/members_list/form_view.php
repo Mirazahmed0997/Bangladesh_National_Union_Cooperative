@@ -1,13 +1,815 @@
-<div class="content-wrapper">
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>One Page Form Design</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .page {
+            width: 100%;
+
+            min-height: 100vh;
+            margin: 0;
+            background: #fff;
+            padding: 20px 30px;
+            color: #000;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            width: 85%;
+        }
+
+        .header {
+            text-align: center;
+            position: relative;
+            line-height: 1.3;
+            background: #c45ebc;
+            box-shadow: 0 2px 6px rgba(23, 23, 23, 0.5);
+            padding: 20px;
+            color: white;
+            /* margin-bottom: 40px !important; */
+        }
+
+        .header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .print {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .badge-title {
+            display: inline-block;
+            border: 2px solid #e6e0e0;
+            padding: 6px 25px;
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .top-box {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        .number-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .digit-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .digit-box span {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: -1px;
+            font-size: 13px;
+        }
+
+        .digit-box .border-none {
+            border: none;
+            width: auto;
+            margin: 0 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .content {
+            font-size: 14px;
+            /* line-height: 1.7; */
+            margin-top: 8px;
+            text-align: justify;
+        }
+
+        .content p {
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            border: 1.5px solid #000;
+            text-align: center;
+            padding: 5px;
+            font-size: 17px;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        table td {
+            border: 1px solid #000;
+            padding: 5px 7px;
+            vertical-align: middle;
+        }
+
+        .label {
+            width: 20%;
+            font-weight: 600;
+        }
+
+        .value {
+            width: 30%;
+        }
+
+        .image-title {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .image-box {
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .image-box img:hover {
+            transform: scale(1.05);
+        }
+
+        .sign-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .member-sign {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .sign-text {
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        .bank-acc {
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .bank-acc p {
+            margin-bottom: 5px;
+        }
+
+        .bank-acc ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .footer-sign {
+            margin-top: 45px;
+            padding-bottom: 10px;
+        }
+
+        .footer-sign .line {
+            border-top: 1px solid #000;
+            width: 150px;
+            margin: 0 auto 5px;
+        }
+
+        .member-sign .line {
+            border-top: 1px solid #000;
+            width: 150px;
+            margin: 0 auto 5px;
+        }
+
+        .footer-sign p {
+            text-align: center;
+            margin: 0;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .footer {
+            background-color: #c45ebc;
+            padding: 5px;
+            box-shadow: 0 2px 6px rgba(23, 23, 23, 0.5);
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .note {
+            font-size: 14px;
+            padding: 10px;
+            /* box-shadow: 0 2px 6px rgba(23, 23, 23, 0.5); */
+        }
+
+        /* .small-note {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 10px;
+        } */
+
+        @media print {
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+
+            .print {
+                display: none;
+            }
+
+
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0 !important;
+                padding: 20px !important;
+                background: #fff;
+            }
+
+            .header {
+                text-align: center;
+                position: relative;
+                line-height: 1.3;
+                background: none !important;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.50);
+                padding: 20px;
+                color: black !important;
+                margin-bottom: 0 !important;
+            }
+
+            .badge-title {
+                border: 2px solid black;
+
+            }
+
+            .top-box {
+
+                padding-top: 0 !important;
+                margin-bottom: 0 !important;
+            }
+
+            table td {
+
+                padding: 3px 7px !important;
+
+            }
+
+            .content-wrapper {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #fff !important;
+            }
+
+            .container-fluid {
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .page {
+                width: 100% !important;
+                min-height: 100vh !important;
+                margin: 0 !important;
+                padding: 10mm !important;
+                box-shadow: none !important;
+                border: none !important;
+                page-break-after: avoid;
+            }
+
+            .image-box {
+                min-height: 50px !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            .bank-acc {
+                font-size: 12px;
+                margin-top: 0 !important;
+            }
+
+            .bank-acc p {
+                margin-bottom: 5px;
+            }
+
+            .image-box img {
+                width: 100px !important;
+                height: 100px !important;
+                object-fit: contain;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .main-sidebar,
+            .main-header,
+            .main-footer,
+            .no-print {
+                display: none !important;
+            }
+
+            .member-sign {
+                margin-top: -10px !important;
+            }
+
+            .footer-sign {
+                padding: 0 !important;
+            }
+
+            .footer {
+                padding: 5px;
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+                box-shadow: 0 2px 6px rgba(23, 23, 23, 0.5);
+            }
+
+            .footer p {
+                font-size: 12px !important;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="content-wrapper page">
+
+        <div class="header">
+
+            <div class="print form-code"><button onclick="window.print()" class="btn btn-danger m-2">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+
+            <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
+
+            <p>নিবন্ধন নম্বর: ৩৪, তারিখ: ১৬.০৬.১৯ খৃ: ১৬.০৬.১৯৬১ খ্রি. (সংশোধিত) সঅ-০১, তারিখ: ০৭.০৭.২০২৫ খ্রি.</p>
+
+            <p>ঠিকানা: সমবায় ব্যাংক ভবন (৮ম তলা), ৯/ডি, মতিঝিল বা/এ, ঢাকা-১০০০।</p>
+
+            <div class="badge-title">
+                সদস্য আবেদন ফরম
+            </div>
+
+        </div>
+
+        <div class="top-box">
+
+            <div class="number-group">
+
+                <span>তারিখ :</span>
+
+                <?php
+                $date = date('dmY', strtotime($member->created_at));
+                ?>
+
+                <div class="digit-box">
+                    <?php foreach (str_split($date) as $digit) { ?>
+                        <span><?= $digit ?></span>
+                    <?php } ?>
+                </div>
+
+            </div>
+
+            <div class="number-group">
+                <span>সদস্য নং :</span>
+                <div class="digit-box">
+                    <?php
+                    $memberNo = $member->member_no;
+
+                    foreach (str_split($memberNo) as $index => $char) {
+
+                        if ($index == 4) {
+                            echo '<span class="border-none">-</span>';
+                        }
+
+                        echo "<span>{$char}</span>";
+                    }
+                    ?>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <p>
+                বরাবর,<br>
+                সভাপতি/সম্পাদক,<br>
+                বাংলাদেশ জাতীয় সমবায় ইউনিয়ন<br>
+                সমবায় ব্যাংক ভবন (৮ম তলা), ৯/ডি, মতিঝিল বা/এ, ঢাকা-১০০০।
+            </p>
+
+
+            <p>
+                বিষয় : সদস্য ভর্তির আবেদন।
+            </p>
+
+            <p>
+                জনাব, <br>
+                আমি নিন্ম স্বাক্ষরকারী আবেদনকৃত সমিতির পক্ষে ক্ষমতাপ্রাপ্ত হয়ে আমাদের সমিতি বাংলাদেশ জাতীয় সমবায় ইউনিয়ন
+                এর সদস্য
+                ভর্তি হওয়ার জন্য ব্যবস্থাপনা কমিটির সিদ্ধান্ত অনুযায়ী আবেদন করলাম । এই মর্মে বাংলাদেশ জাতীয় সমবায় ইউনিয়ন
+                এর ব্যবস্থাপনা কমিটির সিদ্ধান্ত
+                এবং বার্ষিক সাধারন সভার সিদ্ধান্ত সহ ইউনিয়ন এর উপ-আইন এবং সমবায় সমিতি আইন ও বিধিমালা মেনে চলার পূর্ণ
+                অঙ্গীকার ব্যক্ত করছি । নিম্নে সমিতির তথ্য উপস্থাপন করলাম,
+
+            </p>
+
+        </div>
+
+        <div class="section-title">
+            আবেদনকৃত সমিতির ধরণ : <?= $member->a_type ?>
+        </div>
+
+        <table>
+
+            <tr>
+                <td class="label">সমিতির নাম</td>
+                <td colspan="">
+                    <?= $member->association_name ?>
+                </td>
+                <td class="label">কার্যকরী মূলধন</td>
+                <td class="value"><?= $member->valid_cap ?></td>
+
+
+            </tr>
+
+            <tr>
+                <td class="label">কার্যালয়ের ঠিকানা</td>
+                <td class="value"><?= $member->a_address ?></td>
+                <td class="label">সর্বশেষ অর্থ-বছরের নীট লাভ</td>
+                <td><?= $member->last_finYear_profit ?></td>
+
+
+
+            </tr>
+
+            <tr>
+
+                <td class="label">নিবন্ধন নম্বর</td>
+                <td><?= $member->registration_no ?></td>
+                <td class="label">সর্বশেষ বার্ষিক সাধারণ সভার তারিখ</td>
+                <td><?= $member->last_gen_meeting_date ?></td>
+
+
+            </tr>
+            <tr>
+
+                <td class="label">নিবন্ধন তারিখ</td>
+                <td><?= $member->r_date ?></td>
+
+
+                <td class="label">অডিট সম্পাদনের তারিখ</td>
+                <td><?= $member->audit_execution_date ?></td>
+            </tr>
+            <tr>
+
+
+                <td class="label">নিবন্ধন ঠিকানা</td>
+                <td><?= $member->r_address ?></td>
+                <td class="label">নির্বাচন অনুষ্ঠানের তারিখ</td>
+                <td><?= $member->election_date ?></td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td class="label">মোবাইল নম্বর</td>
+                <td><?= $member->a_contact ?></td>
+                <td class="label">নির্বাচিত ব্যবস্থাপনা কমিটির প্রথম সভার তারিখ</td>
+                <td><?= $member->first_man_meeting_date ?></td>
+
+
+            </tr>
+
+            <tr>
+                <td class="label">ই-মেইল</td>
+                <td>
+                    <?= $member->a_email ?>
+                </td>
+
+
+                <td class="label">নির্বাচিত সভাপতির নাম</td>
+                <td><?= $member->elected_president ?></td>
+
+            </tr>
+            <!-- ------------------- -->
+            <tr>
+
+                <td class="label">সমিতির পক্ষে প্রতিনিধির নাম</td>
+                <td>
+                    <?= $member->issuer ?>
+                </td>
+                <td class="label">মোবাইল নম্বর ও ই-মেইল</td>
+                <td><?= $member->president_contact ?>, <?= $member->president_email ?></td>
+
+
+            </tr>
+
+            <tr>
+                <td class="label">পদবী ও ঠিকানা</td>
+                <td><?= $member->i_designation ?></td>
+                <td class="label">নির্বাচিত সম্পাদকের নাম </td>
+                <td><?= $member->elected_editor ?></td>
+
+
+            </tr>
+
+            <tr>
+
+                <td class="label">মোবাইল নম্বর ও ই-মেইল</td>
+                <td>
+                    <?= $member->i_contact ?>,
+                    <?= $member->i_email ?>
+                </td>
+
+                <td class="label">মোবাইল নম্বর ও ই-মেইল</td>
+                <td><?= $member->editor_contact ?>, <?= $member->e_email ?></td>
+
+
+            </tr>
+
+            <tr>
+                <td class="label">অনুমোদিত শেয়ার</td>
+                <td><?= $member->authorized_shares ?></td>
+
+                <td style="font-size: 12px;" class="label">সর্বশেষ লভ্যাংশ প্রদানের সমবায় বর্ষ ও লভ্যাংশ হার</td>
+                <td>8%, 2025-26</td>
+
+            </tr>
+            <tr>
+
+                <td class="label">পরিশোধিত মূলধন</td>
+                <td>
+                    <?= $member->capital ?>
+                </td>
+                <td class="label">লভ্যাংশ প্রদান ধরন</td>
+                <td><?= $member->Dividend_payment_type ?></td>
+            </tr>
+
+        </table>
+
+        <table style="margin-top:10px;">
+
+            <tr>
+                <td class="image-title">নিবন্ধন সনদ</td>
+                <td class="image-title">ফরমপত্র</td>
+                <td class="image-title">রেজুলেশন</td>
+                <td class="image-title">উপ-আইন</td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <div class="image-box">
+
+                        <a href="<?= base_url('./assets/uploads/project/members/att_reg_cer/' . $member->att_reg_cer) ?>"
+                            target="_blank">
+
+                            <img
+                                src="<?= base_url('./assets/uploads/project/members/att_reg_cer/' . $member->att_reg_cer) ?>">
+                        </a>
+
+                    </div>
+                </td>
+
+                <td>
+                    <div class="image-box">
+
+                        <a href="<?= base_url('./assets/uploads/project/members/att_auth_cer/' . $member->att_auth_cer) ?>"
+                            target="_blank">
+
+                            <img
+                                src="<?= base_url('./assets/uploads/project/members/att_auth_cer/' . $member->att_auth_cer) ?>">
+
+                        </a>
+
+                    </div>
+                </td>
+
+                <td>
+                    <div class="image-box">
+
+                        <a href="<?= base_url('./assets/uploads/project/members/att_resulation/' . $member->att_resulation) ?>"
+                            target="_blank">
+
+                            <img
+                                src="<?= base_url('./assets/uploads/project/members/att_resulation/' . $member->att_resulation) ?>">
+
+                        </a>
+
+                    </div>
+                </td>
+
+                <td>
+                    <div class="image-box">
+
+                        <a href="<?= base_url('./assets/uploads/project/members/att_laws/' . $member->att_laws) ?>"
+                            target="_blank">
+
+                            <img
+                                src="<?= base_url('./assets/uploads/project/members/att_laws/' . $member->att_laws) ?>">
+
+                        </a>
+
+                    </div>
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div class="note">
+            <p>সদস্য ভর্তির চাহিত তথ্য সঠিক এবং ভর্তি ফি ২০০০/=(দুই হাজার) টাকা এবং বার্ষিক চাঁদা ১০০০/=(এক হাজার) টাকা
+                ব্যাংক হিসাব নম্বর জমা করবো এবং পরবর্তী বার্ষিক চাঁদা প্রত্যেক বছরের ডিসেম্বর মাসের মধ্যে পরিশোধ করার
+                অঙ্গীকার করলাম।
+            </p>
+        </div>
+
+        <div class="sign-wrapper">
+            <div class="">
+               
+            </div>
+            <div class="member-sign text-center">
+                <div class="line"></div>
+                <div class="sign-text">
+
+                    <div class="text-center"><?= $member->issuer ?></div>
+                    <div class="text-center">সমিতির পক্ষে প্রতিনিধির নাম ও স্বাক্ষর</div>
+                </div>
+
+                <!-- <img src="https://via.placeholder.com/90x35?text=Signature"> -->
+            </div>
+
+        </div>
+        <div class="bank-wrapper">
+            <div class="bank-acc">
+                <p>ইউনিয়নের ব্যাংক হিসাব নম্বর :</p>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="member-sign pt-5 text-center">
+                <!-- <div class="line"></div>
+                <div class="sign-text">
+                    
+                    <div class="text-center"><?= $member->issuer ?></div>
+                    <div class="text-center">সমিতির পক্ষে প্রতিনিধির নাম ও স্বাক্ষর</div>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="row footer-sign">
+
+            <div class="col-4">
+                <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
+                <div class="line"></div>
+                <p>মো. আব্দুস সালাম</p>
+                <p>সভাপতি</p>
+            </div>
+
+            <div class="col-4">
+                <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
+                <div class="line"></div>
+                <p>মো. জসিম উদ্দিন</p>
+                <p>সম্পাদক</p>
+            </div>
+
+            <div class="col-4">
+                <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
+                <div class="line"></div>
+
+                <p>অপারেটর</p>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <div class="footer-note text-center">
+                <!-- <p>সদস্য পদটি স্বয়ংক্রিয়ভাবে প্রস্তুত হচ্ছে :</p> -->
+            </div>
+            <div class="text-center">
+                <p>
+                    আবেদনটি ব্যবস্থাপনা কমিটি কর্তৃক অনুমোদন করা হলে সদস্য পদের ভর্তি ফি ও চাঁদা ব্যাংক হিসেবে জমা করলে
+                    স্বয়ংক্রিয়ভাবে জমা রশিদ আপনার ই-মেইলে প্রেরিত হবে। <br>
+                    ই-মেইলঃ "bjsuxyz892323@gmail.com"
+                    মোবাইলঃ "01700000000" । হালনাগাদ তথ্য দেখার জন্য ওয়েবসাইট লগইন করুন : <a class="text-white"
+                        href="https://bjsucoop.org/">https://bjsucoop.org/</a>
+                </p>
+            </div>
+            <div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- <div class="content-wrapper">
     <div class="content-header" style="color: #800000;">
         <div class="container-fluid">
 
 
             <div class="card shadow-sm p-4">
-                <div class="d-flex justify-content-end align-items-center ">
+                <div class="d-flex justify-content-end align-items-center gap-2">
+
                     <button onclick="window.print()" class="btn btn-danger">
                         <i class="fas fa-print"></i> Print
                     </button>
+
+                    <p class="mb-0 ml-1">
+                        <?php if ($member->document_1): ?>
+                            <a href="<?= base_url('assets/uploads/project/members/members_document/' . $member->document_1) ?>"
+                                target="_blank" class="btn btn-primary">              
+                               <i class="fas fa-file-pdf"></i>  
+                            </a>
+                        <?php else: ?>
+                           <i class="fas fa-folder"></i>
+                        <?php endif; ?>
+                    </p>
+
                 </div>
                 <div class="header d-flex justify-content-center"
                     style="border-bottom:2px solid #800000; padding-bottom:10px;">
@@ -131,9 +933,8 @@
 
 
 <style>
-    
     @media print {
-        .container-fluid{
+        .container-fluid {
             width: 100%;
         }
 
@@ -162,320 +963,11 @@
             box-shadow: none !important;
             padding: 60px;
         }
-        
+
         .btn {
             display: none !important;
         }
     }
 </style>
 
-
-
-<!-- ----------------------row html design----------------- -->
-
-<!-- <!DOCTYPE html>
-<html lang="bn">
-
-<head>
-    <meta charset="UTF-8">
-    <title>সদস্য পদের আবেদন ফরম</title>
-    <link rel="stylesheet" href="preview.css">
- <style>
-        body {
-            background: #eee;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-
-        .form {
-            width: 800px;
-            padding: 40px;
-            border: 1px solid #ccc;
-            font-family: "Times New Roman", Times, serif;
-            line-height: 1.4;
-            color: #800000;
-            background-color: #fff;
-            font-size: 10px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #800000;
-            padding-bottom: 10px;
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .input-line {
-            border: none;
-            border-bottom: 1px dotted #000;
-            outline: none;
-            min-height: 20px;
-        }
-
-        .flex {
-            display: flex;
-            margin-top: 10px;
-        }
-
-        .flex input {
-            flex: 1;
-            margin-left: 5px;
-        }
-
-        .section-list {
-            margin-top: 20px;
-        }
-
-        .section-list .item {
-            display: flex;
-            margin-bottom: 8px;
-        }
-
-        .section-list .label {
-            min-width: 250px;
-        }
-
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .seal-box {
-            width: 150px;
-            height: 80px;
-            border: 1px dashed #ccc;
-            margin-bottom: 5px;
-            margin-top: 40px;
-        }
-
-        .right-footer {
-            width: 300px;
-        }
-
-        .small-input {
-            border: none;
-            border-bottom: 1px dotted #000;
-            outline: none;
-            flex: 1;
-            margin-left: 5px;
-        }
-
-        .print-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background: #800000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .print-btn:hover {
-            background: #a00000;
-        }
-
-
-        @media print {
-            body {
-                margin: 0;
-                padding: 0;
-            }
-
-            .print-btn {
-                display: none !important;
-            }
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <div class="form">
-        <button onclick="printForm()" class="print-btn">Print Form</button>
-
-        <div class="header">
-            <div style="display:flex;align-items:center;justify-content:center;">
-                <div
-                    style="width:70px;height:70px;border:1px solid #000;border-radius:50%;margin-right:15px;display:flex;justify-content:center;align-items:center;overflow:hidden;">
-                    <img src="<?= base_url('assets/uploads/project/members/' . $member->logo) ?>" alt="Logo"
-                        style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
-                </div>
-                <div>
-                    <h1 style="margin:0;font-size:28px;">বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h1>
-                    <p style="margin:0;font-size:12px;">
-                        নিবন্ধন নং- ৩৪, তারিখ: ১৬.০৬.১৯৬১ খ্রি. (সংশোধিত) নং-০১, তারিখ: ০৭.০৭.২০২৫ খ্রি.
-                    </p>
-                    <p style="margin:0;font-size:12px;">
-                        কার্যালয় সমবায় ব্যাংক ভবন (৮ম তলা), ৯/ডি, মতিঝিল বা/এ, ঢাকা-১০০০।
-                    </p>
-                    <p style="margin:0;font-size:12px;">
-                        ই-মেইল: bjsu61@gmail.com, মোবাইল: ০১৭১৬৬৫৩৫৯৯
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div>স্মারক নং- <span style="width:150px; font-weight: bold;"><?= $member->sarok_no ?></div>
-            <div>তারিখ : <span style="width:150px; font-weight: bold;"><?= $member->sarok_date ?></div>
-        </div>
-
-        <h2 style="text-align:center;text-decoration:underline;margin-top:20px;">
-            সদস্য পদের আবেদন ফরম
-        </h2>
-
-        <div style="margin-bottom:10px;">
-            <p style="margin:0;">সভাপতি/সম্পাদক</p>
-            <p style="margin:0;">বাংলাদেশ জাতীয় সমবায় ইউনিয়ন,</p>
-            <p style="margin:0;">সমবায় ব্যাংক ভবন,</p>
-            <p style="margin:0;">৯-ডি, মতিঝিল বাণিজ্যিক এলাকা, ঢাকা-১০০০</p>
-        </div>
-
-        <p>জনাব,</p>
-
-        <div class="Personal-info ">
-            <p style="font-size:12px;">
-                আমি (নাম) : <span style="font-weight: bold">
-                    <?= $member->name ?> ,</span>
-
-                পিতা : <span style="font-weight: bold;">
-                    <?= $member->father_name ?> ,</span>
-
-                মাতা : <span style="font-weight: bold;">
-                    <?= $member->mother_name ?> ,</span>
-
-                গ্রাম : <span style="font-weight: bold;"><?= $member->village ?> ,
-                </span>
-
-                ডাকঘর : <span style="font-weight: bold;"><?= $member->post ?>
-                </span>,
-
-                উপজেলা : <span style="font-weight: bold;"><?= $member->sub_district ?> ,</span>
-                জেলা : <span style="font-weight: bold;"><?= $member->district ?></span>,
-                সমিতিতে পদবী :<span style="font-weight: bold;"> <?= $member->branch_designation ?></span>,
-                জেলার অন্তর্গত, সমিতির নাম :<span style="font-weight: bold;"><?= $member->branch_work_name ?></span>
-            </p>
-
-        </div>
-
-        <p style="text-align:justify;">
-            জানাইতেছি যে, আমাদের সমিতি বাংলাদেশ জাতীয় সমবায় ইউনিয়ন এর সদস্যভুক্ত হইতে ইচ্ছুক এবং সদস্য পদের জন্য ভর্তি
-            ফি বাবদ ২,০০০/-(দুই হাজার) টাকা এবং বার্ষিক চাঁদা ১,০০০/-(এক হাজার) টাকা সর্বমোট ৩০০০/-(তিন হাজার) টাকা এবং
-            বাংলাদেশ জাতীয় সমবায় ইউনিয়ন এর ব্যাংক হিসাব নং ০০৬৭০১০০০৩৯৯৭, রূপালী ব্যাংক পিএলসি, ফরেন এক্সচেঞ্জ কর্পোরেট
-            ব্রাঞ্চ ঢাকা, জমা করে জমার রশিদ সংযুক্ত করেছি।
-        </p>
-
-        <p style="text-align:justify;">
-            আমরা বাংলাদেশ জাতীয় সমবায় ইউনিয়ন এর উপ-আইন, সমবায় সমিতি আইন, ২০০১ (সংশোধিত ২০০২,২০১৩) ও সমবায় সমিতি
-            বিধিমালা, ২০০৪ (সংশোধিত ২০২০) মানিয়া চলিতে সম্মত আছি।
-        </p>
-
-        <div class="section-list">
-
-            <div class="item">
-                <span class="label">১. সমিতির নাম : branch_work_name</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_name ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">২. সমিতির নিবন্ধিত ঠিকানা :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_registration_address ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৩. বর্তমান ঠিকানা :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_address ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৪. যোগাযোগের মোবাইল নম্বর সমিতির :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_mobile_number ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৫. সভাপতি :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_chairman ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৬. সম্পাদক :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_secretary ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৭. তারিখ :</span>
-                <span style="margin-left:10px; font-weight:bold;"> <?= date('Y-m-d', strtotime($member->created_at)) ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৮. সমিতির রেজিস্ট্রেশন নং :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_registration_no ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">৯. সমিতির শ্রেণি :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_class ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">১০. সমিতির সদস্য সংখ্যা :</span>
-                <span style="margin-left:10px; font-weight:bold;"><?= $member->branch_member_count ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">১১. সমিতির সদস্য নির্বাচনী ও কর্ম এলাকা :</span>
-                <span style="margin-left:12px; font-weight:bold;"><?= $member->branch_working_area ?></span>
-            </div>
-
-            <div class="item">
-                <span class="label">১২. মনোনীত সদস্যের পরিচয়পত্র (সংযুক্ত) </span>
-            </div>
-
-            <div class="item">
-                <span class="label">১৩. সমিতি জেলা সমবায় ইউনিয়নের সদস্যভুক্ত/সদস্যভুক্ত নহে</span>
-            </div>
-
-        </div>
-     
-
-        <div class="footer">
-            <div style="text-align:center;">
-                <div class="seal-box"></div>
-                <p>সমিতির সীলমোহর</p>
-            </div>
-
-            <div class="right-footer">
-                <p style="text-align:center;font-weight:bold;">আপনার বিশ্বস্ত</p>
-                <p style="text-align:center;font-size:12px;">সমিতির পক্ষে মনোনীত সদস্যের নাম ও স্বাক্ষর</p>
-
-                <div style="margin-top:20px;">
-                    <div style="display: flex; gap: 5px; align-items: center;">
-                        (০১) স্বাক্ষর
-                    <img src="<?= base_url('assets/uploads/project/members/nominee_sign/' . $member->nomini_sign) ?>" width="80">
-                    </div>
-                    <div class="flex">নাম : <span style="font-weight: bold;"><?= $member->name ?></div>
-                    <div class="flex">পদবী : <span style="font-weight: bold;"><?= $member->branch_designation ?></div>
-                    <div class="flex">মোবাইল নম্বর : <span style="font-weight: bold;"><?= $member->mobile_number ?></div>
-                    <div class="flex">তারিখ : <span style="font-weight: bold;"> <?= date('Y-m-d', strtotime($member->created_at)) ?></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</body>
-
-</html> -->
+ -->

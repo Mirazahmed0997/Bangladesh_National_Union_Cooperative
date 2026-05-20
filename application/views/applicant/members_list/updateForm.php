@@ -7,7 +7,7 @@
 
                 <div class="card-header bg-primary">
                     <h3 class="card-title text-white">
-                        <i class="fas fa-user-edit"></i> সদস্য পদের আবেদন ফরম (Update)
+                        <i class="fas fa-user-edit"></i> সদস্য তথ্য আপডেট
                     </h3>
                 </div>
 
@@ -17,373 +17,261 @@
                         enctype="multipart/form-data" onsubmit="return validatePassword()">
 
 
-                        <div class="row">
-
-                            <div class="col-md-6 form-group">
-                                <label>স্মারক নং</label>
-                                <input type="text" class="form-control" name="sarok_no"
-                                    value="<?= $member->sarok_no ?>">
-                            </div>
-
-                            <div class="col-md-6 form-group">
-                                <label>তারিখ</label>
-                                <input type="date" class="form-control" name="sarok_date"
-                                    value="<?= $member->sarok_date ?>">
-                            </div>
-
-                        </div>
-
-
-                        <!-- authentication Info -->
-                        <div class="row">
-
-                            <div class="col-md-4 form-group">
-                                <label>মোবাইল নম্বর</label>
-                                <input type="text" class="form-control" name="mobile_number"
-                                    value="<?= $member->mobile_number ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>ই-মেইল</label>
-                                <input type="text" class="form-control" name="email"
-                                    value="<?= $member->email ?>">
-                            </div>
-
-
-                            <div class="col-md-4 form-group">
-                                <label class="text-green">পাসওয়ার্ড পরিবর্তন করুন</label>
-                                <div style="position:relative;">
-                                    <input type="password" name="password" id="password" class="form-control"
-                                        value="<?= $member->password ?>">
-
-                                    <i class="fa fa-eye" onclick="togglePassword('password', this)"
-                                        style="position:absolute; right:10px; top:10px; cursor:pointer;">
-                                    </i>
-                                </div>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label class="text-green">কন্ফার্ম পাসওয়ার্ড</label>
-                                <div style="position:relative;">
-                                    <input type="password" name="confirm_password" id="confirm_password"
-                                        class="form-control" value="<?= $member->password ?>">
-
-                                    <i class="fa fa-eye" onclick="togglePassword('confirm_password', this)"
-                                        style="position:absolute; right:10px; top:10px; cursor:pointer;">
-                                    </i>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <!-- Personal Information -->
-                        <h5 class="mt-4 mb-3 text-primary">১. ব্যক্তিগত তথ্য</h5>
-
-                        <div class="row">
-
-                            <div class="col-md-4 form-group">
-                                <label>নাম</label>
-                                <input type="text" class="form-control" name="name" value="<?= $member->name ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>পিতা</label>
-                                <input type="text" class="form-control" name="father_name"
-                                    value="<?= $member->father_name ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>মাতা</label>
-                                <input type="text" class="form-control" name="mother_name"
-                                    value="<?= $member->mother_name ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>NID</label>
-                                <input type="number" class="form-control" name="nid" value="<?= $member->nid ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>জন্ম তারিখ</label>
-                                <input type="date" class="form-control" name="birth_date"
-                                    value="<?= $member->birth_date ?>">
-                            </div>
-
-
-
-                            <!-- <div class="col-md-4 form-group">
-                                <label>মোবাইল নম্বর</label>
-                                <input type="text" class="form-control" name="mobile_number"
-                                    value="<?= $member->mobile_number ?>">
-                            </div> -->
-
-
-                            <div class="col-md-4 form-group">
-                                <label>লিঙ্গ</label>
-                                <select class="form-control" name="gender">
-                                    <option value="">নির্বাচন করুন</option>
-
-                                    <option value="পুরুষ" <?= ($member->gender == 'পুরুষ') ? 'selected' : '' ?>>
-                                        পুরুষ
-                                    </option>
-
-                                    <option value="মহিলা" <?= ($member->gender == 'মহিলা') ? 'selected' : '' ?>>
-                                        মহিলা
-                                    </option>
-
-                                    <option value="অন্যান্য" <?= ($member->gender == 'অন্যান্য') ? 'selected' : '' ?>>
-                                        অন্যান্য
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>গ্রাম</label>
-                                <input type="text" class="form-control" name="village" value="<?= $member->village ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>ডাকঘর</label>
-                                <input type="text" class="form-control" name="post" value="<?= $member->post ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>উপজেলা</label>
-                                <input type="text" class="form-control" name="sub_district"
-                                    value="<?= $member->sub_district ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>জেলা</label>
-                                <input type="text" class="form-control" name="district"
-                                    value="<?= $member->district ?>">
-                            </div>
-
-                            <div class="col-md-4 form-group">
-                                <label>সমিতিতে পদবি </label>
-                                <input type="text" class="form-control" name="association_designation"
-                                    value="<?= $member->association_designation ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>সমিতি জেলা</label>
-                                <input type="text" class="form-control" name="association_district"
-                                    value="<?= $member->association_district ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>সমিতি নাম</label>
-                                <input type="text" class="form-control" name="association_name"
-                                    value="<?= $member->association_name ?>">
-                            </div>
-
-
-                            <div class="col-md-4 form-group">
-                                <label>টাকার পরিমাণ</label>
-                                <input type="text" class="form-control" name="paid_amount"
-                                    value="<?= $member->paid_amount ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>রশিদ নম্বর</label>
-                                <input type="text" class="form-control" name="voucher_no"
-                                    value="<?= $member->voucher_no ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>ব্যবস্থাপনা কমিটির তারিখ</label>
-                                <input type="date" class="form-control" name="managing_committee_date"
-                                    value="<?= $member->managing_committee_date ?>">
-                            </div>
-
-                        </div>
-
-
-                        <!-- Cooperative -->
-                        <h5 class="mt-4 mb-3 text-success">২. সমবায় সংক্রান্ত তথ্য</h5>
 
                         <div class="row">
 
                             <div class="col-md-4 form-group">
                                 <label>সমিতির নাম</label>
-                                <input type="text" class="form-control" name="Cooperative_association_name"
-                                    value="<?= $member->Cooperative_association_name ?>">
-                            </div>
-
-
-
-                            <div class="col-md-4 form-group">
-                                <label>মোবাইল</label>
-                                <input type="text" class="form-control" name="Cooperative_association_number"
-                                    value="<?= $member->Cooperative_association_number ?>">
-                            </div>
-
-
-
-
-                            <div class="col-md-4 form-group">
-                                <label>সভাপতি</label>
-                                <input type="text" class="form-control" name="Cooperative_association_chairman"
-                                    value="<?= $member->Cooperative_association_chairman ?>">
+                                <input required type="text" class="form-control" name="association_name" 
+                                    value="<?= $member->association_name ?>">
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>সম্পাদক</label>
-                                <input type="text" class="form-control" name="Cooperative_association_secretary"
-                                    value="<?= $member->Cooperative_association_secretary ?>">
+                                <label>কার্যালয়ের ঠিকানা</label>
+                                <input required type="text" class="form-control" name="a_address"
+                                    value="<?= $member->a_address ?>">
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>রেজিস্ট্রেশন নং</label>
-                                <input type="text" class="form-control" name="Cooperative_association_registration_no"
-                                    value="<?= $member->Cooperative_association_registration_no ?>">
+                                <label>ইমেইল</label>
+                                <input required type="email" class="form-control" name="a_email" value="<?= $member->a_email ?>">
                             </div>
 
-
                             <div class="col-md-4 form-group">
-                                <label>নিবন্ধিত ঠিকানা</label>
-                                <input type="text" class="form-control"
-                                    name="Cooperative_association_registration_address"
-                                    value="<?= $member->Cooperative_association_registration_address ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>বর্তমান ঠিকানা</label>
-                                <input type="text" class="form-control" name="Cooperative_association_address"
-                                    value="<?= $member->Cooperative_association_address ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>সমিতির শ্রেনি</label>
-                                <input type="text" class="form-control" name="Cooperative_association_class"
-                                    value="<?= $member->Cooperative_association_class ?>">
+                                <label>মোবাইল নম্বর</label>
+                                <input required type="text" class="form-control" name="a_contact"
+                                    value="<?= $member->a_contact ?>">
                             </div>
 
-
                             <div class="col-md-4 form-group">
-                                <label>টাইপ</label>
-                                <select class="form-control" name="Cooperative_association_type">
-                                    <option value="">নির্বাচন করুন</option>
-                                    <option value="প্রাথমিক" <?= $member->Cooperative_association_type == 'initial' ? 'selected' : '' ?>>প্রাথমিক</option>
-                                    <option value="কেন্দ্রীয়" <?= $member->Cooperative_association_type == 'central' ? 'selected' : '' ?>>কেন্দ্রীয়
-                                    </option>
-                                    <option value="জাতীয়" <?= $member->Cooperative_association_type == 'national' ? 'selected' : '' ?>>জাতীয়
-                                    </option>
-                                </select>
+                                <label>মেম্বার নম্বর</label>
+                                <input required type="text" readonly class="form-control" name="member_no"
+                                    value="<?= $member->member_no ?>">
                             </div>
 
-
-
                             <div class="col-md-4 form-group">
-                                <label>সমিতির সদস্য সংখ্যা</label>
-                                <input type="text" class="form-control" name="Cooperative_association_member_count"
-                                    value="<?= $member->Cooperative_association_member_count ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>সমিতির সদস্য নির্বাচনী ও কর্ম এলাকা</label>
-                                <input type="text" class="form-control" name="Cooperative_association_working_area"
-                                    value="<?= $member->Cooperative_association_working_area ?>">
+                                <label>রেজিস্ট্রেশন নম্বর</label>
+                                <input required type="text" class="form-control" name="registration_no"
+                                    value="<?= $member->registration_no ?>">
                             </div>
 
                             <div class="col-md-4 form-group">
                                 <label>রেজিস্ট্রেশন তারিখ</label>
-                                <input type="date" class="form-control" name="Cooperative_association_registration_date"
-                                    value="<?= $member->Cooperative_association_registration_date ?>">
+                                <input required type="date" class="form-control" name="r_date" value="<?= $member->r_date ?>">
                             </div>
 
+                            <div class="col-md-8 form-group">
+                                <label>রেজিস্ট্রেশন ঠিকানা</label>
+                                <input required type="text" class="form-control" name="r_address"
+                                    value="<?= $member->r_address ?>">
+                            </div>
 
                         </div>
 
 
-                        <!-- Nominee -->
-                        <h5 class="mt-4 mb-3 text-warning">৩. মনোনীত সদস্য তথ্য</h5>
 
                         <div class="row">
 
                             <div class="col-md-3 form-group">
-                                <label>নাম</label>
-                                <input type="text" class="form-control" name="nomini_name"
-                                    value="<?= $member->nomini_name ?>">
+                                <label>প্রতিনিধির নাম</label>
+                                <input required type="text" class="form-control" name="issuer" value="<?= $member->issuer ?>">
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label>পদবী</label>
-                                <input type="text" class="form-control" name="nomini_designation"
-                                    value="<?= $member->nomini_designation ?>">
+                                <input required type="text" class="form-control" name="i_designation"
+                                    value="<?= $member->i_designation ?>">
                             </div>
 
                             <div class="col-md-3 form-group">
                                 <label>মোবাইল</label>
-                                <input type="text" class="form-control" name="nomini_mobile_no"
-                                    value="<?= $member->nomini_mobile_no ?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label>তারিখ</label>
-                                <input type="date" class="form-control" name="nomini_date"
-                                    value="<?= $member->nomini_date ?>">
+                                <input required type="text" class="form-control" name="i_contact"
+                                    value="<?= $member->i_contact ?>">
                             </div>
 
                             <div class="col-md-3 form-group">
-                                <label>স্বাক্ষর</label>
-                                <input type="file" class="form-control" name="nomini_sign">
-
-                                <?php if ($member->nomini_sign): ?>
-                                    <img src="<?= base_url('assets/uploads/project/members/nominee_sign/' . $member->nomini_sign) ?>"
-                                        width="60">
-                                <?php endif; ?>
-
+                                <label>ইমেইল</label>
+                                <input required type="email" class="form-control" name="i_email" value="<?= $member->i_email ?>">
                             </div>
 
                         </div>
 
 
-                        <!-- Documents -->
-                        <h5 class="mt-4 mb-3 text-danger">৪. ডকুমেন্ট</h5>
 
                         <div class="row">
 
-                            <div class="col-md-4 form-group">
-                                <label>লোগো</label>
-                                <input type="file" class="form-control" name="logo">
-
-                                <?php if ($member->logo): ?>
-                                    <img src="<?= base_url('assets/uploads/project/members/logo/' . $member->logo) ?>"
-                                        width="60">
-                                <?php endif; ?>
+                            <div class="col-md-6 form-group">
+                                <label>কার্যকরী মূলধন</label>
+                                <input required type="number" step="0.01" class="form-control" name="valid_cap"
+                                    value="<?= $member->valid_cap ?>">
                             </div>
 
-                            <div class="col-md-4 form-group">
-                                <label>PDF</label>
-                                <input type="file" class="form-control" name="document_1">
-
-                                <?php if ($member->document_1): ?>
-                                    <a target="_blank"
-                                        href="<?= base_url('assets/uploads/project/members/members_document/' . $member->document_1) ?>">View</a>
-                                <?php endif; ?>
-
+                            <div class="col-md-6 form-group">
+                                <label>সর্বশেষ অর্থ বছরের নীট লাভ</label>
+                                <input required type="number" step="0.01" class="form-control" name="last_finYear_profit"
+                                    value="<?= $member->last_finYear_profit ?>">
                             </div>
 
                         </div>
 
-        <!-- ----------------------- addmission issuer data-------------------- -->
 
-                        <h5 class="mt-4 mb-3 text-danger">৫. ভর্তি ইস্যুকারী তথ্য</h5>
+
+                        <div class="row">
+
+                            <div class="col-md-3 form-group">
+                                <label>অডিট তারিখ</label>
+                                <input required type="date" class="form-control" name="audit_execution_date"
+                                    value="<?= $member->audit_execution_date ?>">
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>সাধারণ সভার তারিখ</label>
+                                <input required type="date" class="form-control" name="last_gen_meeting_date"
+                                    value="<?= $member->last_gen_meeting_date ?>">
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>নির্বাচন তারিখ</label>
+                                <input required type="date" class="form-control" name="election_date"
+                                    value="<?= $member->election_date ?>">
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>প্রথম ম্যানেজমেন্ট সভা</label>
+                                <input required type="date" class="form-control" name="first_man_meeting_date"
+                                    value="<?= $member->first_man_meeting_date ?>">
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-3 form-group">
+                                <label>সভাপতির নাম</label>
+                                <input required type="text" class="form-control" name="elected_president"
+                                    value="<?= $member->elected_president ?>">
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>সভাপতির মোবাইল</label>
+                                <input required type="text" class="form-control" name="president_contact"
+                                    value="<?= $member->president_contact ?>">
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>সম্পাদকের নাম</label>
+                                <input required type="text" class="form-control" name="elected_editor"
+                                    value="<?= $member->elected_editor ?>">
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>সম্পাদকের মোবাইল</label>
+                                <input required type="text" class="form-control" name="editor_contact"
+                                    value="<?= $member->editor_contact ?>">
+                            </div>
+
+                        </div>
+
+
 
                         <div class="row">
 
                             <div class="col-md-4 form-group">
-                                <label>ভর্তি ইস্যুকারী স্বাক্ষর</label>
-                                <input type="file" class="form-control" name="Admission_Issuer_sign">
+                                <label>লভ্যাংশ প্রদানের তারিখ</label>
+                                <input required type="date" class="form-control" name="divident_payment_date"
+                                    value="<?= $member->divident_payment_date ?>">
+                            </div>
 
-                                <?php if ($member->logo): ?>
-                                    <img src="<?= base_url('/assets/uploads/project/members/admission_issuer_sign/' . $member->Admission_Issuer_sign) ?>"
-                                        width="60">
-                                <?php endif; ?>
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-3 form-group">
+                                <label>নিবন্ধন সনদ</label>
+                                <input required type="file" class="form-control" name="att_reg_cer">
+
+                                <?php if ($member->att_reg_cer) { ?>
+                                    <img target="_blank"
+                                        src="<?= base_url('./assets/uploads/project/members/att_reg_cer/' . $member->att_reg_cer) ?>" width="60px">
+                                        
+                                    </img>
+                                <?php } ?>
                             </div>
 
                             <div class="col-md-3 form-group">
-                                <label>পদবী</label>
-                                <input type="text" class="form-control" name="Admission_Issuer_designation"
-                                    value="<?= $member->Admission_Issuer_designation ?>">
+                                <label>ক্ষমতাপত্র</label>
+                                <input required type="file" class="form-control" name="att_auth_cer">
+
+                                <?php if ($member->att_auth_cer) { ?>
+                                    <img target="_blank"
+                                        src="<?= base_url('./assets/uploads/project/members/att_auth_cer/' . $member->att_auth_cer) ?>" width="60px">
+                                        
+                                    </img>
+                                <?php } ?>
                             </div>
 
-                             <div class="col-md-4 form-group">
-                                <label>ইস্যুর তারিখ</label>
-                                <input type="date" class="form-control" name="Admission_Issue_date"
-                                    value="<?= $member->Admission_Issue_date ?>">
+                            <div class="col-md-3 form-group">
+                                <label>রেজুলেশন</label>
+                                <input required type="file" class="form-control" name="att_resulation">
+
+                                <?php if ($member->att_resulation) { ?>
+                                    <img target="_blank"
+                                        src="<?= base_url('./assets/uploads/project/members/att_resulation/' . $member->att_resulation) ?>" width="60px">
+                                        
+                                    </img>
+                                <?php } ?>
+                            </div>
+
+                            <div class="col-md-3 form-group">
+                                <label>উপ-আইন</label>
+                                <input required type="file" class="form-control" name="att_laws">
+
+                                <?php if ($member->att_laws) { ?>
+                                    <img target="_blank"
+                                        src="<?= base_url('./assets/uploads/project/members/att_laws/' . $member->att_laws) ?>" width="60px">
+                                        
+                                    </img>
+                                <?php } ?>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label>পাসওয়ার্ড</label>
+
+                                <div style="position:relative;">
+
+                                    <input required value="<?= $member->password ?>" type="password" name="password"
+                                        id="password" class="form-control">
+
+                                    <i class="fa fa-eye" onclick="togglePassword('password', this)"
+                                        style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">
+                                    </i>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>কন্ফার্ম পাসওয়ার্ড</label>
+
+                                <div style="position:relative;">
+
+                                    <input required value="<?= $member->password ?>" type="password" name="confirm_password"
+                                        id="confirm_password" class="form-control">
+
+                                    <i class="fa fa-eye" onclick="togglePassword('confirm_password', this)"
+                                        style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">
+                                    </i>
+
+                                </div>
                             </div>
 
                         </div>
@@ -398,6 +286,7 @@
                     </form>
 
                 </div>
+
             </div>
 
         </div>
@@ -411,10 +300,10 @@
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
 
-        if (password.length < 8) {
-            alert("পাসওয়ার্ড কমপক্ষে ৮ ডিজিট হতে হবে");
-            return false;
-        }
+        // if (password.length < 8) {
+        //     alert("পাসওয়ার্ড কমপক্ষে ৮ ডিজিট হতে হবে");
+        //     return false;
+        // }
         if (password !== confirmPassword) {
             alert("পাসওয়ার্ড মিলছে না!");
             return false;
@@ -427,7 +316,7 @@
 
     function togglePassword(fieldId, icon) {
 
-        var input = document.getElementById(fieldId);
+        var input  = document.getElementById(fieldId);
 
         if (input.type === "password") {
             input.type = "text";

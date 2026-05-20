@@ -49,7 +49,8 @@
                 <label>জাতীয় পরিচয়পত্র নম্বর (NID)</label>
                 <input type="number" name="nid" id="digit-input" inputmode="numeric"
                     pattern="[0-9]{10}|[0-9]{13}|[0-9]{17}|[0-9]{19}"
-                    title="অনুগ্রহ পূর্বক ১০, ১৩, ১৭ অথবা ১৯ টি সংখ্যা দিন" placeholder="জাতীয় পরিচয়পত্র নম্বর..." required>
+                    title="অনুগ্রহ পূর্বক ১০, ১৩, ১৭ অথবা ১৯ টি সংখ্যা দিন" placeholder="জাতীয় পরিচয়পত্র নম্বর..."
+                    required>
             </div>
             <div class="form-group">
                 <label>জন্ম তারিখ</label>
@@ -131,8 +132,8 @@
             </div>
             <div class="form-group">
                 <label>বর্তমান ঠিকানা</label>
-                <textarea rows="3" name="Cooperative_association_address"
-                    placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা" required></textarea>
+                <textarea rows="3" name="Cooperative_association_address" placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা"
+                    required></textarea>
             </div>
             <div class="form-group">
                 <label>সভাপতি</label>
@@ -214,7 +215,9 @@
                 </div>
             </div>
 
-            <div class="form-group">
+
+
+            <!-- <div class="form-group">
                 <label>পাসওয়ার্ড</label>
                 <div style="position:relative;">
                     <input type="password" name="password" id="password" class="form-control" required>
@@ -234,7 +237,7 @@
                         style="position:absolute; right:10px; top:10px; cursor:pointer;">
                     </i>
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -276,6 +279,204 @@
         <button type="submit" class="submit-btn">আবেদন জমা দিন</button>
     </form>
 </div>
+
+
+<style>
+    body {
+        background: #eef2f7;
+        font-family: "SolaimanLipi", sans-serif;
+    }
+
+    .form-container {
+        max-width: 1200px;
+
+        margin: 40px auto;
+
+        background: #fff;
+
+        border-radius: 16px;
+
+        overflow: hidden;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-header {
+        /* background: #C45EBC; */
+        /* background: linear-gradient(to right, #1565c0, #42a5f5); */
+        background: linear-gradient(to right, #C45EBC, #42a5f5);
+
+        padding: 40px 20px;
+
+        text-align: center;
+
+        color: #fff;
+    }
+
+    .form-header h2 {
+        font-size: 34px;
+
+        margin-top: 15px;
+
+        font-weight: 700;
+
+        color: white !important;
+    }
+
+    .form-header p {
+        margin: 0;
+        opacity: .9;
+    }
+
+    .form-body {
+        padding: 30px;
+    }
+
+    .form-section-title {
+        border: 2px solid #19bfd3;
+
+        color: #0b8fa5;
+
+        padding: 10px 14px;
+
+        border-radius: 6px;
+
+        margin: 30px 0 20px;
+
+        font-size: 20px;
+
+        font-weight: 700;
+
+        background: #f9ffff;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        font-weight: 600;
+
+        margin-bottom: 7px;
+
+        display: block;
+
+        color: #333;
+    }
+
+    input,
+    select,
+    textarea {
+        /* width: 100%; */
+
+        border: 1px solid #d7dce3;
+
+        border-radius: 8px;
+
+        padding: 12px 14px;
+
+        font-size: 15px;
+
+        transition: .3s;
+
+        background: #fff;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #2196f3;
+
+        outline: none;
+
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, .15);
+    }
+
+    textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .file-upload {
+        border: 2px dashed #cfd8dc;
+
+        padding: 14px;
+
+        border-radius: 10px;
+
+        background: #fafafa;
+    }
+
+    .submit-btn {
+        width: 100%;
+
+        border: none;
+
+        background: linear-gradient(to right, #1565c0, #42a5f5);
+
+        color: #fff;
+
+        padding: 15px;
+
+        border-radius: 10px;
+
+        font-size: 18px;
+
+        font-weight: 700;
+
+        margin-top: 25px;
+
+        transition: .3s;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 8px 20px rgba(21, 101, 192, .25);
+    }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-wrapper i {
+        position: absolute;
+
+        right: 14px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        cursor: pointer;
+
+        color: #666;
+    }
+
+    .checkbox-area {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    @media(max-width:768px) {
+
+        .form-header {
+            padding: 30px 15px;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+        }
+
+        .form-body {
+            padding: 18px;
+        }
+
+        .form-section-title {
+            font-size: 16px;
+        }
+    }
+</style>
 
 
 

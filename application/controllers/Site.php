@@ -23,7 +23,7 @@ class Site extends CI_Controller
 			// exit;
 		}
 
-		echo($user->active_status);
+		echo ($user->active_status);
 
 		if ($user->active_status != 1) {
 			$this->session->set_flashdata('error', 'আপনার মেম্বারশিপ একটিভ নয়, দয়া করে কতৃপক্ষের সাথে যোগাযোগ করুন');
@@ -122,7 +122,7 @@ class Site extends CI_Controller
 		}
 	}
 
-	
+
 
 
 
@@ -147,7 +147,7 @@ class Site extends CI_Controller
 	{
 		$data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
 
-		$path = "site/pages/member_application";
+		$path = "site/pages/member_application_form";
 		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
 	}
 
@@ -155,11 +155,11 @@ class Site extends CI_Controller
 	public function member_application_save()
 	{
 
-		$mobile_number = $this->input->post('mobile_number');
+		$a_contact = $this->input->post('a_contact');
 
 		// Check if mobile number already exists
-		$this->db->where('mobile_number', $mobile_number);
-		$existing_member = $this->db->get('members_n')->row();
+		$this->db->where('a_contact', $a_contact);
+		$existing_member = $this->db->get('members_table')->row();
 
 		if ($existing_member) {
 			$this->session->set_flashdata('error', 'ইতিমধ্যে এই নম্বর যে একজন সদস্য বিদ্যমান!');
@@ -167,68 +167,67 @@ class Site extends CI_Controller
 			return;
 		}
 
-		$logo = $this->upload_file('logo', './assets/uploads/project/members/logo/');
-		$document_1 = $this->upload_file('document_1', './assets/uploads/project/members/members_document/');
-		$nomini_sign = $this->upload_file('nomini_sign', './assets/uploads/project/members/nominee_sign/');
-		$Admission_Issuer_sign = $this->upload_file('Admission_Issuer_sign', './assets/uploads/project/members/admission_issuer_sign/');
+		$att_reg_cer = $this->upload_file('att_reg_cer', './assets/uploads/project/members/att_reg_cer/');
+		$att_auth_cer = $this->upload_file('att_auth_cer', './assets/uploads/project/members/att_auth_cer/');
+		$att_resulation = $this->upload_file('att_resulation', './assets/uploads/project/members/att_resulation/');
+		$att_laws = $this->upload_file('att_laws', './assets/uploads/project/members/att_laws/');
 
 		$data = array(
 
-			'sarok_no' => $this->input->post('sarok_no'),
-			'sarok_date' => $this->input->post('sarok_date'),
-
-			'name' => $this->input->post('name'),
-			'father_name' => $this->input->post('father_name'),
-			'mother_name' => $this->input->post('mother_name'),
-			'nid' => $this->input->post('nid'),
-			'birth_date' => $this->input->post('birth_date'),
-			'mobile_number' => $this->input->post('mobile_number'),
-			'email' => $this->input->post('email'),
-			'gender' => $this->input->post('gender'),
-
-			'village' => $this->input->post('village'),
-			'post' => $this->input->post('post'),
-			'sub_district' => $this->input->post('sub_district'),
-			'district' => $this->input->post('district'),
-
-			'association_designation' => $this->input->post('association_designation'),
-			'association_district' => $this->input->post('association_district'),
 			'association_name' => $this->input->post('association_name'),
+			'a_type' => $this->input->post('a_type'),
+			'registration_no' => $this->input->post('registration_no'),
+			'r_date' => $this->input->post('r_date'),
+			'r_address' => $this->input->post('r_address'),
+			
 
-			'paid_amount' => $this->input->post('paid_amount'),
-			'voucher_no' => $this->input->post('voucher_no'),
-			'managing_committee_date' => $this->input->post('managing_committee_date'),
+			'a_contact' => $this->input->post('a_contact'),
+			'a_email' => $this->input->post('a_email'),
+			'a_address' => $this->input->post('a_address'),
 
-			'Cooperative_association_name' => $this->input->post('Cooperative_association_name'),
-			'Cooperative_association_number' => $this->input->post('Cooperative_association_number'),
-			'Cooperative_association_registration_address' => $this->input->post('Cooperative_association_registration_address'),
-			'Cooperative_association_address' => $this->input->post('Cooperative_association_address'),
-			'Cooperative_association_chairman' => $this->input->post('Cooperative_association_chairman'),
-			'Cooperative_association_secretary' => $this->input->post('Cooperative_association_secretary'),
-			'Cooperative_association_registration_no' => $this->input->post('Cooperative_association_registration_no'),
-			'Cooperative_association_registration_date' => $this->input->post('Cooperative_association_registration_date'),
-			'Cooperative_association_class' => $this->input->post('Cooperative_association_class'),
-			'Cooperative_association_type' => $this->input->post('Cooperative_association_type'),
-			'Cooperative_association_member_count' => $this->input->post('Cooperative_association_member_count'),
-			'Cooperative_association_working_area' => $this->input->post('Cooperative_association_working_area'),
 
-			'nomini_name' => $this->input->post('nomini_name'),
-			'nomini_designation' => $this->input->post('nomini_designation'),
-			'nomini_mobile_no' => $this->input->post('nomini_mobile_no'),
-			'nomini_date' => $this->input->post('nomini_date'),
-			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+			'issuer' => $this->input->post('issuer'),
+			'i_designation' => $this->input->post('i_designation'),
+			'i_contact' => $this->input->post('i_contact'),
+			'i_email' => $this->input->post('i_email'),
 
-			'Admission_Issue_date' => $this->input->post('Admission_Issue_date'),
-			'Admission_Issuer_designation' => $this->input->post('Admission_Issuer_designation'),
+			'valid_cap' => $this->input->post('valid_cap'),
+			'last_finYear_profit' => $this->input->post('last_finYear_profit'),
+			'authorized_shares' => $this->input->post('authorized_shares'),
+			'capital' => $this->input->post('capital'),
 
-			'logo' => $logo,
-			'document_1' => $document_1,
-			'nomini_sign' => $nomini_sign,
-			'Admission_Issuer_sign' => $Admission_Issuer_sign,
+			'audit_execution_date' => $this->input->post('audit_execution_date'),
+			'last_gen_meeting_date' => $this->input->post('last_gen_meeting_date'),
+			'election_date' => $this->input->post('election_date'),
+			'first_man_meeting_date' => $this->input->post('first_man_meeting_date'),
+
+			'elected_president' => $this->input->post('elected_president'),
+			'president_contact' => $this->input->post('president_contact'),
+			'president_email' => $this->input->post('president_email'),
+
+			'elected_editor' => $this->input->post('elected_editor'),
+			'editor_contact' => $this->input->post('editor_contact'),
+			'e_email' => $this->input->post('e_email'),
+
+			'Dividend_payment_type' => $this->input->post('Dividend_payment_type'),
+			'password' => $this->input->post('password'),
+
+			'att_reg_cer' => $att_reg_cer,
+			'att_auth_cer' => $att_auth_cer,
+			'att_resulation' => $att_resulation,
+			'att_laws' => $att_laws
 		);
 
-		$this->db->insert('members_n', $data);
-		$this->session->set_flashdata('success', 'অভিনন্দন, আপনার আবেদন সফলভাবে জমা দেওয়া হয়েছে। সদস্যপদ টি একটিভ করতে সদস্য ফী প্রদান করুন ');
+		$this->db->insert('members_table', $data);
+		$id = $this->db->insert_id();
+
+		$member_no = "BJSUM" . str_pad($id, 5, "0", STR_PAD_LEFT);
+
+		$this->db->where('id', $id);
+		$this->db->update('members_table', [
+			'member_no' => $member_no
+		]);
+		$this->session->set_flashdata('success', 'অভিনন্দন, আপনার আবেদন সফলভাবে জমা দেওয়া হয়েছে।');
 		redirect('member_login');
 	}
 
@@ -261,63 +260,49 @@ class Site extends CI_Controller
 
 	public function edit_member($id)
 	{
-		$data['member'] = $this->db->get_where('members_n', ['id' => $id])->row();
+		$data['member'] = $this->db->get_where('members_table', ['id' => $id])->row();
 		$this->load->view('site/members_list/updateForm', $data);
 	}
 
 
 	public function update_member($id)
 	{
-		$member = $this->db->get_where('members_n', ['id' => $id])->row();
+		$member = $this->db->get_where('members_table', ['id' => $id])->row();
 
 		$update_data = [
-			'sarok_no' => $this->input->post('sarok_no'),
-			'sarok_date' => $this->input->post('sarok_date'),
-
-			'name' => $this->input->post('name'),
-			'father_name' => $this->input->post('father_name'),
-			'mother_name' => $this->input->post('mother_name'),
-			'nid' => $this->input->post('nid'),
-			'birth_date' => $this->input->post('birth_date'),
-			'mobile_number' => $this->input->post('mobile_number'),
-			'email' => $this->input->post('email'),
-			'gender' => $this->input->post('gender'),
-
-			'village' => $this->input->post('village'),
-			'post' => $this->input->post('post'),
-			'sub_district' => $this->input->post('sub_district'),
-			'district' => $this->input->post('district'),
-
-			'association_designation' => $this->input->post('association_designation'),
-			'association_district' => $this->input->post('association_district'),
 			'association_name' => $this->input->post('association_name'),
+			'registration_no' => $this->input->post('registration_no'),
+			'r_date' => $this->input->post('r_date'),
+			'r_address' => $this->input->post('r_address'),
 
-			'paid_amount' => $this->input->post('paid_amount'),
-			'voucher_no' => $this->input->post('voucher_no'),
-			'managing_committee_date' => $this->input->post('managing_committee_date'),
+			'a_contact' => $this->input->post('a_contact'),
+			'a_email' => $this->input->post('a_email'),
+			'a_address' => $this->input->post('a_address'),
 
-			'Cooperative_association_name' => $this->input->post('Cooperative_association_name'),
-			'Cooperative_association_number' => $this->input->post('Cooperative_association_number'),
-			'Cooperative_association_registration_address' => $this->input->post('Cooperative_association_registration_address'),
 
-			'Cooperative_association_address' => $this->input->post('Cooperative_association_address'),
-			'Cooperative_association_chairman' => $this->input->post('Cooperative_association_chairman'),
-			'Cooperative_association_secretary' => $this->input->post('Cooperative_association_secretary'),
-			'Cooperative_association_registration_no' => $this->input->post('Cooperative_association_registration_no'),
-			'Cooperative_association_registration_date' => $this->input->post('Cooperative_association_registration_date'),
-			'Cooperative_association_class' => $this->input->post('Cooperative_association_class'),
-			'Cooperative_association_type' => $this->input->post('Cooperative_association_type'),
-			'Cooperative_association_member_count' => $this->input->post('Cooperative_association_member_count'),
-			'Cooperative_association_working_area' => $this->input->post('Cooperative_association_working_area'),
+			'issuer' => $this->input->post('issuer'),
+			'i_designation' => $this->input->post('i_designation'),
+			'i_contact' => $this->input->post('i_contact'),
+			'i_email' => $this->input->post('i_email'),
 
-			'nomini_name' => $this->input->post('nomini_name'),
-			'nomini_designation' => $this->input->post('nomini_designation'),
-			'nomini_mobile_no' => $this->input->post('nomini_mobile_no'),
-			'nomini_date' => $this->input->post('nomini_date'),
-			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+			'valid_cap' => $this->input->post('valid_cap'),
+			'last_finYear_profit' => $this->input->post('last_finYear_profit'),
 
-			'Admission_Issue_date' => $this->input->post('Admission_Issue_date'),
-			'Admission_Issuer_designation' => $this->input->post('Admission_Issuer_designation'),
+			'audit_execution_date' => $this->input->post('audit_execution_date'),
+			'last_gen_meeting_date' => $this->input->post('last_gen_meeting_date'),
+			'election_date' => $this->input->post('election_date'),
+			'first_man_meeting_date' => $this->input->post('first_man_meeting_date'),
+
+			'elected_president' => $this->input->post('elected_president'),
+			'president_contact' => $this->input->post('president_contact'),
+
+			'elected_editor' => $this->input->post('elected_editor'),
+			'editor_contact' => $this->input->post('editor_contact'),
+
+			'divident_payment_date' => $this->input->post('divident_payment_date'),
+			'password' => $this->input->post('password'),
+
+			
 
 		];
 
@@ -354,37 +339,38 @@ class Site extends CI_Controller
 			return $old_file;
 		}
 
-		$update_data['logo'] = update_file(
-			'logo',
-			'./assets/uploads/project/members/logo/',
-			$member->logo,
-			'jpg|jpeg|png'
+
+		$update_data['att_reg_cer'] = update_file(
+			'att_reg_cer',
+			'./assets/uploads/project/members/att_reg_cer/',
+			$member->att_reg_cer,
+			'jpg|jpeg|png|webp'
 		);
 
-		$update_data['nomini_sign'] = update_file(
-			'nomini_sign',
-			'./assets/uploads/project/members/nominee_sign/',
-			$member->nomini_sign,
-			'jpg|jpeg|png'
+		$update_data['att_auth_cer'] = update_file(
+			'att_auth_cer',
+			'./assets/uploads/project/members/att_auth_cer/',
+			$member->att_auth_cer,
+			'jpg|jpeg|png|webp'
 		);
 
-		$update_data['document_1'] = update_file(
-			'document_1',
-			'./assets/uploads/project/members/members_document',
-			$member->document_1,
-			'pdf'
+		$update_data['att_resulation'] = update_file(
+			'att_resulation',
+			'./assets/uploads/project/members/att_resulation',
+			$member->att_resulation,
+			'jpg|jpeg|png|webp'
 		);
 
 
-		$update_data['Admission_Issuer_sign'] = update_file(
-			'Admission_Issuer_sign',
-			'./assets/uploads/project/members/admission_issuer_sign/',
-			$member->Admission_Issuer_sign,
+		$update_data['att_laws'] = update_file(
+			'att_laws',
+			'./assets/uploads/project/members/att_laws/',
+			$member->att_laws,
 			'jpg|jpeg|png'
 		);
 
 		$this->db->where('id', $id);
-		$this->db->update('members_n', $update_data);
+		$this->db->update('members_table', $update_data);
 
 		redirect(base_url('applicant/members_list/member_Details/' . $id));
 	}

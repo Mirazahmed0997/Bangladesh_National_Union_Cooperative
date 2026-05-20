@@ -14,24 +14,24 @@
     <div class="content-header">
         <div class="container-fluid">
             <!-- Search / Filter Form -->
-            <form method="get" action="<?= base_url('Admin/members_list') ?>">
+            <form method="get" action="<?= base_url('Applicant/members_list') ?>">
                 <div class="row g-2 mb-3 align-items-center">
                     <div class="col-md-auto">
                         <button type="button" class="btn btn-primary"><i class="fas fa-search"></i> সদস্য
                             খুঁজুন</button>
                     </div>
                     <div class="col-md">
-                        <input type="text" name="id" value="<?= $this->input->get('id') ?>" class="form-control"
+                        <input type="text" name="member_no" value="<?= $this->input->get('member_no') ?>" class="form-control"
                             placeholder="সদস্য নম্বর">
                     </div>
                     <div class="col-md">
-                        <input type="text" name="Cooperative_association_number" class="form-control"
+                        <input type="text" name="association_name" class="form-control"
                             placeholder="সমিতির নিবন্ধন নম্বর">
                     </div>
                     <div class="col-md">
-                        <input type="text" name="mobile_number" class="form-control" placeholder="মোবাইল নম্বর">
+                        <input type="text" name="a_contact" class="form-control" placeholder="মোবাইল নম্বর">
                     </div>
-                    <div class="col-md">
+                    <!-- <div class="col-md">
                         <select name="branch_name" class="form-select">
                             <option value="">সদস্য সমিতির নাম</option>
                             <?php foreach ($members as $member): ?>
@@ -41,7 +41,7 @@
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row g-2 align-items-center mb-3">
@@ -82,69 +82,39 @@
                                     <th rowspan="2">ক্রমিক</th>
                                     <th rowspan="2">সদস্য নম্বর</th>
                                     <th rowspan="2">সমিতির নাম</th>
-                                    <th rowspan="2">নিবন্ধন ঠিকানা</th>
-                                    <th rowspan="2">নিবন্ধন নম্বর</th>
+                                    <th rowspan="2">কার্যালয়ের ঠিকানা</th>
                                     <th rowspan="2">মোবাইল</th>
                                     <th rowspan="2">ই-মেইল</th>
-                                    <th rowspan="2">ভর্তির ফি</th>
-                                    <th rowspan="2">সদস্য সমিতির মোবাইল নাম্বার</th>
-                                    <th rowspan="2">ভর্তির তারিখ</th>
-
-
-
-                                    <th rowspan="2">চাঁদার পরিমাণ</th>
-                                    <th rowspan="2">চাঁদা পরিশোধের সাল</th>
-
-
-                                    <!-- <th class="text-center" colspan="3">ভর্তি ইস্যুকারী স্বাক্ষর </th> -->
-
-                                    <th rowspan="2">ব্যবস্থাপনা কমিটি অনুমোদনের তারিখ</th>
-                                    <th rowspan="2">অনুমোদনকারী</th>
-                                    <th rowspan="2">প্রত্যাহার তারিখ</th>
-                                    <th rowspan="2">প্রত্যাহার অনুমোদনকারী</th>
+                                    <th rowspan="2">নিবন্ধন নম্বর</th>                                    
+                                    <th rowspan="2">সমিতির পক্ষে প্রতিনিধির নাম</th>
+                                    <th rowspan="2">সমিতির পক্ষে প্রতিনিধির নাম</th>
+                                    <th rowspan="2">আবেদনের তারিখ</th>
                                     <th rowspan="2">অবস্থান</th>
-                                    <th rowspan="2">টাকা পরিশোধ</th>
+                                   
                                     <th rowspan="2">খতিয়ান</th>
                                     <th rowspan="4"></th>
                                 </tr>
-
-                                <!-- <tr>
-                                    <th>স্বাক্ষর </th>
-                                    <th>পদবী </th>
-                                    <th>তারিখ</th>
-                                </tr> -->
                             </thead>
                             <tbody>
                                 <?php $i = 1;
                                 foreach ($members as $row): ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
-                                        <td><?= $row->id; ?></td>
-                                        <td><?= $row->Cooperative_association_name; ?></td>
-                                        <td><?= $row->Cooperative_association_address; ?></td>
-                                        <td><?= $row->Cooperative_association_registration_no; ?></td>
-                                        <td><?= $row->mobile_number; ?></td>
-                                        <td><?= $row->email; ?></td>
-                                        <td><?= $row->payable_amount; ?></td>
-                                        <td><?= $row->Cooperative_association_number; ?></td>
+                                        <td><?= $row->member_no; ?></td>
+                                        <td><?= $row->association_name; ?></td>
+                                        <td><?= $row->a_address; ?></td>
+                                        <td><?= $row->a_contact; ?></td>
+                                        <td><?= $row->a_email; ?></td>
+                                        <td><?= $row->registration_no; ?></td>
+                                        <td><?= $row->issuer; ?></td>
+                                        <td><?= $row->i_designation; ?></td>
                                         <td><?= $row->created_at; ?></td>
 
 
 
-                                        <td><?= $row->subscription_fee; ?></td>
-                                        <td><?= $row->payment_year; ?></td>
-                                        <!-- <td>
-                                            <img src="<?= base_url('/assets/uploads/project/members/admission_issuer_sign/' . $member->Admission_Issuer_sign) ?>"
-                                                alt="Signature" width="40">
-                                        </td>
-                                        <td><?= $row->Admission_Issuer_designation; ?></td>
-                                        <td><?= $row->Admission_Issue_date; ?></td> -->
-
-
-                                        <td><?= $row->approved_date; ?></td>
-                                        <td class="font-bold"><?= $row->approved_by; ?></td>
-                                        <td><?= $row->widthdrawal_date; ?></td>
-                                        <td><?= $row->widthdrawal_approved_by; ?></td>
+                                      
+                                       
+                                    
                                         <td>
                                             <?php if ($row->active_status == 1): ?>
                                                 <span class="badge bg-success">Active</span>
@@ -152,35 +122,18 @@
                                                 <span class="badge bg-danger">Inactive</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm pay-now"
-                                                data-id="<?= $row->id; ?>">
-                                                <?= ($row->payment_status == 'paid') ? 'Paid' : "Pay now"; ?>
-                                            </a>
-                                        </td>
-                                        <!-- <td>
-                                            <?php if ($row->payment_status == 'paid'): ?>
-                                                <span class="badge bg-success">Paid</span>
-                                            <?php elseif ($row->payment_status == 'pending'): ?>
-                                                <span class="badge bg-warning text-dark">Pending</span>
-                                            <?php else: ?>
-                                                <span class="badge bg-danger">Unpaid</span>
-                                            <?php endif; ?>
-                                        </td> -->
-
+                                       
+                                      
                                         <td><a href="<?= base_url('members_account_details'); ?>"
                                                 class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a></td>
                                         <td>
 
                                             <a href="<?= base_url('Applicant/form_view/' . $row->id); ?>"
-                                                class="btn btn-warning btn-sm">Preview</a>
+                                                class="btn btn-warning btn-sm">ফরম</a>
                                             <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
                                                 class="btn btn-warning btn-sm">Update</a>
 
-                                            <!-- <a href="javascript:void(0);" class="btn btn-warning btn-sm open-charge-modal"
-                                                data-id="<?= $row->id; ?>">
-                                                Change Password
-                                            </a> -->
+                                           
 
                                         </td>
                                     </tr>

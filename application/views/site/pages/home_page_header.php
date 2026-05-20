@@ -85,6 +85,7 @@
 
     @media (max-width: 768px) {
         .header {
+            margin-top: 25px;
             flex-direction: column;
             align-items: center;
             text-align: center;

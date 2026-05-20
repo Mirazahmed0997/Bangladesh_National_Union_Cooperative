@@ -144,6 +144,7 @@ $route['order_status/(:num)'] = 'Admin/order_status/$1';
 // --------------------Member Registration----------------------
 
 
+// $route['member_registration'] = 'Site/member_application';
 $route['member_registration'] = 'Site/member_application';
 $route['member_register'] = 'Site/member_application_save';
 $route['member_login'] = 'Member_login/index';

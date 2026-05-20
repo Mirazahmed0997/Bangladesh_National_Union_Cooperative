@@ -68,7 +68,7 @@ class Admin extends CI_Controller
 		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
 		// Fetch the specific member
-		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+		$data['member'] = $this->Common->get_data_single_conditional('members_table', 'id', $id)->row();
 
 		//  Check if member exists
 		if (!$data['member']) {
@@ -90,18 +90,16 @@ class Admin extends CI_Controller
 			redirect(base_url('Admin/members_list'));
 		}
 
-		//  Set dashboard navigation & page title
 		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
 		// Fetch the specific member
-		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+		$data['member'] = $this->Common->get_data_single_conditional('members_table', 'id', $id)->row();
 
 		//  Check if member exists
 		if (!$data['member']) {
 			show_404(); // member not found
 		}
 
-		//  Render the member details inside dashboard layout
 		// $path = 'admin/members_list/IdentityForm';
 		$path = 'admin/members_list/form_view';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -138,46 +136,50 @@ class Admin extends CI_Controller
 	{
 		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
 
-		$where_data = array();
+		 $where_data = array();
 
-		$id = $this->input->get('id');
-		$branch_registration_no = $this->input->get('branch_registration_no');
-		$mobile_number = $this->input->get('mobile_number');
-		$branch_name = $this->input->get('branch_name');
-		$from_date = $this->input->get('from_date');
-		$to_date = $this->input->get('to_date');
+        $member_no = $this->input->get('member_no');
+        $association_name = $this->input->get('association_name');
+        $a_type = $this->input->get('a_type');
+        $a_email = $this->input->get('a_email');
+        $a_contact = $this->input->get('a_contact');
+        $from_date = $this->input->get('from_date');
+        $to_date = $this->input->get('to_date');
 
 
 
-		if (!empty($id)) {
-			$where_data['id'] = $id;
-		}
+        if (!empty($member_no)) {
+            $where_data['member_no'] = $member_no;
+        }
 
-		if (!empty($branch_registration_no)) {
-			$where_data['branch_registration_no'] = $branch_registration_no;
-		}
+        if (!empty($association_name)) {
+            $where_data['association_name'] = $association_name;
+        }
+        if (!empty($a_type)) {
+            $where_data['a_type'] = $a_type;
+        }
 
-		if (!empty($mobile_number)) {
-			$where_data['mobile_number'] = $mobile_number;
-		}
+        if (!empty($a_email)) {
+            $where_data['a_email'] = $a_email;
+        }
 
-		if (!empty($branch_name)) {
-			$where_data['branch_name'] = $branch_name;
-		}
+        if (!empty($a_contact)) {
+            $where_data['a_contact'] = $a_contact;
+        }
 
-		if (!empty($where_data)) {
-			$this->db->where($where_data);
-		}
+        if (!empty($where_data)) {
+            $this->db->where($where_data);
+        }
 
-		if (!empty($from_date)) {
-			$this->db->where('created_at >=', $from_date);
-		}
+        if (!empty($from_date)) {
+            $this->db->where('created_at >=', $from_date);
+        }
 
-		if (!empty($to_date)) {
-			$this->db->where('created_at <=', $to_date);
-		}
+        if (!empty($to_date)) {
+            $this->db->where('created_at <=', $to_date);
+        }
 
-		$data['members'] = $this->db->get('members_n')->result();
+        $data['members'] = $this->db->get('members_table')->result();
 
 		$path = 'admin/members_list/members_list';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -187,20 +189,9 @@ class Admin extends CI_Controller
 
 	public function delete_member($id)
 	{
-		$this->Common->delete_data('members_n', 'id', $id);
-		redirect('members');
+		$this->Common->delete_data('members_table', 'id', $id);
+		redirect('members_list');
 	}
-
-
-
-
-	public function edit_member($id)
-	{
-		$data['member'] = $this->db->get_where('members_n', ['id' => $id])->row();
-		$this->load->view('site/members_list/updateForm', $data);
-	}
-
-
 
 
 
@@ -231,12 +222,12 @@ class Admin extends CI_Controller
 
 		$data = [
 			'active_status' => 1,
-			'approved_by' => $approved_by,
-			'approved_date' => date('Y-m-d H:i:s')
+			// 'approved_by' => $approved_by,
+			// 'approved_date' => date('Y-m-d H:i:s')
 		];
 
 		$this->db->where('id', $id);
-		$this->db->update('members_n', $data);
+		$this->db->update('members_table', $data);
 
 		echo "success";
 	}

@@ -135,7 +135,7 @@ class Applicant extends CI_Controller
     {
         $data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
-        $data['member_count'] = $this->db->count_all('members_n');
+        $data['member_count'] = $this->db->count_all('members_table');
 
         $path = 'applicant/dashboard';
 
@@ -154,7 +154,7 @@ class Applicant extends CI_Controller
         $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
         // Fetch the specific member
-        $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+        $data['member'] = $this->Common->get_data_single_conditional('members_table', 'id', $id)->row();
 
         //  Check if member exists
         if (!$data['member']) {
@@ -205,7 +205,7 @@ class Applicant extends CI_Controller
         $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
         // Fetch the specific member
-        $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+        $data['member'] = $this->Common->get_data_single_conditional('members_table', 'id', $id)->row();
 
         if (!$data['member']) {
             show_404();
@@ -236,29 +236,29 @@ class Applicant extends CI_Controller
 
         $where_data = array();
 
-        $id = $this->input->get('id');
-        $branch_registration_no = $this->input->get('branch_registration_no');
-        $mobile_number = $this->input->get('mobile_number');
-        $branch_name = $this->input->get('branch_name');
+        $member_no = $this->input->get('member_no');
+        $association_name = $this->input->get('association_name');
+        $a_email = $this->input->get('a_email');
+        $a_contact = $this->input->get('a_contact');
         $from_date = $this->input->get('from_date');
         $to_date = $this->input->get('to_date');
 
 
 
-        if (!empty($id)) {
-            $where_data['id'] = $id;
+        if (!empty($member_no)) {
+            $where_data['member_no'] = $member_no;
         }
 
-        if (!empty($branch_registration_no)) {
-            $where_data['branch_registration_no'] = $branch_registration_no;
+        if (!empty($association_name)) {
+            $where_data['association_name'] = $association_name;
         }
 
-        if (!empty($mobile_number)) {
-            $where_data['mobile_number'] = $mobile_number;
+        if (!empty($a_email)) {
+            $where_data['a_email'] = $a_email;
         }
 
-        if (!empty($branch_name)) {
-            $where_data['branch_name'] = $branch_name;
+        if (!empty($a_contact)) {
+            $where_data['a_contact'] = $a_contact;
         }
 
         if (!empty($where_data)) {
@@ -273,7 +273,7 @@ class Applicant extends CI_Controller
             $this->db->where('created_at <=', $to_date);
         }
 
-        $data['members'] = $this->db->get('members_n')->result();
+        $data['members'] = $this->db->get('members_table')->result();
 
         $path = 'applicant/members_list/members_list';
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -292,7 +292,7 @@ class Applicant extends CI_Controller
         $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
 
         // Fetch the specific member
-        $data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+        $data['member'] = $this->Common->get_data_single_conditional('members_table', 'id', $id)->row();
 
         //  Check if member exists
         if (!$data['member']) {
@@ -317,7 +317,7 @@ class Applicant extends CI_Controller
         ];
 
         $this->db->where('id', $id);
-        $this->db->update('members_n', $data);
+        $this->db->update('members_table', $data);
 
         echo "success";
     }
@@ -328,7 +328,7 @@ class Applicant extends CI_Controller
 
     public function delete_member($id)
     {
-        $this->Common->delete_data('members_n', 'id', $id);
+        $this->Common->delete_data('members_table', 'id', $id);
         redirect('members');
     }
 

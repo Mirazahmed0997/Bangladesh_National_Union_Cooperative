@@ -29,7 +29,7 @@
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-4">Mobile No <span style="color:red">*</span></div>
-                                <div class="col-8"><input type="number" name="mobile_number" class="form-control"
+                                <div class="col-8"><input type="number" name="a_contact" class="form-control"
                                         required></div>
                             </div>
                             <div class="row">

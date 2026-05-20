@@ -36,23 +36,23 @@ class Member_login extends CI_Controller
     public function login_process()
     {
 
-        $mobile_number = $this->input->post('mobile_number');
+        $a_contact = $this->input->post('a_contact');
         $password = $this->input->post('password');
 
-        $this->db->where('mobile_number', $mobile_number);
-        $user = $this->db->get('members_n')->row();
+        $this->db->where('a_contact', $a_contact);
+        $user = $this->db->get('members_table')->row();
 
         if ($user) {
 
-            if (password_verify($password, $user->password))
-            // if ($password == $user->password)
+            // if (password_verify($password, $user->password))
+            if ($password == $user->password)
                  {
 
                 $this->session->set_userdata('current_type', 2);
                 $this->session->set_userdata('login_user_info_all', $user);
                 $this->session->set_flashdata('login_success', 'Successfully logged in');
-                redirect('home');
-                // redirect('members');
+                // redirect('home');
+                redirect('members');
 
             } else {
 
