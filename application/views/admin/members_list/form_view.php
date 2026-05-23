@@ -120,7 +120,7 @@
 
         .content {
             font-size: 14px;
-            /* line-height: 1.7; */
+            line-height: 1.3;
             margin-top: 8px;
             text-align: justify;
         }
@@ -174,8 +174,9 @@
         }
 
         .image-box img {
-            width: 100%;
-            height: 100%;
+            min-width: 150px;
+            max-width: 150px;
+            height: 40%;
             object-fit: contain;
             cursor: pointer;
             transition: 0.3s;
@@ -189,7 +190,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: -5px;
         }
 
         .member-sign {
@@ -208,6 +209,9 @@
         .bank-acc {
             font-size: 12px;
             margin-top: 10px;
+            background-color: #EAF1DD;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
         }
 
         .bank-acc p {
@@ -220,14 +224,14 @@
         }
 
         .footer-sign {
-            margin-top: 45px;
-            padding-bottom: 10px;
+            margin-top: 25px;
+            padding-bottom: 5px;
         }
 
         .footer-sign .line {
             border-top: 1px solid #000;
             width: 150px;
-            margin: 0 auto 5px;
+            margin: 0 auto;
         }
 
         .member-sign .line {
@@ -238,9 +242,9 @@
 
         .footer-sign p {
             text-align: center;
-            margin: 0;
             font-size: 12px;
             font-weight: 600;
+            margin: 0%;
         }
 
         .footer {
@@ -250,7 +254,6 @@
         }
 
         .footer p {
-            margin: 0;
             font-size: 14px;
             font-weight: bold;
             color: white;
@@ -262,11 +265,10 @@
             /* box-shadow: 0 2px 6px rgba(23, 23, 23, 0.5); */
         }
 
-        /* .small-note {
-            text-align: right;
-            margin-top: 10px;
-            font-size: 10px;
-        } */
+        .invisible-box {
+            visibility: hidden;
+        }
+
 
         @media print {
 
@@ -278,6 +280,15 @@
 
             .print {
                 display: none;
+            }
+
+            .section-title {
+
+                padding: 5px;
+                font-size: 17px;
+                font-weight: 700;
+                margin-top: 6px !important;
+                margin-bottom: 5px !important;
             }
 
 
@@ -296,7 +307,7 @@
                 line-height: 1.3;
                 background: none !important;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.50);
-                padding: 20px;
+                padding: 0 !important;
                 color: black !important;
                 margin-bottom: 0 !important;
             }
@@ -308,14 +319,20 @@
 
             .top-box {
 
-                padding-top: 0 !important;
+                padding-top: 5px !important;
                 margin-bottom: 0 !important;
             }
 
             table td {
-
                 padding: 3px 7px !important;
+            }
 
+            .content {
+                margin-top: 5px !important;
+            }
+
+            .content p {
+                margin-bottom: 0 !important;
             }
 
             .content-wrapper {
@@ -365,6 +382,8 @@
                 transition: 0.3s;
             }
 
+
+
             .main-sidebar,
             .main-header,
             .main-footer,
@@ -372,23 +391,32 @@
                 display: none !important;
             }
 
-            .member-sign {
-                margin-top: -10px !important;
+            .sign-wrapper {
+
+                margin-top: -5px !important;
             }
+
+            .member-sign {
+                margin-top: 0 !important;
+            }
+
+            /* .bank-acc p{
+                margin-bottom: 0 !important;
+            } */
 
             .footer-sign {
                 padding: 0 !important;
             }
 
             .footer {
-                padding: 5px;
+                padding: 5px !important;
                 padding-left: 10px !important;
                 padding-right: 10px !important;
                 box-shadow: 0 2px 6px rgba(23, 23, 23, 0.5);
             }
 
             .footer p {
-                font-size: 12px !important;
+                font-size: 16px !important;
             }
 
         }
@@ -402,9 +430,15 @@
 
         <div class="header">
 
-            <div class="print form-code"><button onclick="window.print()" class="btn btn-danger m-2">
+            <div class="print form-code m-2">
+                <button onclick="window.print()" class="btn btn-sm btn-danger ">
                     <i class="fas fa-print"></i> Print
                 </button>
+                <a href="<?= base_url('approval_update/' . $member->id); ?>"
+                    class="btn btn-success btn-sm active-button"
+                    onclick="return confirm('Are you sure you want to approve this member?');">
+                    <?= ($member->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
+                </a>
             </div>
 
             <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
@@ -419,7 +453,7 @@
 
         </div>
 
-        <div class="top-box">
+        <div class="top-box <?= ($member->member_status != 'approved') ? 'invisible-box' : '' ?>">
 
             <div class="number-group">
 
@@ -439,6 +473,7 @@
 
             <div class="number-group">
                 <span>সদস্য নং :</span>
+
                 <div class="digit-box">
                     <?php
                     $memberNo = $member->member_no;
@@ -546,7 +581,7 @@
 
                 <td class="label">মোবাইল নম্বর</td>
                 <td><?= $member->a_contact ?></td>
-                <td class="label">নির্বাচিত ব্যবস্থাপনা কমিটির প্রথম সভার তারিখ</td>
+                <td style="font-size: 12px;" class="label">নির্বাচিত ব্যবস্থাপনা কমিটির প্রথম সভার তারিখ</td>
                 <td><?= $member->first_man_meeting_date ?></td>
 
 
@@ -603,8 +638,11 @@
                 <td class="label">অনুমোদিত শেয়ার</td>
                 <td><?= $member->authorized_shares ?></td>
 
+
                 <td style="font-size: 12px;" class="label">সর্বশেষ লভ্যাংশ প্রদানের সমবায় বর্ষ ও লভ্যাংশ হার</td>
-                <td>8%, 2025-26</td>
+                <td><?= $member->dividend_percentage ?>%,
+                    <?= date('Y', strtotime($member->last_dividend_payment_year)) ?>
+                </td>
 
             </tr>
             <tr>
@@ -636,8 +674,8 @@
                         <a href="<?= base_url('./assets/uploads/project/members/att_reg_cer/' . $member->att_reg_cer) ?>"
                             target="_blank">
 
-                            <img
-                                src="<?= base_url('./assets/uploads/project/members/att_reg_cer/' . $member->att_reg_cer) ?>">
+                            <img src="<?= base_url('./assets/uploads/project/members/att_reg_cer/' . $member->att_reg_cer) ?>"
+                                width="60px">
                         </a>
 
                     </div>
@@ -649,8 +687,8 @@
                         <a href="<?= base_url('./assets/uploads/project/members/att_auth_cer/' . $member->att_auth_cer) ?>"
                             target="_blank">
 
-                            <img
-                                src="<?= base_url('./assets/uploads/project/members/att_auth_cer/' . $member->att_auth_cer) ?>">
+                            <img src="<?= base_url('./assets/uploads/project/members/att_auth_cer/' . $member->att_auth_cer) ?>"
+                                width="60px">
 
                         </a>
 
@@ -663,8 +701,8 @@
                         <a href="<?= base_url('./assets/uploads/project/members/att_resulation/' . $member->att_resulation) ?>"
                             target="_blank">
 
-                            <img
-                                src="<?= base_url('./assets/uploads/project/members/att_resulation/' . $member->att_resulation) ?>">
+                            <img src="<?= base_url('./assets/uploads/project/members/att_resulation/' . $member->att_resulation) ?>"
+                                width="60px">
 
                         </a>
 
@@ -677,8 +715,8 @@
                         <a href="<?= base_url('./assets/uploads/project/members/att_laws/' . $member->att_laws) ?>"
                             target="_blank">
 
-                            <img
-                                src="<?= base_url('./assets/uploads/project/members/att_laws/' . $member->att_laws) ?>">
+                            <img src="<?= base_url('./assets/uploads/project/members/att_laws/' . $member->att_laws) ?>"
+                                width="60px">
 
                         </a>
 
@@ -689,7 +727,7 @@
 
         </table>
 
-        <div class="note">
+        <div class="note text-bold">
             <p>সদস্য ভর্তির চাহিত তথ্য সঠিক এবং ভর্তি ফি ২০০০/=(দুই হাজার) টাকা এবং বার্ষিক চাঁদা ১০০০/=(এক হাজার) টাকা
                 ব্যাংক হিসাব নম্বর জমা করবো এবং পরবর্তী বার্ষিক চাঁদা প্রত্যেক বছরের ডিসেম্বর মাসের মধ্যে পরিশোধ করার
                 অঙ্গীকার করলাম।
@@ -698,36 +736,45 @@
 
         <div class="sign-wrapper">
             <div class="">
-               
+
             </div>
+
             <div class="member-sign text-center">
-                <div class="line"></div>
+
                 <div class="sign-text">
 
+                    <div class="text-center">
+                        <a href="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                            target="_blank">
+
+                            <img src="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                                width="60px">
+                        </a>
+                    </div>
+                    <div class="line"></div>
                     <div class="text-center"><?= $member->issuer ?></div>
                     <div class="text-center">সমিতির পক্ষে প্রতিনিধির নাম ও স্বাক্ষর</div>
+                    <div class="text-center">
+                        আবেদনের তারিখ : <?= date('d-m-Y', strtotime($member->created_at)) ?>
+                    </div>
                 </div>
 
-                <!-- <img src="https://via.placeholder.com/90x35?text=Signature"> -->
+
             </div>
 
         </div>
         <div class="bank-wrapper">
-            <div class="bank-acc">
-                <p>ইউনিয়নের ব্যাংক হিসাব নম্বর :</p>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+            <div class="bank-acc col-12 text-bold">
+                <p class="">ইউনিয়নের ব্যাংক হিসাব নম্বর :</p>
+                <p class=""><span>১.</span> রূপালী ব্যাংক পিএলসি,হিসাব নম্বর : ০০৬৭০১০০৩৯৯৭, ফরেন এক্সচেঞ্জ কর্পোরেট
+                    ব্রাঞ্চ ঢাকা।</p>
+                <p class=""><span>২.</span> মার্কেন্টাইল ব্যাংক পিএলসি,হিসাব নম্বর : ১১২১০১২২১০৩৪৩, চাঁদপুর ব্রাঞ্চ।</p>
+                <p class="">আবেদনটি ব্যবস্থাপনা কমিটি কর্তৃক অনুমোদন করা হলে সদস্য পদের ভর্তি ফি ও চাঁদা ব্যাংক হিসেবে
+                    জমা করলে
+                    স্বয়ংক্রিয়ভাবে জমা রশিদ আপনার ই-মেইলে প্রেরিত হবে।</p>
             </div>
-            <div class="member-sign pt-5 text-center">
-                <!-- <div class="line"></div>
-                <div class="sign-text">
-                    
-                    <div class="text-center"><?= $member->issuer ?></div>
-                    <div class="text-center">সমিতির পক্ষে প্রতিনিধির নাম ও স্বাক্ষর</div>
-                </div> -->
+            <div class="member-sign text-center">
+
 
             </div>
 
@@ -735,7 +782,15 @@
 
         <div class="row footer-sign">
 
+
             <div class="col-4">
+
+                <div class="text-center">
+                    <a href="<?= base_url('assets/persident_editor_sign/p_sign.png'); ?>" target="_blank">
+                        <img src="<?= base_url('assets/persident_editor_sign/p_sign.png'); ?>" width="60px"
+                            alt="President Editor Signature">
+                    </a>
+                </div>
                 <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
                 <div class="line"></div>
                 <p>মো. আব্দুস সালাম</p>
@@ -743,6 +798,12 @@
             </div>
 
             <div class="col-4">
+                <div class="text-center">
+                    <a href="<?= base_url('assets/persident_editor_sign/e_sign.png'); ?>" target="_blank">
+                        <img src="<?= base_url('assets/persident_editor_sign/e_sign.png'); ?>" width="60px"
+                            alt="President Editor Signature">
+                    </a>
+                </div>
                 <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
                 <div class="line"></div>
                 <p>মো. জসিম উদ্দিন</p>
@@ -750,6 +811,14 @@
             </div>
 
             <div class="col-4">
+                <div class="text-center">
+                    <a href="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                        target="_blank">
+
+                        <img src="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                            width="60px">
+                    </a>
+                </div>
                 <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
                 <div class="line"></div>
 
@@ -760,14 +829,13 @@
 
         <div class="footer">
             <div class="footer-note text-center">
-                <!-- <p>সদস্য পদটি স্বয়ংক্রিয়ভাবে প্রস্তুত হচ্ছে :</p> -->
             </div>
             <div class="text-center">
-                <p>
-                    আবেদনটি ব্যবস্থাপনা কমিটি কর্তৃক অনুমোদন করা হলে সদস্য পদের ভর্তি ফি ও চাঁদা ব্যাংক হিসেবে জমা করলে
-                    স্বয়ংক্রিয়ভাবে জমা রশিদ আপনার ই-মেইলে প্রেরিত হবে। <br>
-                    ই-মেইলঃ "bjsuxyz892323@gmail.com"
-                    মোবাইলঃ "01700000000" । হালনাগাদ তথ্য দেখার জন্য ওয়েবসাইট লগইন করুন : <a class="text-white"
+                <p class="text-bold">
+                    <!-- আবেদনটি ব্যবস্থাপনা কমিটি কর্তৃক অনুমোদন করা হলে সদস্য পদের ভর্তি ফি ও চাঁদা ব্যাংক হিসেবে জমা করলে
+                    স্বয়ংক্রিয়ভাবে জমা রশিদ আপনার ই-মেইলে প্রেরিত হবে। <br> -->
+                    ই-মেইলঃ bjsu61@gmail.com
+                    মোবাইলঃ ০১৭০৯৬৫৩৫৯৯ । হালনাগাদ তথ্য দেখার জন্য ওয়েবসাইট লগইন করুন : <a class="text-white"
                         href="https://bjsucoop.org/">https://bjsucoop.org/</a>
                 </p>
             </div>

@@ -26,7 +26,8 @@ $route['logout'] = 'Admin_login/logout';
 $route['admin_dashboard'] = 'Admin/index';
 $route['members_list'] = 'Admin/members_list/members_list';
 $route['view_member/(:num)'] = 'Admin/view_member/$1';
-// $route['edit_member/(:num)'] = 'Admin/edit_member/$1';
+$route['member_active_status/(:num)'] = 'Admin/member_active_status/$1';
+$route['approval_update/(:num)'] = 'Admin/approval_update/$1';
 $route['delete_member/(:num)'] = 'Admin/delete_member/$1';
 $route['members_account_details_admin'] = 'Admin/members_account';
 
@@ -166,6 +167,8 @@ $route['edit_member/(:num)'] = 'Applicant/edit_member/$1';
 // $route['delete_member/(:num)'] = 'Applicant/delete_member/$1';
 $route['members_account_details'] = 'Applicant/members_account';
 $route['update_member/(:num)'] = 'Site/update_member/$1';
+$route['peyment_doc/(:num)'] = 'Site/peyment_doc/$1';
+
 
 
 $route['my_orders'] = 'Applicant/my_orders';

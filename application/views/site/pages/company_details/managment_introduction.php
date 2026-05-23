@@ -14,7 +14,10 @@ $managment_info = $this->db->order_by('id', 'asc')
             <?php foreach ($managment_info as $info): ?>
 
                 <div class="employee-card">
-                    <img src="<?= base_url('./assets/uploads/project/management_img/' . $info['image']) ?>" alt="Jane Smith">
+                    <div class="card-img">
+                        <img src="<?= base_url('./assets/uploads/project/management_img/' . $info['image']) ?>"
+                            alt="Jane Smith">
+                    </div>
                     <div class="card-body" style="padding: 10px;">
                         <p style="font-size: 14px; line-height: 1.1;"><?= htmlspecialchars($info['name']) ?></p>
                         <p style="font-size: 14px;" class=" designation"><?= htmlspecialchars($info['designation']) ?></p>
@@ -39,11 +42,12 @@ $managment_info = $this->db->order_by('id', 'asc')
         <?php endif; ?>
     </div>
 
-    
-<div style="text-align: center; padding: 10px;">
-    <a href="all_managment">সকল ব্যবস্থাপনা সদস্য</a>
+
+    <div style="text-align: center; padding: 10px;">
+        <a href="all_managment">সকল ব্যবস্থাপনা সদস্য</a>
+    </div>
 </div>
-</div>
+
 
 
 
@@ -110,6 +114,7 @@ $managment_info = $this->db->order_by('id', 'asc')
         transform: translateY(-5px);
     }
 
+
     .employee-card img {
         width: 100%;
         height: 310px;
@@ -150,6 +155,12 @@ $managment_info = $this->db->order_by('id', 'asc')
             padding: 5px;
         }
 
+        .card-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .employee-card img {
             height: 300px;
         }
@@ -166,6 +177,13 @@ $managment_info = $this->db->order_by('id', 'asc')
             flex: 0 0 calc(50% - 10px);
             max-width: calc(50% - 10px);
             padding: 5px;
+        }
+
+        .card-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
         }
 
         .employee-card img {

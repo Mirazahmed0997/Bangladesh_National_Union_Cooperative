@@ -103,8 +103,7 @@ if ($user) {
                     আবেদন</a>
             </li>
 
-
-            <?php $user = $this->session->userdata('login_user_info_all'); ?>
+             <?php $user = $this->session->userdata('login_user_info_all'); ?>
             <?php if ($user): ?>
 
                 <li class="dropdown">
@@ -174,9 +173,7 @@ if ($user) {
             <?php endif; ?>
 
 
-
-
-
+         
 
 
 
@@ -191,7 +188,7 @@ if ($user) {
         position: relative;
         z-index: 1001;
         background: transparent;
-        
+
     }
 
     #navbar {
@@ -212,11 +209,13 @@ if ($user) {
 
     .submenu {
         display: none;
+        background-color: #41ABB6;
     }
 
     .dropdown.open>.submenu {
         display: block;
     }
+   
 
     @media (max-width: 768px) {
 
@@ -231,6 +230,11 @@ if ($user) {
     }
 
     @media (max-width: 768px) {
+        .container {
+           
+            align-items: end !important;
+            
+        }
 
         .mobile-bar {
             display: block;
@@ -243,7 +247,7 @@ if ($user) {
                 width: 100%;
                 position: relative;
                 z-index: 999;
-                background: #fff;
+                background: #41ABB6;
             }
 
             #navbar.active {
@@ -260,11 +264,14 @@ if ($user) {
         #navbar ul li {
             width: 100%;
             padding: 10px;
-            border-bottom: 1px solid #eee;
+            /* border-bottom: 1px solid #eee; */
         }
 
         #navbar ul li a {
             display: block;
+        }
+        #navbar ul li  {
+           background-color: #41ABB6;
         }
     }
 </style>

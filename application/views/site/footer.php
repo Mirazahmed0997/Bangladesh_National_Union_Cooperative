@@ -14,7 +14,7 @@ $count = $this->db->count_all('newvisitors');
                     </a>
                    <div>
                      <h5 style=" margin-top: -25px;" class="comh5any-description">
-                        বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h5>
+                        বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h5>
                    </div>
                 </div>
                 
@@ -52,14 +52,13 @@ $count = $this->db->count_all('newvisitors');
                     <li><a href="#" class="footer-link">কার্যক্রম ও প্রকল্প </a></li>
                     <li><a href="#" class="footer-link">আইন ও বিধিমালা</a></li>
                     <li><a href="#" class="footer-link">আন্তর্জাতিক</a></li>
-                    <li><a href="#" class="footer-link">মিডিয়া </a></li>
+                    <li><a href="#" class="footer-link">মিডিয়া </a></li>
                     <li><a href="#" class="footer-link">নিয়োগ বিজ্ঞপ্তি</a></li>
 
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>সাথে থাকুন</h3>
-                <!-- <p class="newsletter-description">Subscribe to our newsletter for the latest marketing insights.</p> -->
                 <form class="newsletter-form">
                     <div>
                         <input type="email" id="email" name="email" required class="email-input"
@@ -86,9 +85,6 @@ $count = $this->db->count_all('newvisitors');
     </div>
 </section>
 
-
-
-
 <style>
     .footer-logo {
     display: flex;
@@ -101,8 +97,6 @@ $count = $this->db->count_all('newvisitors');
         border-radius: 50%;
         width: auto;
     }
-
-
 
     /* CSS Custom Properties */
     :root {
@@ -149,20 +143,22 @@ $count = $this->db->count_all('newvisitors');
         }
     }
 
+    /* Target small/mobile screens by default, columns sort vertically */
     .footer-grid {
         display: grid;
-        grid-template-columns: 3fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 3rem;
-        
     }
 
-    @media (min-width: 768px) {
+    /* Tablet breakdown sorts into 2 columns */
+    @media (min-width: 576px) and (max-width: 1023px) {
         .footer-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
     }
 
+    /* Desktop layout spans out into the full original 4 columns */
     @media (min-width: 1024px) {
         .footer-grid {
             grid-template-columns: repeat(4, 1fr);

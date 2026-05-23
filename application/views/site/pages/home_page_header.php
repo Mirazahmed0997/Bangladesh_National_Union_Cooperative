@@ -10,12 +10,12 @@
                 </div>
 
                 <div class="company_info">
-                    <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
-                    <h6 style=" text-align:center;">৯/ডি, মতিঝিল বাণিজ্যিক এলাকা, ঢাকা-১০০০, বাংলাদেশ।</h6>
+                    <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
+                    <h6>৯/ডি, মতিঝিল বাণিজ্যিক এলাকা, ঢাকা-১০০০, বাংলাদেশ।</h6>
                 </div>
             </div>
 
-            <div class="coop ">
+            <div class="coop">
                 <a href="<?= base_url(); ?>">
                     <img width="200px" src="assets/uploads/coop-removebg-preview.png" alt="BJSU Logo" />
                 </a>
@@ -29,24 +29,21 @@
         padding-top: 5px;
         display: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: center; 
         flex: 1;
-    }
-
-    .coop {
-        right: 0;
+        width: 100%;
     }
 
     .logo {
         background-color: white;
         border-radius: 50%;
         border: none !important;
+        display: inline-block;
     }
-
 
     .top-header {
         border-bottom: 1px solid white;
-        padding: 5px 10px;
+        padding: 10px 0;
         background: linear-gradient(90deg, #32aaba, #feb47b);
     }
 
@@ -59,24 +56,28 @@
     .header-flex .logo img {
         max-height: 100px;
         width: auto;
+        display: block;
     }
 
-    .header-flex .company_info h3 {
+    .header-flex .company_info {
+        color: white;
+        text-align: center;
+    }
+
+    .header-flex .company_info h2 {
         font-size: 24px;
         font-weight: 600;
         margin: 0;
         padding-bottom: 2px;
     }
 
-    .header-flex .company_info {
-        font-size: 18px;
-        font-weight: 900;
+    .header-flex .company_info h6 {
+        font-size: 14px;
+        font-weight: 400;
         margin: 0;
-        color: white;
-
     }
 
-    /* Responsive adjustments */
+    /* Media Queries */
     @media (max-width: 992px) {
         .coop img {
             max-width: 150px;
@@ -85,58 +86,76 @@
 
     @media (max-width: 768px) {
         .header {
-            margin-top: 25px;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            justify-content: center !important;
+            gap: 15px;
+            width: 100%;
         }
 
         .header-flex {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            width: 100%;
+        }
+
+        .company_info {
+            text-align: center !important;
+            width: 100%;
+        }
+        
+        .company_info h6 {
+            text-align: center !important;
+        }
+
+        .logo {
+            margin: 0 auto;
         }
 
         .logo img {
-            max-height: 60px;
+            max-height: 70px;
         }
 
-        .company_info h2 {
-            font-size: 18px;
+        .header-flex .company_info h2 {
+            font-size: 20px !important;
         }
 
-        .company_info h6 {
-            font-size: 14px;
+        .header-flex .company_info h6 {
+            font-size: 13px !important;
+        }
+
+        .coop {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100%;
+            margin: 0 auto;
         }
 
         .coop img {
-            max-width: 120px;
-            margin-top: 10px;
+            max-width: 130px;
+            margin: 5px auto 0 auto;
+            display: inline-block;
         }
     }
 
     @media (max-width: 480px) {
         .logo img {
-            max-height: 50px;
+            max-height: 60px;
         }
 
-        .company_info h2 {
-            font-size: 16px;
+        .header-flex .company_info h2 {
+            font-size: 18px !important;
         }
 
-        .company_info h6 {
-            font-size: 12px;
+        .header-flex .company_info h6 {
+            font-size: 11px !important;
         }
 
         .coop img {
-            max-width: 100px;
-        }
-
-        .header-flex .company_info h2{
-        font-size: 18px;
-        }
-        .header-flex .company_info h6{
-        font-size: 8px;
+            max-width: 110px;
         }
     }
 </style>

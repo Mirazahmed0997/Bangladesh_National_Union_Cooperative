@@ -87,7 +87,6 @@
                                     <th rowspan="2">সমিতির পক্ষে প্রতিনিধির নাম</th>
                                     <th rowspan="2">আবেদনের তারিখ</th>
                                     <th rowspan="2">অবস্থান</th>
-                                    <th rowspan="2">খতিয়ান</th>
 
                                     <th colspan="5"></th>
                                 </tr>
@@ -127,23 +126,9 @@
                                         </td>
 
 
-                                        <!-- <td>
-                                            <form action="<?= base_url('member_active_status/' . $row->id); ?>"
-                                                method="post">
-                                                <select name="active_status" onchange="this.form.submit()"
-                                                    class="form-control form-control-sm">
-                                                    <option value=1 <?= $row->active_status == 1 ? 'selected' : '' ?>>Active
-                                                    </option>
-                                                    <option value=0 <?= $row->active_status == 0 ? 'selected' : '' ?>>Inactive
-                                                    </option>
+                                       
 
-                                                </select>
-                                            </form>
-                                        </td> -->
-
-                                        <td><a href="<?= base_url('Admin/members_account/'); ?>"
-                                                class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a></td>
-                                                <td>
+                                       <td>
                                             <?php if ($row->member_status == 'approved'): ?>
                                                 <span class="badge bg-success">Approved</span>
                                             <?php else: ?>
@@ -153,8 +138,7 @@
 
                                         <td>
                                         
-                                        <!-- <a href="<?= base_url('Admin/view_member/' . $row->id); ?>"
-                                                class="btn btn-success btn-sm">Details</a> -->
+                                       
 
                                         <a href="<?= base_url('Admin/form_view/' . $row->id); ?>"
                                             class="btn btn-warning btn-sm">ফরম</a>
@@ -163,24 +147,6 @@
                                         <a href="<?= base_url('Admin/delete_member/' . $row->id); ?>"
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('Are you sure?');">Delete</a>
-
-
-
-
-
-
-                                        <!-- <a href="<?= base_url('Admin/seed_members/' . $row->id); ?>"
-                                                class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure?');">add dummy</a> -->
-
-
-
-
-
-                                        <!-- <a href="javascript:void(0);" class="btn btn-success btn-sm active-button"
-                                                data-id="<?= $row->id; ?>">
-                                                <?= ($row->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
-                                            </a> -->
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -194,192 +160,3 @@
 
 
 </div>
-
-
-
-<style>
-    @media print {
-
-        thead {
-            display: table-header-group !important;
-        }
-
-
-
-        table {
-            width: 100%;
-            border-collapse: collapse !important;
-            white-space: normal !important;
-            font-size: 9px;
-            page-break-inside: auto;
-        }
-
-        thead th {
-            color: #000 !important;
-            background: #fff !important;
-
-            border: 1px solid #000 !important;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        table th,
-        table td {
-            border: 1px solid #000 !important;
-            padding: 5px !important;
-            font-size: 10px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        tr {
-            page-break-inside: avoid;
-            page-break-after: auto;
-        }
-
-        .btn,
-        .open-charge-modal,
-        .active-button,
-        a {
-            display: none !important;
-        }
-
-        table th:last-child,
-        table td:last-child {
-            display: none !important;
-        }
-
-        .table-responsive {
-            overflow: visible !important;
-        }
-
-
-    }
-</style>
-
-
-
-
-<!-- ---------------------popup-------------------------- -->
-
-<div class="modal fade" id="chargeModal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-
-            <form id="chargeForm">
-
-                <div class="modal-header">
-                    <h5 class="modal-title">Update Charge</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <input type="hidden" name="member_id" id="member_id">
-
-                    <div class="form-group">
-                        <label>Subscription Fee</label>
-                        <input type="number" name="subscription_fee" id="subscription_fee" class="form-control"
-                            required>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-sm">Save</button>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
-</div>
-
-
-
-
-
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#membersTable').DataTable({
-            responsive: false,
-            scrollX: true,
-            scrollY: "500px",
-            scrollCollapse: true,
-            paging: false,
-            fixedHeader: true,
-            pageLength: 10,
-            searching: false,
-            lengthMenu: [10, 25, 50, 100],
-            language: {
-                lengthMenu: "Show _MENU_ entries",
-                info: "Showing _START_ to _END_ of _TOTAL_ members"
-            }
-        });
-    });
-
-
-    // for popup------------------------------------------
-
-    $(document).on("click", ".open-charge-modal", function () {
-        let memberId = $(this).data("id");
-        let fee = $(this).data("fee");
-
-        $("#member_id").val(memberId);
-        $("#subscription_fee").val(fee);
-
-        $("#chargeModal").modal("show");
-    });
-
-
-    $("#chargeForm").submit(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            url: "<?= base_url('Admin/save_charge'); ?>",
-            type: "POST",
-            data: $(this).serialize(),
-            success: function (response) {
-
-                $("#chargeModal").modal("hide");
-
-                alert("Charge updated successfully!");
-
-                location.reload();
-            }
-        });
-    });
-
-
-
-
-    // --------------------------for approval----------------
-
-    $(document).on("click", ".active-button", function () {
-        let memberId = $(this).data("id");
-
-        if (confirm("Are you sure you want to mark as Active?")) {
-
-            $.ajax({
-                url: "<?= base_url('Admin/approval_update'); ?>",
-                type: "POST",
-                data: { member_id: memberId },
-                success: function (res) {
-
-                    alert("Member Active Successfully !");
-
-                    $("tr[data-id='" + memberId + "'] .payment-status")
-                        .text("Active")
-                        .removeClass("badge-danger")
-                        .addClass("badge-success");
-
-                }
-            });
-        }
-    });
-
-
-
-</script>

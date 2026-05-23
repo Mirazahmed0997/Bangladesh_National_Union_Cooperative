@@ -1,3 +1,13 @@
+<?php
+
+$member_application_count = 0;
+$this->db->where('member_status', 'pending');
+$member_application_count = $this->db->count_all_results('members_table');
+?>
+
+
+
+
 <style>
     [class*=sidebar-dark-] {
         background-image: linear-gradient(to bottom,
@@ -179,34 +189,34 @@
                             </ul>
 
                         </li>
-                        
 
-                       
+
+
                     </ul>
                 </li>
 
                 <li class="nav-item has-treeview <?= ($sub_nav == 'gallery') ? 'menu-open' : ''; ?>">
 
-                            <a href="#" class="nav-link <?= ($sub_nav == 'gallery') ? 'active' : ''; ?>">
-                                <i class="fas fa-newspaper nav-icon"></i>
-                                <p>
-                                    অর্ডার ব্যবস্থাপনা
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                    <a href="#" class="nav-link <?= ($sub_nav == 'gallery') ? 'active' : ''; ?>">
+                        <i class="fas fa-newspaper nav-icon"></i>
+                        <p>
+                            অর্ডার ব্যবস্থাপনা
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin_orders_table') ?>"
+                                class="nav-link <?= active_nav('image_gallery_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>অর্ডার তালিকা</p>
                             </a>
-
-                            <ul class="nav nav-treeview">
-
-                                <li class="nav-item">
-                                    <a href="<?= base_url('admin_orders_table') ?>"
-                                        class="nav-link <?= active_nav('image_gallery_list', $sub_nav); ?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>অর্ডার তালিকা</p>
-                                    </a>
-                                </li>
-                            </ul>
-
                         </li>
+                    </ul>
+
+                </li>
 
 
                 <br>
@@ -236,6 +246,14 @@
                                 class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>সদস্য তালিকা</p>
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Admin/application_list') ?>"
+                                class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>আবেদন তালিকা <span class="badge bg-danger"><?= $member_application_count ?></span></p>
 
                             </a>
                         </li>

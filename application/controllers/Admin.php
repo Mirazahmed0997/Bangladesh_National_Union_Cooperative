@@ -136,55 +136,189 @@ class Admin extends CI_Controller
 	{
 		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
 
-		 $where_data = array();
+		$where_data = array();
 
-        $member_no = $this->input->get('member_no');
-        $association_name = $this->input->get('association_name');
-        $a_type = $this->input->get('a_type');
-        $a_email = $this->input->get('a_email');
-        $a_contact = $this->input->get('a_contact');
-        $from_date = $this->input->get('from_date');
-        $to_date = $this->input->get('to_date');
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
 
 
 
-        if (!empty($member_no)) {
-            $where_data['member_no'] = $member_no;
-        }
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
 
-        if (!empty($association_name)) {
-            $where_data['association_name'] = $association_name;
-        }
-        if (!empty($a_type)) {
-            $where_data['a_type'] = $a_type;
-        }
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
 
-        if (!empty($a_email)) {
-            $where_data['a_email'] = $a_email;
-        }
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
 
-        if (!empty($a_contact)) {
-            $where_data['a_contact'] = $a_contact;
-        }
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
 
-        if (!empty($where_data)) {
-            $this->db->where($where_data);
-        }
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
 
-        if (!empty($from_date)) {
-            $this->db->where('created_at >=', $from_date);
-        }
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
 
-        if (!empty($to_date)) {
-            $this->db->where('created_at <=', $to_date);
-        }
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
 
-        $data['members'] = $this->db->get('members_table')->result();
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'asc')
+			->where('member_status','approved')
+			->get('members_table')
+			->result();
 
 		$path = 'admin/members_list/members_list';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
+	public function application_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
 
+		$where_data = array();
+
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
+
+
+
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
+
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
+
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
+
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'asc')
+			->where('member_status','pending')
+			->get('members_table')
+			->result();
+
+		$path = 'admin/members_list/application_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+// 	public function members_list()
+// {
+//     $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+
+//     $member_no = $this->input->get('member_no');
+//     $association_name = $this->input->get('association_name');
+//     $a_type = $this->input->get('a_type');
+//     $a_email = $this->input->get('a_email');
+//     $a_contact = $this->input->get('a_contact');
+//     $from_date = $this->input->get('from_date');
+//     $to_date = $this->input->get('to_date');
+
+    
+//     $this->db->from('members_table');
+
+//     if (!empty($member_no)) {
+//         $this->db->where('member_no', $member_no);
+//     }
+
+//     if (!empty($association_name)) {
+//         $this->db->like('association_name', $association_name);
+//     }
+
+//     if (!empty($a_type)) {
+//         $this->db->where('a_type', $a_type);
+//     }
+
+//     if (!empty($a_email)) {
+//         $this->db->where('a_email', $a_email);
+//     }
+
+//     if (!empty($a_contact)) {
+//         $this->db->where('a_contact', $a_contact);
+//     }
+
+//     if (!empty($from_date)) {
+//         $this->db->where('created_at >=', $from_date);
+//     }
+
+//     if (!empty($to_date)) {
+//         $this->db->where('created_at <=', $to_date);
+//     }
+
+    
+//     $config['base_url'] = base_url('members_list');
+//     $config['total_rows'] = $this->db->count_all_results('', false); 
+//     $config['per_page'] = 10;
+//     $config['uri_segment'] = 2;
+
+    
+//     $config['full_tag_open'] = '<ul class="pagination">';
+//     $config['full_tag_close'] = '</ul>';
+//     $config['attributes'] = ['class' => 'page-link'];
+
+//     $this->pagination->initialize($config);
+
+    
+//     $page = $this->uri->segment(2);
+//     $offset = ($page) ? $page : 0;
+
+   
+//     $this->db->order_by('id', 'DESC');
+//     $this->db->limit($config['per_page'], $offset);
+
+//     $data['members'] = $this->db->get()->result();
+
+   
+//     $data['links'] = $this->pagination->create_links();
+
+//     $path = 'admin/members_list/members_list';
+//     $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+// }
 	// ---------------------delete member-----------------
 
 	public function delete_member($id)
@@ -211,25 +345,56 @@ class Admin extends CI_Controller
 	}
 
 
-	public function approval_update()
+	public function approval_update($id)
 	{
-		$id = $this->input->post('member_id');
+		// $id = $this->input->post('member_id');
 
 		$user = $this->session->userdata('login_user_info_all');
 
+		// count only approved members
+		$this->db->where('member_status', 'approved');
+		$count = $this->db->count_all_results('members_table') + 1;
 
-		$approved_by = $user->username;
+		$member_no = "BJSUM0000" . str_pad($count, STR_PAD_LEFT);
 
 		$data = [
 			'active_status' => 1,
-			// 'approved_by' => $approved_by,
+			'member_status' => 'approved',
+			'member_no' => $member_no,
+			// 'approved_by' => $user['id'] ?? null,
 			// 'approved_date' => date('Y-m-d H:i:s')
 		];
 
 		$this->db->where('id', $id);
 		$this->db->update('members_table', $data);
 
-		echo "success";
+		$this->session->set_flashdata('member-aprove-success', 'Member approved successfully');
+
+		redirect('members_list');
+		// redirect($_SERVER['HTTP_REFERER']);
+
+
+
+		// echo "success";
+
+
+	}
+
+
+	public function member_active_status($id)
+	{
+		$member = $this->db->get_where('members_table', ['id' => $id])->row();
+
+		$update_data = [
+
+			'active_status' => $this->input->post('active_status'),
+		];
+
+
+		$this->db->where('id', $id);
+		$this->db->update('members_table', $update_data);
+
+		redirect('members_list');
 	}
 
 
@@ -253,6 +418,58 @@ class Admin extends CI_Controller
 
 		$path = 'admin/members_list/members_accounts_details';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+	public function seed_members()
+	{
+		for ($i = 1; $i <= 10000; $i++) {
+
+			$data = [
+				'association_name' => 'Association ' . $i,
+				'a_address' => 'Dhaka Address ' . $i,
+				'a_email' => 'user' . $i . '@mail.com',
+				'a_contact' => 1700000000 + $i,
+				'i_email' => 'issuer' . $i . '@mail.com',
+				'i_contact' => 1800000000 + $i,
+
+				'r_date' => date('Y-m-d'),
+
+				'valid_cap' => rand(1000, 100000),
+				'last_finYear_profit' => rand(1000, 50000),
+
+				'audit_execution_date' => date('Y-m-d'),
+				'last_gen_meeting_date' => date('Y-m-d'),
+				'election_date' => date('Y-m-d'),
+				'first_man_meeting_date' => date('Y-m-d'),
+
+				'elected_president' => 'President ' . $i,
+				'president_contact' => 1700000000 + $i,
+
+				'elected_editor' => 'Editor ' . $i,
+				'editor_contact' => 1800000000 + $i,
+
+				'authorized_shares' => rand(1000, 10000),
+				'capital' => rand(10000, 500000),
+
+				'president_email' => 'president' . $i . '@mail.com',
+				'e_email' => 'editor' . $i . '@mail.com',
+
+				'a_type' => ['জাতীয়', 'কেন্দ্রীয়', 'প্রাথমিক'][array_rand(['জাতীয়', 'কেন্দ্রীয়', 'প্রাথমিক'])],
+				'Dividend_payment_type' => ['নগদ', 'স্টক', 'বোনাস'][array_rand(['নগদ', 'স্টক', 'বোনাস'])],
+
+				'dividend_percentage' => rand(5, 25),
+
+				'member_status' => (rand(0, 1) ? 'approved' : 'pending'),
+				'active_status' => rand(0, 1),
+
+				'created_at' => date('Y-m-d H:i:s')
+			];
+
+			$this->db->insert('members_table', $data);
+		}
+
+		echo "10,000 dummy members inserted successfully";
 	}
 
 
@@ -459,10 +676,10 @@ class Admin extends CI_Controller
 		}
 
 		// $data['orders'] = $this->db->get('orders_table')->result();
-		 $data['orders'] = $this->db
-            ->order_by('id', 'DESC')
-            ->get('orders_table')
-            ->result();
+		$data['orders'] = $this->db
+			->order_by('id', 'DESC')
+			->get('orders_table')
+			->result();
 
 		$path = 'admin/orders_table/orders_table';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -515,7 +732,7 @@ class Admin extends CI_Controller
 		// echo '<pre>';
 		// print_r($update_data);
 		// exit;
-		
+
 		$this->db->where('id', $id);
 		$this->db->update('orders_table', $update_data);
 

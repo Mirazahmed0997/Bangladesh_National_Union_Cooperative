@@ -1,15 +1,15 @@
 <div class="content-wrapper">
 
-  <?php if ($this->session->flashdata('success')): ?>
-<div class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index:9999; width: 400px;">
-    
-    <div class="alert alert-success alert-dismissible fade show shadow">
-        <?= $this->session->flashdata('success'); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    <?php if ($this->session->flashdata('success')): ?>
+        <div class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index:9999; width: 400px;">
 
-</div>
-<?php endif; ?>
+            <div class="alert alert-success alert-dismissible fade show shadow">
+                <?= $this->session->flashdata('success'); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+        </div>
+    <?php endif; ?>
 
     <div class="content-header">
         <div class="container-fluid">
@@ -21,8 +21,8 @@
                             খুঁজুন</button>
                     </div>
                     <div class="col-md">
-                        <input type="text" name="member_no" value="<?= $this->input->get('member_no') ?>" class="form-control"
-                            placeholder="সদস্য নম্বর">
+                        <input type="text" name="member_no" value="<?= $this->input->get('member_no') ?>"
+                            class="form-control" placeholder="সদস্য নম্বর">
                     </div>
                     <div class="col-md">
                         <input type="text" name="association_name" class="form-control"
@@ -85,14 +85,15 @@
                                     <th rowspan="2">কার্যালয়ের ঠিকানা</th>
                                     <th rowspan="2">মোবাইল</th>
                                     <th rowspan="2">ই-মেইল</th>
-                                    <th rowspan="2">নিবন্ধন নম্বর</th>                                    
+                                    <th rowspan="2">নিবন্ধন নম্বর</th>
                                     <th rowspan="2">সমিতির পক্ষে প্রতিনিধির নাম</th>
                                     <th rowspan="2">সমিতির পক্ষে প্রতিনিধির নাম</th>
                                     <th rowspan="2">আবেদনের তারিখ</th>
                                     <th rowspan="2">অবস্থান</th>
-                                   
+
                                     <th rowspan="2">খতিয়ান</th>
-                                    <th rowspan="4"></th>
+                                    <!-- <th rowspan="2">রিসিপ্ট আপলোড করুন</th> -->
+                                    <th colspan="4"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,9 +113,9 @@
 
 
 
-                                      
-                                       
-                                    
+
+
+
                                         <td>
                                             <?php if ($row->active_status == 1): ?>
                                                 <span class="badge bg-success">Active</span>
@@ -122,19 +123,31 @@
                                                 <span class="badge bg-danger">Inactive</span>
                                             <?php endif; ?>
                                         </td>
-                                       
-                                      
+
+
                                         <td><a href="<?= base_url('members_account_details'); ?>"
                                                 class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a></td>
+                                        <!-- <td>
+
+                                         <form action="<?= base_url('peyment_doc/' . $row->id); ?>" method="post"
+                                                enctype="multipart/form-data">
+
+                                                <input type="file" id="file_<?= $row->id ?>" name="receipt"
+                                                    style="display:none;" onchange="this.form.submit()">
+
+                                                <button type="button" class="btn btn-warning btn-sm"
+                                                    onclick="document.getElementById('file_<?= $row->id ?>').click();">
+                                                    <i class="fas fa-folder-open"></i>
+                                                </button>
+
+                                            </form>
+                                    
+                                        </td> -->
                                         <td>
-
                                             <a href="<?= base_url('Applicant/form_view/' . $row->id); ?>"
-                                                class="btn btn-warning btn-sm">ফরম</a>
-                                            <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
-                                                class="btn btn-warning btn-sm">Update</a>
-
-                                           
-
+                                            class="btn btn-warning btn-sm">ফরম</a>
+                                        <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
+                                            class="btn btn-warning btn-sm">Update</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

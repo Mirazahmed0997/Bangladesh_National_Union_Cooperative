@@ -156,13 +156,15 @@ class Site extends CI_Controller
 	{
 
 		$a_contact = $this->input->post('a_contact');
+		$a_email = $this->input->post('a_email');
 
 		// Check if mobile number already exists
 		$this->db->where('a_contact', $a_contact);
+		$this->db->where('a_email', $a_email);
 		$existing_member = $this->db->get('members_table')->row();
 
 		if ($existing_member) {
-			$this->session->set_flashdata('error', 'ইতিমধ্যে এই নম্বর যে একজন সদস্য বিদ্যমান!');
+			$this->session->set_flashdata('member_error', 'ইতিমধ্যে এই নম্বর/ইমেইল একজন সদস্য বিদ্যমান!');
 			redirect('member_registration');
 			return;
 		}
@@ -171,6 +173,7 @@ class Site extends CI_Controller
 		$att_auth_cer = $this->upload_file('att_auth_cer', './assets/uploads/project/members/att_auth_cer/');
 		$att_resulation = $this->upload_file('att_resulation', './assets/uploads/project/members/att_resulation/');
 		$att_laws = $this->upload_file('att_laws', './assets/uploads/project/members/att_laws/');
+		$i_sign = $this->upload_file('i_sign', './assets/uploads/project/members/i_sign/');
 
 		$data = array(
 
@@ -179,7 +182,7 @@ class Site extends CI_Controller
 			'registration_no' => $this->input->post('registration_no'),
 			'r_date' => $this->input->post('r_date'),
 			'r_address' => $this->input->post('r_address'),
-			
+
 
 			'a_contact' => $this->input->post('a_contact'),
 			'a_email' => $this->input->post('a_email'),
@@ -200,6 +203,8 @@ class Site extends CI_Controller
 			'last_gen_meeting_date' => $this->input->post('last_gen_meeting_date'),
 			'election_date' => $this->input->post('election_date'),
 			'first_man_meeting_date' => $this->input->post('first_man_meeting_date'),
+			'last_dividend_payment_year' => $this->input->post('last_dividend_payment_year'),
+			'dividend_percentage' => $this->input->post('dividend_percentage'),
 
 			'elected_president' => $this->input->post('elected_president'),
 			'president_contact' => $this->input->post('president_contact'),
@@ -215,18 +220,17 @@ class Site extends CI_Controller
 			'att_reg_cer' => $att_reg_cer,
 			'att_auth_cer' => $att_auth_cer,
 			'att_resulation' => $att_resulation,
-			'att_laws' => $att_laws
+			'att_laws' => $att_laws,
+			'i_sign' => $i_sign,
 		);
 
 		$this->db->insert('members_table', $data);
 		$id = $this->db->insert_id();
 
-		$member_no = "BJSUM" . str_pad($id, 5, "0", STR_PAD_LEFT);
+		
 
 		$this->db->where('id', $id);
-		$this->db->update('members_table', [
-			'member_no' => $member_no
-		]);
+		
 		$this->session->set_flashdata('success', 'অভিনন্দন, আপনার আবেদন সফলভাবে জমা দেওয়া হয়েছে।');
 		redirect('member_login');
 	}
@@ -271,9 +275,11 @@ class Site extends CI_Controller
 
 		$update_data = [
 			'association_name' => $this->input->post('association_name'),
+			'a_type' => $this->input->post('a_type'),
 			'registration_no' => $this->input->post('registration_no'),
 			'r_date' => $this->input->post('r_date'),
 			'r_address' => $this->input->post('r_address'),
+
 
 			'a_contact' => $this->input->post('a_contact'),
 			'a_email' => $this->input->post('a_email'),
@@ -287,22 +293,30 @@ class Site extends CI_Controller
 
 			'valid_cap' => $this->input->post('valid_cap'),
 			'last_finYear_profit' => $this->input->post('last_finYear_profit'),
+			'authorized_shares' => $this->input->post('authorized_shares'),
+			'capital' => $this->input->post('capital'),
 
 			'audit_execution_date' => $this->input->post('audit_execution_date'),
 			'last_gen_meeting_date' => $this->input->post('last_gen_meeting_date'),
 			'election_date' => $this->input->post('election_date'),
 			'first_man_meeting_date' => $this->input->post('first_man_meeting_date'),
+			'last_dividend_payment_year' => $this->input->post('last_dividend_payment_year'),
 
 			'elected_president' => $this->input->post('elected_president'),
 			'president_contact' => $this->input->post('president_contact'),
+			'president_email' => $this->input->post('president_email'),
 
 			'elected_editor' => $this->input->post('elected_editor'),
 			'editor_contact' => $this->input->post('editor_contact'),
+			'e_email' => $this->input->post('e_email'),
 
+			'Dividend_payment_type' => $this->input->post('Dividend_payment_type'),
 			'divident_payment_date' => $this->input->post('divident_payment_date'),
+			'dividend_percentage' => $this->input->post('dividend_percentage'),
+
 			'password' => $this->input->post('password'),
 
-			
+
 
 		];
 
@@ -368,6 +382,18 @@ class Site extends CI_Controller
 			$member->att_laws,
 			'jpg|jpeg|png'
 		);
+		$update_data['i_sign'] = update_file(
+			'i_sign',
+			'./assets/uploads/project/members/i_sign/',
+			$member->i_sign,
+			'jpg|jpeg|png'
+		);
+		$update_data['peyment_doc'] = update_file(
+			'peyment_doc',
+			'./assets/uploads/project/members/peyment_doc/',
+			$member->peyment_doc,
+			'pdf'
+		);
 
 		$this->db->where('id', $id);
 		$this->db->update('members_table', $update_data);
@@ -376,7 +402,58 @@ class Site extends CI_Controller
 	}
 
 
+	public function peyment_doc($id)
+	{
+		$member = $this->db->get_where('members_table', ['id' => $id])->row();
 
+		
+
+
+
+		function update_file($field_name, $upload_path, $old_file = '', $allowed_types = '*')
+		{
+			$CI =& get_instance();
+
+			if (!empty($_FILES[$field_name]['name'])) {
+
+				$config['upload_path'] = $upload_path;
+				$config['allowed_types'] = $allowed_types;
+				$config['file_name'] = time() . '_' . $_FILES[$field_name]['name'];
+
+				$CI->load->library('upload');
+				$CI->upload->initialize($config);
+
+				if ($CI->upload->do_upload($field_name)) {
+
+					$uploadData = $CI->upload->data();
+					$new_file = $uploadData['file_name'];
+
+					// delete old file
+					if (!empty($old_file) && file_exists($upload_path . $old_file)) {
+						unlink($upload_path . $old_file);
+					}
+
+					return $new_file;
+				}
+			}
+
+			return $old_file;
+		}
+
+
+		
+		$update_data['peyment_doc'] = update_file(
+			'peyment_doc',
+			'./assets/uploads/project/members/peyment_doc/',
+			$member->peyment_doc,
+			'pdf'
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('members_table', $update_data);
+
+		redirect(base_url('applicant/members_list/member_Details/' . $id));
+	}
 
 
 
