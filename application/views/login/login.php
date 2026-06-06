@@ -59,7 +59,7 @@
                     </form>
 
                     <div class="text-center mt-3">
-                        <a href="#">পাসওয়ার্ড ভুলে গেছেন?</a>
+                        <a href="<?php echo base_url('forget_password'); ?>">পাসওয়ার্ড ভুলে গেছেন?</a>
                     </div>
 
                     <div class="text-center mt-2">

@@ -195,7 +195,7 @@ class Applicant extends CI_Controller
 
     // -------------------Form View---------------------
 
-    public function form_view($id = null)
+    public function form_view($id)
     {
         if (empty($id)) {
             redirect(base_url('Applicant/members_list'));
@@ -212,7 +212,7 @@ class Applicant extends CI_Controller
         }
 
         //  Render the member details inside dashboard layout
-        $path = 'Applicant/members_list/form_view';
+        $path = 'applicant/members_list/form_view';
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
 
@@ -282,7 +282,7 @@ class Applicant extends CI_Controller
 
     // -------------------Update member details---------------------
 
-    public function edit_member($id = null)
+    public function edit_member($id)
     {
         if (empty($id)) {
             redirect(base_url('Applicant/members_list'));
@@ -300,7 +300,7 @@ class Applicant extends CI_Controller
         }
 
         //  Render the member details inside dashboard layout
-        $path = 'Applicant/members_list/updateForm';
+        $path = 'applicant/members_list/updateForm';
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
 

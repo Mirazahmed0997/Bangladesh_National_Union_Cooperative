@@ -1,105 +1,19 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Member_login extends CI_Controller
+class Reset_password extends CI_Controller
 {
-
-
-    private $main_layout = 'recruitment/master_layout';
-    private $header = 'recruitment/header';
-    private $footer = 'recruitment/footer';
+    private $main_layout = 'site/master_layout';
+    private $header = 'site/header';
+    private $footer = 'site/footer';
     private $serverDateTime = '';
     public function __construct()
     {
         parent::__construct();
-
-        $controller = $this->router->fetch_class();
-        $method = $this->router->fetch_method();
-
-        // if (
-        //     !$this->session->userdata('login_user_info_all')
-        //     && !($controller == 'Member_login' && in_array($method, ['index', 'login_process']))
-        // ) {
-        //     $this->session->set_flashdata('login_failed', 'Please login first');
-        //     redirect('member_login');
-        // }
     }
 
 
     public function index()
-    {
-        $data = $this->engine->store_nav('recruitment', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-        $path = 'site/pages/login';
-        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
-    }
-
-    public function login_process()
-    {
-
-        $a_contact = $this->input->post('a_contact');
-        $password = $this->input->post('password');
-
-        $this->db->where('a_contact', $a_contact);
-        $user = $this->db->get('members_table')->row();
-
-        if ($user) {
-
-            // if (password_verify($password, $user->password))
-            if ($password == $user->password)
-                 {
-
-                $this->session->set_userdata('current_type', 2);
-                $this->session->set_userdata('login_user_info_all', $user);
-                $this->session->set_flashdata('login_success', 'Successfully logged in');
-                // redirect('home');
-                redirect('members');
-
-            } else {
-
-                $this->session->set_flashdata('login_failed', 'Wrong Password');
-                redirect('member_login');
-
-            }
-
-        } else {
-
-            $this->session->set_flashdata('login_failed', 'Mobile number not found');
-            redirect('member_login');
-        }
-    }
-
-
-
-    public function change_password($id)
-    {
-        $id = $this->input->post('member_id');
-        $password = $this->input->post('password');
-
-        if (!empty($password)) {
-            $update_data = [
-                'password' => password_hash($password, PASSWORD_DEFAULT)
-            ];
-
-            $this->db->where('id', $id);
-            $this->db->update('members_table', $update_data);
-        }
-
-        redirect(base_url('applicant/members_list/member_Details/' . $id));
-    }
-
-
-
-
-    public function logout()
-    {
-        $this->session->sess_destroy();
-        redirect('admin');
-    }
-
-
-
-
-     public function member_reset_email_form()
     {
         $data = $this->engine->store_nav('bjsu', 'bjsu', 'বাংলাদেশ জাতীয় সমবায় ইউনিয়ন');
         $data['homapage_info'] = $this->Common->get_data('job_homepage')->row();
@@ -109,11 +23,9 @@ class Member_login extends CI_Controller
     }
 
 
-    public function member_send_reset_link()
+    public function send_reset_link()
     {
-        $email = $this->input->post('email');
-        // echo $email;
-        // exit;
+        $email = $this->input->post('a_email');
 
         $user = $this->db
             ->where('a_email', $email)
@@ -179,7 +91,7 @@ class Member_login extends CI_Controller
     }
 
 
-    public function member_reset_password($token)
+    public function reset_password($token)
     {
         $user = $this->db
             ->where('reset_token', $token)
@@ -200,14 +112,11 @@ class Member_login extends CI_Controller
     }
 
 
-    public function member_update_password()
+    public function update_password()
     {
         $token = $this->input->post('token');
 
         $password = $this->input->post('password');
-
-        // echo $password;
-        // exit;
 
         $user = $this->db
             ->where('reset_token', $token)
@@ -239,9 +148,7 @@ class Member_login extends CI_Controller
             echo "Invalid token";
         }
     }
+
+
+
 }
-
-
-
-
-?>

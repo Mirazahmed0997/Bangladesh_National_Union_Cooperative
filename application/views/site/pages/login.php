@@ -48,6 +48,9 @@
                                 <p>If your are not registered, please <a
                                         href="<?php echo base_url('site/registration'); ?>">click</a> here for
                                     registration</p>
+                                <p>Forget password ? <a
+                                        href="<?php echo base_url('member_forget_password'); ?>">click</a> here for
+                                    Reset Password</p>
                                 <input type="submit" value="Submit" class="btn btn-info">
                             </div>
 

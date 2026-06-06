@@ -1,10 +1,13 @@
 <title>সদস্য ভর্তি তালিকা</title>
 
+
+ 
 <div class="content-wrapper">
     
 
     <div class="content-header">
         <div class="container-fluid">
+            <!-- Search / Filter Form -->
             <form method="get" action="<?= base_url('Admin/members_list') ?>">
                 <div class="row g-2 mb-3 align-items-center">
                     <div class="col-md-auto">
@@ -55,7 +58,9 @@
             </form>
         </div>
     </div>
-<section class="content">
+
+    <!-- Members Table -->
+    <section class="content">
         <div class="container-fluid">
             <div class="card shadow">
                 
@@ -94,7 +99,7 @@
 									</div>
                                      <div class="text-center headline">
                                                  <div class="card-header w-25 mt-2 mx-auto">
-                                                         <h5 class="mb-0 text-center">আবেদন তালিকা</h5>
+                                                         <h5 class="mb-0 text-center">সদস্য ভর্তি তালিকা</h5>
                                             </div>
                             </div>
 
@@ -113,22 +118,21 @@
                            <thead class="thead-dark">
                                 <tr>
                                     <th>ক্র: নং</th>
-                                    <th>আবেদনকৃত <br> সমিতির নাম</th>
-                                    <th>সমিতির <br> ঠিকানা</th>
-                                    <th>সমিতির<br> নিবন্ধন নম্বর</th>
+                                    <th>সদস্য সমিতির <br> নাম</th>
+                                    <th>সদস্য নম্বর</th>
+                                    <th>কার্যালয়ের ঠিকানা</th>
                                     <th>নিবন্ধিত ঠিকানা</th>
-                                    <th>সদস্য আবেদনের<br> তারিখ</th>
-                                    <th>আবেদন<br> মঞ্জুর তারিখ</th>
-                                    <th>মোবাইল নম্বর</th>
-                                    <th>সমিতির <br>মেইল</th>
-                                    <th>প্রতিনিধির <br>নাম</th>
-                                    <th>প্রতিনিধির <br>মোবাইল নম্বর</th>
-                                    <th>প্রতিনিধির <br>মেইল</th>
-                                    <th>এসএমএস <br>প্রেরণ</th>
-                                    <th>মেইল <br>প্রেরণ</th>
-                                    <th>পেমেন্ট<br> স্ট্যাটাস</th>
-                                    <th>আবেদন<br> ফরম ভিউ</th>
-                                </tr>
+                                    <th>সদস্য ভর্তির তারিখ</th>
+                                    <th>মোবাইল <br> নম্বর</th>
+                                    <th>ইমেইল</th>
+                                    <th>প্রতিনিধির  <br>নাম</th>
+                                    <th>প্রতিনিধির  <br>পদবি</th>
+                                    <th>প্রতিনিধির <br>মোবাইল নম্বর <br>ও মেইল</th>
+                                    <th>সদস্য ভর্তির ফী <br> ও চাঁদা জমা রশিদ <br> ও ভিউ</th>
+                                    <th>সদস্য <br> সমিতির <br>জেলা</th>
+                                    <th>সদস্য<br> সমিতির<br> বিভাগ</th> 
+                                    <th>আবেদন <br>ফরম ভিউ
+                               
                                 <tr>
                                     <th>০১</th>
                                     <th>০২</th>
@@ -145,7 +149,6 @@
                                     <th>১৩</th>
                                     <th>১৪</th>
                                     <th>১৫</th>
-                                    <th>১৬</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,26 +157,34 @@
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?= $row->association_name; ?></td>
+                                        <td><?= $row->member_no; ?></td>
                                         <td><?= $row->a_address; ?></td>
-                                        <td><?= $row->registration_no; ?></td>
-                                        <td><?= $row->r_address ?></td>
-                                        <td><?= $row->created_at; ?></td>
+                                        <td><?= $row->r_address; ?></td>
                                         <td><?= $row->approved_date; ?></td>
                                         <td>0<?= $row->a_contact; ?></td>
-                                        <td><?= $row->a_email; ?></td>
+                                        <td class="comment-cell"><?= $row->a_email; ?></td>
                                         <td><?= $row->issuer; ?></td>
-                                        <td>0<?= $row->i_contact; ?></td>
-                                        <td><?= $row->i_email; ?></td>
+                                        <td><?= $row->i_designation; ?></td>
+
+
+    
+                                        <td class="comment-cell" title="<?= htmlspecialchars($row->comments); ?>">
+                                            0<?= $row->i_contact; ?>, <?= $row->i_email; ?>
+                                        </td>
+                                        
+                                        
+                                        
+                                        
+                                        <td>
+                                            <a href=""
+                                            class=""><i class="fas fa-eye"></i></a>
+                                        </td>
                                         <td></td>
                                         <td></td>
-                                        <td><?= $row->payment_status; ?></td>
                                         <td>
                                             <a href="<?= base_url('Admin/form_view/' . $row->id); ?>"
                                             class=""><i class="fas fa-eye"></i></a>
                                         </td>
-                                        
-                                        
-                                    
 
 
 
@@ -213,7 +224,7 @@
                                             <?php endif; ?>
                                         </td> -->
 
-                                        <td>
+                                        <!-- <td> -->
                                         
                                         <!-- <a href="<?= base_url('Admin/view_member/' . $row->id); ?>"
                                                 class="btn btn-success btn-sm">Details</a> -->
@@ -242,7 +253,7 @@
                                                 data-id="<?= $row->id; ?>">
                                                 <?= ($row->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
                                             </a> -->
-                                        </td>
+                                        <!-- </td> -->
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -259,6 +270,13 @@
 
 
 <style>
+
+      .comment-cell {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
     .header{
         background-color: #3BAAB7;
@@ -292,12 +310,17 @@
         }
         .headline{
             padding: 10px;
+            
         }
                                             
         .card-header{
         border: 1px solid black;
+        font-size: 16px !important;
         
     }
+
+
+
         table {
             width: 100%;
             border-collapse: collapse !important;
@@ -322,7 +345,6 @@
             font-size: 10px;
             text-align: center;
             vertical-align: middle;
-            color: #000;
         }
 
         tr {

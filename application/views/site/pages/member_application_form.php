@@ -20,9 +20,23 @@
                 <input required type="text" name="association_name">
             </div>
 
-            <div class="form-group">
+
+
+
+
+            <div class="form-group full">
+                <label>কার্যালয়ের ঠিকানা :</label>
+                <textarea name="a_address"></textarea>
+            </div>
+
+
+        </div>
+
+        <div class="grid" style="display:flex; gap:15px; flex-wrap:wrap;">
+
+            <div class="form-group" style="flex:1; min-width:200px;">
                 <label>সমিতির শ্রেনি :</label>
-                <select name="a_type" required>
+                <select name="a_type" required class="form-control">
                     <option value="">নির্বাচন করুন</option>
                     <option value="প্রাথমিক">প্রাথমিক</option>
                     <option value="কেন্দ্রীয়">কেন্দ্রীয়</option>
@@ -30,32 +44,22 @@
                 </select>
             </div>
 
-
-            <div class="form-group ">
-                <label>সমিতির ইমেইল :</label>
-                <input required type="email" name="a_email">
-            </div>
-            <div class="form-group full">
-                <label>কার্যালয়ের ঠিকানা :</label>
-                <textarea name="a_address"></textarea>
-            </div>
-
-            <div class="form-group">
+            <div class="form-group" style="flex:1; min-width:200px;">
                 <label>নিবন্ধন নং :</label>
-                <input required type="text" name="registration_no">
+                <input required type="text" name="registration_no" class="form-control">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="flex:1; min-width:200px;">
                 <label>নিবন্ধন তারিখ :</label>
-                <input required type="date" name="r_date">
+                <input required type="date" name="r_date" class="form-control">
             </div>
 
+        </div>
 
-            <div class="form-group full">
-                <label>নিবন্ধন ঠিকানা :</label>
-                <textarea name="r_address"></textarea>
-            </div>
 
+        <div class="form-group full">
+            <label>নিবন্ধন ঠিকানা :</label>
+            <textarea name="r_address"></textarea>
         </div>
 
 
@@ -67,8 +71,8 @@
                     placeholder="01XXXXXXXXX" oninput="if(this.value.length > 11) this.value = this.value.slice(0,11)">
             </div>
 
-            <div class="form-group">
-                <label>ইমেইল :</label>
+            <div class="form-group ">
+                <label>সমিতির ইমেইল :</label>
                 <input required type="email" name="a_email">
             </div>
 
@@ -225,13 +229,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>ক্ষমতাপত্র :</label>
+                <label>সদস্য পরিচয় পত্রের ফরম [বিধি ৩৩(১) দ্রষ্টব্যঃ] :</label>
+                <a target="_blank" href="<?= base_url('assets/uploads/attachments/member_identity_form.pdf') ?>"> (নমুনা দেখুন)</a>
                 <div class="file-upload">
                     <input required name="att_auth_cer" type="file" accept="image/*">
                 </div>
             </div>
             <div class="form-group">
                 <label>রেজুলেশন :</label>
+                <a target="_blank" href="<?= base_url('assets/uploads/attachments/resulation.pdf') ?>"> (নমুনা দেখুন)</a>
                 <div class="file-upload">
                     <input required name="att_resulation" type="file" accept="image/*">
                 </div>
@@ -242,6 +248,21 @@
                     <input name="att_laws" type="file" accept="image/*">
                 </div>
             </div>
+
+            <div class="full" style="margin-top: 20px;">
+            <input type="checkbox" name="check_option" id="terms" required>
+            <label  for="terms" style="display: inline; font-weight: 400; font-size: 14px; font-weight: bold; box-shadow: 1px solid black;">
+                সদস্য ভর্তির চাহিত তথ্য সঠিক এবং ভর্তি ফি ২০০০/=(দুই হাজার) টাকা এবং
+                        বার্ষিক চাঁদা ১০০০/=(এক হাজার) টাকা ব্যাংক হিসাব নম্বরে জমা করবো এবং
+                        পরবর্তী বার্ষিক চাঁদা প্রত্যেক বছরের ডিসেম্বর মাসের মধ্যে পরিশোধ করার অঙ্গীকার করলাম। <br>
+            </label>
+        </div>
+
+
+
+
+
+
             <div class="form-group">
                 <label>সমিতির পক্ষে প্রতিনিধির স্বাক্ষর :</label>
                 <div class="file-upload">
@@ -286,7 +307,13 @@
         <button type="submit" class="btn">Submit</button>
 
     </form>
+
+    
 </div>
+<div class="contact ">
+    <p class="">প্রয়োজনে যোগাযোগ করুন : ০১৭০৯৬৫৩৫৯৯</p>
+</div>
+
 
 
 
@@ -369,7 +396,27 @@
         background: #125aa0;
     }
 
-    /* Responsive */
+
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .contact{
+        background-color: #86AEA0;
+    }
+    .contact p{
+        text-align: center;
+        padding: 10px;
+    }
+
+
     @media(max-width:768px) {
         .grid {
             grid-template-columns: 1fr;
@@ -415,5 +462,15 @@
         }
 
     }
+
+
+    document.querySelectorAll('input[type="number"]').forEach(function (input) {
+
+        input.addEventListener('wheel', function (e) {
+            this.blur();
+        });
+
+    });
+
 
 </script>

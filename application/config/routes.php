@@ -18,39 +18,35 @@ $route['admin_registration'] = 'Admin_login/admin_registration_saved';
 $route['update_user_role/(:num)'] = 'Admin/update_users_role/$1';
 $route['logout'] = 'Admin_login/logout';
 
+$route['forget_password'] = 'Admin_login/reset_email_form';
+$route['send_reset_link'] = 'Admin_login/send_reset_link';
+// $route['reset_password'] = 'Admin_login/send_reset_link';
+$route['reset_password/(:any)'] = 'Admin_login/reset_password/$1';
+$route['update_password'] = 'Admin_login/update_password';
+
 
 
 
 // --------------------Admin dashboard-------------------------
 
 $route['admin_dashboard'] = 'Admin/index';
-$route['members_list'] = 'Admin/members_list/members_list';
+$route['members_list'] = 'Admin/members_list';
+$route['members_admit_list'] = 'Admin/members_admit_list';
+$route['due_list'] = 'Admin/due_list';
+$route['current_member_list'] = 'Admin/current_member_list';
+$route['reject_list'] = 'Admin/reject_list';
+$route['review_list'] = 'Admin/review_list';
+$route['payment_check_list'] = 'Admin/payment_check_list';
+$route['application_list'] = 'Admin/application_list';
+$route['submitted_reciept'] = 'Admin/submitted_reciept';
+$route['expanse_invoice'] = 'Admin/expanse_invoice';
 $route['view_member/(:num)'] = 'Admin/view_member/$1';
 $route['member_active_status/(:num)'] = 'Admin/member_active_status/$1';
 $route['approval_update/(:num)'] = 'Admin/approval_update/$1';
+$route['reject_member/(:num)'] = 'Admin/reject_member/$1';
+$route['review_member/(:num)'] = 'Admin/review_member/$1';
 $route['delete_member/(:num)'] = 'Admin/delete_member/$1';
 $route['members_account_details_admin'] = 'Admin/members_account';
-
-
-
-// --------------for user home page view ----------------------
-
-$route['view_all_news'] = 'View_content_controller/view_news';
-$route['company_details'] = 'View_content_controller/details_description';
-$route['news_details/(:num)'] = 'View_content_controller/news_details/$1';
-$route['notice_details/(:num)'] = 'View_content_controller/notice_details/$1';
-$route['management_details/(:num)'] = 'View_content_controller/management_details/$1';
-$route['all_managment'] = 'View_content_controller/all_managment';
-$route['all_products'] = 'Site/all_products';
-
-
-
-$route['checkout'] = 'Site/checkout';
-
-
-
-
-
 
 // -----------------------News managment------------------------
 
@@ -66,7 +62,7 @@ $route['update_notice_status/(:num)'] = 'News_notice_management/notice_active_st
 $route['delete_notice/(:num)'] = 'News_notice_management/delete_notice/$1';
 
 
-// ---------------------Slider managment----------------------
+// ------------------------ Slider managment -------------------------
 
 
 $route['slider_list'] = 'Home_Page_managment_controller/slider_list';
@@ -122,6 +118,8 @@ $route['place_order'] = 'Order_controller/place_order';
 $route['payment_success/(:num)'] = 'Payment_controller/success/$1';
 $route['payment_failed/(:num)'] = 'Payment_controller/fail/$1';
 $route['payment_cancelled/(:num)'] = 'Payment_controller/cancel/$1';
+$route['checkout'] = 'Site/checkout';
+
 
 
 // -----------------------------Admin projects list------------------------
@@ -153,6 +151,12 @@ $route['members_login'] = 'Member_login/login_process';
 $route['member_logout'] = 'Member_login/logout';
 $route['change_password/(:num)'] = 'Member_login/change_password/$1';
 $route['member_logout'] = 'Member_login/logout';
+
+$route['member_forget_password'] = 'Member_login/member_reset_email_form';
+$route['member_send_reset_link'] = 'Member_login/send_reset_link';
+// $route['member_reset_password'] = 'Member_login/send_reset_link';
+$route['member_reset_password/(:any)'] = 'Member_login/reset_password/$1';
+$route['member_update_password'] = 'Member_login/update_password';
 
 
 
@@ -193,26 +197,40 @@ $route['update_product_images/(:num)'] = 'Products_controller/update_product_ima
 
 
 
+// --------------for user home page view ----------------------
+
+$route['view_all_news'] = 'View_content_controller/view_news';
+$route['company_details'] = 'View_content_controller/details_description';
+$route['news_details/(:num)'] = 'View_content_controller/news_details/$1';
+$route['notice_details/(:num)'] = 'View_content_controller/notice_details/$1';
+$route['management_details/(:num)'] = 'View_content_controller/management_details/$1';
+$route['all_managment'] = 'View_content_controller/all_managment';
+$route['all_products'] = 'Site/all_products';
 
 
 
 
 
-$route['org_history'] = 'Site/history';
-$route['org_mission'] = 'Site/mission_vission';
-$route['exi_committee'] = 'Site/executive_committee';
-$route['committee_mem_details'] = 'Site/committee_member_details';
-$route['org_structure'] = 'Site/organization_structure';
-$route['ex_presidents'] = 'Site/previous_presidents';
-$route['ex_presidents_details'] = 'Site/previous_presidents_details';
-$route['ex_secretaries'] = 'Site/previous_secretaries';
-$route['ex_secretaries_details'] = 'Site/previous_secretaries_details';
-$route['crnt_projects'] = 'Site/current_projects';
-$route['crnt_projects_details'] = 'Site/current_projects_details';
-$route['all_dev_works'] = 'Site/all_devlopment_works';
-$route['dev_works'] = 'Site/devlopment_works';
-$route['dev_works_details'] = 'Site/devlopment_works_details';
-$route['omen_dev_works'] = 'Site/women_devlopment_works';
-$route['omen_dev_works_details'] = 'Site/women_devlopment_works_details';
+
+
+
+
+
+// $route['org_history'] = 'Site/history';
+// $route['org_mission'] = 'Site/mission_vission';
+// $route['exi_committee'] = 'Site/executive_committee';
+// $route['committee_mem_details'] = 'Site/committee_member_details';
+// $route['org_structure'] = 'Site/organization_structure';
+// $route['ex_presidents'] = 'Site/previous_presidents';
+// $route['ex_presidents_details'] = 'Site/previous_presidents_details';
+// $route['ex_secretaries'] = 'Site/previous_secretaries';
+// $route['ex_secretaries_details'] = 'Site/previous_secretaries_details';
+// $route['crnt_projects'] = 'Site/current_projects';
+// $route['crnt_projects_details'] = 'Site/current_projects_details';
+// $route['all_dev_works'] = 'Site/all_devlopment_works';
+// $route['dev_works'] = 'Site/devlopment_works';
+// $route['dev_works_details'] = 'Site/devlopment_works_details';
+// $route['omen_dev_works'] = 'Site/women_devlopment_works';
+// $route['omen_dev_works_details'] = 'Site/women_devlopment_works_details';
 
 

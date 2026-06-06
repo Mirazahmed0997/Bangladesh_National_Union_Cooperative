@@ -125,8 +125,24 @@
                                         </td>
 
 
-                                        <td><a href="<?= base_url('members_account_details'); ?>"
-                                                class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a></td>
+                                        <td>
+                                            <?php if ($row->member_status == 'approved'): ?>
+
+                                                <a href="<?= base_url('members_account_details/' . $row->id); ?>"
+                                                    class="btn btn-success btn-sm">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+
+                                            <?php else: ?>
+
+                                                <span class="badge bg-warning">Not approved</span>
+
+                                            <?php endif; ?>
+                                        </td>
+
+
+
+
                                         <!-- <td>
 
                                          <form action="<?= base_url('peyment_doc/' . $row->id); ?>" method="post"
@@ -145,9 +161,9 @@
                                         </td> -->
                                         <td>
                                             <a href="<?= base_url('Applicant/form_view/' . $row->id); ?>"
-                                            class="btn btn-warning btn-sm">ফরম</a>
-                                        <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
-                                            class="btn btn-warning btn-sm">Update</a>
+                                                class="btn btn-warning btn-sm">ফরম</a>
+                                            <a href="<?= base_url('Applicant/edit_member/' . $row->id); ?>"
+                                                class="btn btn-warning btn-sm">Update</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -223,16 +239,16 @@
     </div>
 </div>
 
-
-
-
-
 <!-- Scripts -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script>
+    
+
+
+
     $(document).ready(function () {
         $('#membersTable').DataTable({
             responsive: false,

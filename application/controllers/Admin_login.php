@@ -24,49 +24,50 @@ class Admin_login extends CI_Controller
     }
 
     public function admin_registration()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
+    {
+        $data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
 
-		$path = 'admin/registration/registration';
-		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
-	}
+        $path = 'admin/registration/registration';
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
 
-	public function admin_registration_saved()
-	{
-			$username= $this->input->post('username');
-			$mobile_number= $this->input->post('mobile_number');
-			$email= $this->input->post('email');
+    public function admin_registration_saved()
+    {
+        $username = $this->input->post('username');
+        $mobile_number = $this->input->post('mobile_number');
+        $email = $this->input->post('email');
 
-			$this->db->where("username", $username);
-			$this->db->where("mobile_number", $mobile_number);
-			// $this->db->where("email", $email);
+        // $this->db->where("username", $username);
+        $this->db->where("mobile_number", $mobile_number);
+        $this->db->where("email", $email);
 
-			$isExist= $this->db->get("users")->row();
-			if ($isExist) {
-			$this->session->set_flashdata('error', 'Already registered with this number');
+        $isExist = $this->db->get("users")->row();
+        if ($isExist) {
+            $this->session->set_flashdata('error', 'Already registered with this Email/Number');
 
-			redirect('admin_registration');
-			return;
-		}
-
-
-		$data = array(
-
-			'first_name' => $this->input->post('first_name'),
-			'last_name' => $this->input->post('last_name'),
-			'email' => $this->input->post('email'),
-
-			'username' => $this->input->post('username'),
-			'mobile_number' => $this->input->post('mobile_number'),
-			'designation' => $this->input->post('designation'),
-			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-		);
-
-		$this->db->insert('users', $data);
-		redirect("admin");
+            redirect('admin_registration');
+            return;
+        }
 
 
-	}
+        $data = array(
+
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('email'),
+
+            'username' => $this->input->post('username'),
+            'mobile_number' => $this->input->post('mobile_number'),
+            'designation' => $this->input->post('designation'),
+            'password' => $this->input->post('password'),
+            // 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+        );
+
+        $this->db->insert('users', $data);
+        redirect("admin");
+
+
+    }
 
     public function login_process()
     {
@@ -79,8 +80,8 @@ class Admin_login extends CI_Controller
 
         if ($user) {
 
-            if (password_verify($password, $user->password))
-            // if ($password == $user->password)
+            // if (password_verify($password, $user->password))
+            if ($password == $user->password)
             {
 
                 $this->session->set_userdata('current_type', 2);
@@ -105,6 +106,153 @@ class Admin_login extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect('admin');
+    }
+
+
+
+
+
+
+    // ------------------------------------------password reset-----------------------------
+    public function reset_email_form()
+    {
+        $data = $this->engine->store_nav('bjsu', 'bjsu', 'বাংলাদেশ জাতীয় সমবায় ইউনিয়ন');
+        $data['homapage_info'] = $this->Common->get_data('job_homepage')->row();
+
+        $path = 'site/pages/reset_pass_form/reset_pass';
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+
+    public function send_reset_link()
+    {
+        $email = $this->input->post('email');
+        // echo $email;
+        // exit;
+
+        $user = $this->db
+            ->where('email', $email)
+            ->get('users')
+            ->row();
+
+        if ($user) {
+
+            $token = bin2hex(random_bytes(32));
+
+            $expire = date(
+                'Y-m-d H:i:s',
+                strtotime('+1 hour')
+            );
+
+            $this->db->where('id', $user->id);
+            $this->db->update('users', [
+                'reset_token' => $token,
+                'token_expire' => $expire
+            ]);
+
+            $reset_link = base_url(
+                'reset_password/' . $token
+            );
+
+            $this->load->library('email');
+
+            $this->email->from('ahmedmiraz87@gmail.com', 'বাংলাদেশ জাতীয় সমবায় ইউনিয়ন');
+
+            $this->email->to($email);
+
+            $this->email->subject(
+                'Password Reset Link'
+            );
+
+            $this->email->message(
+                'Click this link to reset password: '
+                . $reset_link
+            );
+
+            if ($this->email->send()) {
+
+                $this->session->set_flashdata(
+                    'success',
+                    'Reset link sent to email'
+                );
+
+            } else {
+
+                echo $this->email->print_debugger();
+            }
+
+        } else {
+
+            $this->session->set_flashdata(
+                'error',
+                'Email not found'
+            );
+        }
+
+        // redirect('member_login');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+    public function reset_password($token)
+    {
+        $user = $this->db
+            ->where('reset_token', $token)
+            ->where('token_expire >', date('Y-m-d H:i:s'))
+            ->get('users')
+            ->row();
+
+        if (!$user) {
+            echo "Invalid or expired token";
+            return;
+        }
+
+        $data['token'] = $token;
+        $path = 'site/pages/reset_pass_form/update_pass';
+
+
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+
+    public function update_password()
+    {
+        $token = $this->input->post('token');
+
+        $password = $this->input->post('password');
+
+        // echo $password;
+        // exit;
+
+        $user = $this->db
+            ->where('reset_token', $token)
+            ->get('users')
+            ->row();
+
+        if ($user) {
+
+            $this->db->where('id', $user->id);
+
+            $this->db->update('users', [
+
+                'password' => $password,
+
+                'reset_token' => NULL,
+
+                'token_expire' => NULL
+            ]);
+
+            $this->session->set_flashdata(
+                'success',
+                'Password updated successfully'
+            );
+
+            redirect('admin');
+
+        } else {
+
+            echo "Invalid token";
+        }
     }
 }
 

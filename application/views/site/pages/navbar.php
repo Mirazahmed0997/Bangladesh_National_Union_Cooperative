@@ -103,7 +103,8 @@ if ($user) {
                     আবেদন</a>
             </li>
 
-             <?php $user = $this->session->userdata('login_user_info_all'); ?>
+      
+            <?php $user = $this->session->userdata('login_user_info_all'); ?>
             <?php if ($user): ?>
 
                 <li class="dropdown">

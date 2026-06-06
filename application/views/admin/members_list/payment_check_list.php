@@ -5,6 +5,7 @@
 
     <div class="content-header">
         <div class="container-fluid">
+            <!-- Search / Filter Form -->
             <form method="get" action="<?= base_url('Admin/members_list') ?>">
                 <div class="row g-2 mb-3 align-items-center">
                     <div class="col-md-auto">
@@ -55,7 +56,9 @@
             </form>
         </div>
     </div>
-<section class="content">
+
+    <!-- Members Table -->
+    <section class="content">
         <div class="container-fluid">
             <div class="card shadow">
                 
@@ -94,7 +97,7 @@
 									</div>
                                      <div class="text-center headline">
                                                  <div class="card-header w-25 mt-2 mx-auto">
-                                                         <h5 class="mb-0 text-center">আবেদন তালিকা</h5>
+                                                         <h5 class="mb-0 text-center">পেমেন্ট স্ট্যাটাস যাচাই তালিকা</h5>
                                             </div>
                             </div>
 
@@ -124,8 +127,7 @@
                                     <th>প্রতিনিধির <br>নাম</th>
                                     <th>প্রতিনিধির <br>মোবাইল নম্বর</th>
                                     <th>প্রতিনিধির <br>মেইল</th>
-                                    <th>এসএমএস <br>প্রেরণ</th>
-                                    <th>মেইল <br>প্রেরণ</th>
+                                    <th>পেমেন্ট রিসিপ্ট</th>
                                     <th>পেমেন্ট<br> স্ট্যাটাস</th>
                                     <th>আবেদন<br> ফরম ভিউ</th>
                                 </tr>
@@ -145,7 +147,6 @@
                                     <th>১৩</th>
                                     <th>১৪</th>
                                     <th>১৫</th>
-                                    <th>১৬</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,9 +165,20 @@
                                         <td><?= $row->issuer; ?></td>
                                         <td>0<?= $row->i_contact; ?></td>
                                         <td><?= $row->i_email; ?></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td><?= $row->payment_status; ?></td>
+                                        <td><i class="fas fa-folder"></i></td>
+                                        <td>
+                                            <form action="" method="post">
+                                                <select name="status" onchange="this.form.submit()"
+                                                    class="form-control form-control-sm">
+                                                    <option value=1 <?= $row->payment_status == 'paid' ? 'selected' : '' ?>>Paid
+                                                    </option>
+                                                    <option value=0 <?= $row->payment_status == 'unpaid' ? 'selected' : '' ?>>Unpaid
+                                                    </option>
+
+                                                </select>
+                                            </form>
+                                        </td>
+                                       
                                         <td>
                                             <a href="<?= base_url('Admin/form_view/' . $row->id); ?>"
                                             class=""><i class="fas fa-eye"></i></a>
@@ -290,14 +302,26 @@
         thead {
             display: table-header-group !important;
         }
+
         .headline{
             padding: 10px;
+            
         }
                                             
         .card-header{
         border: 1px solid black;
+        font-size: 16px !important;
         
     }
+    
+                                            
+        .card-header h5{
+        font-size: 16px !important;
+        
+    }
+
+
+
         table {
             width: 100%;
             border-collapse: collapse !important;
@@ -322,7 +346,6 @@
             font-size: 10px;
             text-align: center;
             vertical-align: middle;
-            color: #000;
         }
 
         tr {

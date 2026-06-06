@@ -167,6 +167,10 @@ class Admin extends CI_Controller
 			$where_data['a_contact'] = $a_contact;
 		}
 
+		// if (!empty($a_contact) && $a_contact[0] == '0') {
+		// 	$a_contact = substr($a_contact, 1);
+		// }
+
 		if (!empty($where_data)) {
 			$this->db->where($where_data);
 		}
@@ -181,12 +185,244 @@ class Admin extends CI_Controller
 
 		// $data['members'] = $this->db->get('members_table')->result();
 		$data['members'] = $this->db
-			->order_by('id', 'asc')
-			->where('member_status','approved')
+			->order_by('id', 'desc')
+			->where('member_status', 'approved')
 			->get('members_table')
 			->result();
 
 		$path = 'admin/members_list/members_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function members_admit_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+
+		$where_data = array();
+
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
+
+
+
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
+
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
+
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
+
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
+
+		// if (!empty($a_contact) && $a_contact[0] == '0') {
+		// 	$a_contact = substr($a_contact, 1);
+		// }
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'desc')
+			->where('member_status', 'approved')
+			->get('members_table')
+			->result();
+
+		$path = 'admin/members_list/members_admit_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function reject_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+
+		$where_data = array();
+
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
+
+
+
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
+
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
+
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
+
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'desc')
+			->where('member_status', 'reject')
+			->get('members_table')
+			->result();
+
+		$path = 'admin/members_list/reject_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function review_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+
+		$where_data = array();
+
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
+
+
+
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
+
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
+
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
+
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'desc')
+			->where('member_status', 'review')
+			->get('members_table')
+			->result();
+
+		$path = 'admin/members_list/review_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function inactive_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+
+		$where_data = array();
+
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
+
+
+
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
+
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
+
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
+
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'desc')
+			->where('active_status', 0)
+			->get('members_table')
+			->result();
+
+		$path = 'admin/members_list/inactive_list';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
 	public function application_list()
@@ -238,20 +474,101 @@ class Admin extends CI_Controller
 
 		// $data['members'] = $this->db->get('members_table')->result();
 		$data['members'] = $this->db
-			->order_by('id', 'asc')
-			->where('member_status','pending')
+			->order_by('id', 'desc')
+			->where('member_status', 'pending')
 			->get('members_table')
 			->result();
 
 		$path = 'admin/members_list/application_list';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
+	public function payment_check_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
 
-// 	public function members_list()
+		$where_data = array();
+
+		$member_no = $this->input->get('member_no');
+		$association_name = $this->input->get('association_name');
+		$a_type = $this->input->get('a_type');
+		$a_email = $this->input->get('a_email');
+		$a_contact = $this->input->get('a_contact');
+		$from_date = $this->input->get('from_date');
+		$to_date = $this->input->get('to_date');
+
+
+
+		if (!empty($member_no)) {
+			$where_data['member_no'] = $member_no;
+		}
+
+		if (!empty($association_name)) {
+			$where_data['association_name'] = $association_name;
+		}
+		if (!empty($a_type)) {
+			$where_data['a_type'] = $a_type;
+		}
+
+		if (!empty($a_email)) {
+			$where_data['a_email'] = $a_email;
+		}
+
+		if (!empty($a_contact)) {
+			$where_data['a_contact'] = $a_contact;
+		}
+
+		if (!empty($where_data)) {
+			$this->db->where($where_data);
+		}
+
+		if (!empty($from_date)) {
+			$this->db->where('created_at >=', $from_date);
+		}
+
+		if (!empty($to_date)) {
+			$this->db->where('created_at <=', $to_date);
+		}
+
+		// $data['members'] = $this->db->get('members_table')->result();
+		$data['members'] = $this->db
+			->order_by('id', 'desc')
+			->where('member_status', 'pending')
+			->get('members_table')
+			->result();
+
+		$path = 'admin/members_list/payment_check_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function due_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		$path = 'admin/members_list/due_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function current_member_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		$path = 'admin/members_list/current_member_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function submitted_reciept()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		$path = 'admin/accounts/submitted_reciept';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function expanse_invoice()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		$path = 'admin/accounts/expanse_invoice';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+	// 	public function members_list()
 // {
 //     $data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
 
-//     $member_no = $this->input->get('member_no');
+	//     $member_no = $this->input->get('member_no');
 //     $association_name = $this->input->get('association_name');
 //     $a_type = $this->input->get('a_type');
 //     $a_email = $this->input->get('a_email');
@@ -259,64 +576,64 @@ class Admin extends CI_Controller
 //     $from_date = $this->input->get('from_date');
 //     $to_date = $this->input->get('to_date');
 
-    
-//     $this->db->from('members_table');
 
-//     if (!empty($member_no)) {
+	//     $this->db->from('members_table');
+
+	//     if (!empty($member_no)) {
 //         $this->db->where('member_no', $member_no);
 //     }
 
-//     if (!empty($association_name)) {
+	//     if (!empty($association_name)) {
 //         $this->db->like('association_name', $association_name);
 //     }
 
-//     if (!empty($a_type)) {
+	//     if (!empty($a_type)) {
 //         $this->db->where('a_type', $a_type);
 //     }
 
-//     if (!empty($a_email)) {
+	//     if (!empty($a_email)) {
 //         $this->db->where('a_email', $a_email);
 //     }
 
-//     if (!empty($a_contact)) {
+	//     if (!empty($a_contact)) {
 //         $this->db->where('a_contact', $a_contact);
 //     }
 
-//     if (!empty($from_date)) {
+	//     if (!empty($from_date)) {
 //         $this->db->where('created_at >=', $from_date);
 //     }
 
-//     if (!empty($to_date)) {
+	//     if (!empty($to_date)) {
 //         $this->db->where('created_at <=', $to_date);
 //     }
 
-    
-//     $config['base_url'] = base_url('members_list');
+
+	//     $config['base_url'] = base_url('members_list');
 //     $config['total_rows'] = $this->db->count_all_results('', false); 
 //     $config['per_page'] = 10;
 //     $config['uri_segment'] = 2;
 
-    
-//     $config['full_tag_open'] = '<ul class="pagination">';
+
+	//     $config['full_tag_open'] = '<ul class="pagination">';
 //     $config['full_tag_close'] = '</ul>';
 //     $config['attributes'] = ['class' => 'page-link'];
 
-//     $this->pagination->initialize($config);
+	//     $this->pagination->initialize($config);
 
-    
-//     $page = $this->uri->segment(2);
+
+	//     $page = $this->uri->segment(2);
 //     $offset = ($page) ? $page : 0;
 
-   
-//     $this->db->order_by('id', 'DESC');
+
+	//     $this->db->order_by('id', 'DESC');
 //     $this->db->limit($config['per_page'], $offset);
 
-//     $data['members'] = $this->db->get()->result();
+	//     $data['members'] = $this->db->get()->result();
 
-   
-//     $data['links'] = $this->pagination->create_links();
 
-//     $path = 'admin/members_list/members_list';
+	//     $data['links'] = $this->pagination->create_links();
+
+	//     $path = 'admin/members_list/members_list';
 //     $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 // }
 	// ---------------------delete member-----------------
@@ -357,12 +674,16 @@ class Admin extends CI_Controller
 
 		$member_no = "BJSUM0000" . str_pad($count, STR_PAD_LEFT);
 
+		$this->db->where('member_no', $member_no);
+		$existing_member = $this->db->get('members_table')->row();
+
+
 		$data = [
 			'active_status' => 1,
 			'member_status' => 'approved',
 			'member_no' => $member_no,
 			// 'approved_by' => $user['id'] ?? null,
-			// 'approved_date' => date('Y-m-d H:i:s')
+			'approved_date' => date('Y-m-d H:i:s')
 		];
 
 		$this->db->where('id', $id);
@@ -381,6 +702,39 @@ class Admin extends CI_Controller
 	}
 
 
+	public function reject_member($id)
+	{
+		$member = $this->db->get_where('members_table', ['id' => $id])->row();
+
+		$update_data = [
+
+			'member_status' => 'reject',
+		];
+
+
+		$this->db->where('id', $id);
+		$this->db->update('members_table', $update_data);
+
+		redirect('reject_list');
+	}
+
+	public function review_member($id)
+	{
+		$member = $this->db->get_where('members_table', ['id' => $id])->row();
+
+		$update_data = [
+
+			'member_status' => 'review',
+		];
+
+
+		$this->db->where('id', $id);
+		$this->db->update('members_table', $update_data);
+
+		redirect('review_list');
+	}
+
+
 	public function member_active_status($id)
 	{
 		$member = $this->db->get_where('members_table', ['id' => $id])->row();
@@ -395,6 +749,20 @@ class Admin extends CI_Controller
 		$this->db->update('members_table', $update_data);
 
 		redirect('members_list');
+	}
+
+
+		public function update_comment($id)
+	{
+		$member = $this->db->get_where('members_table', ['id' => $id])->row();
+
+		$update_data = [
+			'comments' => $this->input->post('comments'),
+		];
+		$this->db->where('id', $id);
+		$this->db->update('members_table', $update_data);
+
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 

@@ -269,6 +269,12 @@
             visibility: hidden;
         }
 
+        .badge-title {
+            background-color: #FFDFB7;
+        }
+
+       
+
 
         @media print {
 
@@ -289,6 +295,10 @@
                 font-weight: 700;
                 margin-top: 6px !important;
                 margin-bottom: 5px !important;
+            }
+
+            .border {
+                display: none;
             }
 
 
@@ -314,8 +324,11 @@
 
             .badge-title {
                 border: 2px solid black;
+                width: 50%;
 
             }
+
+
 
             .top-box {
 
@@ -417,6 +430,11 @@
 
             .footer p {
                 font-size: 16px !important;
+                color: black !important;
+            }
+
+            .footer a {
+                color: black !important;
             }
 
         }
@@ -434,23 +452,29 @@
                 <button onclick="window.print()" class="btn btn-sm btn-danger ">
                     <i class="fas fa-print"></i> Print
                 </button>
-                <a href="<?= base_url('approval_update/' . $member->id); ?>"
+                <!-- <a href="<?= base_url('approval_update/' . $member->id); ?>"
                     class="btn btn-success btn-sm active-button"
                     onclick="return confirm('Are you sure you want to approve this member?');">
                     <?= ($member->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
-                </a>
+                </a> -->
             </div>
 
             <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
 
-            <p>নিবন্ধন নম্বর: ৩৪, তারিখ: ১৬.০৬.১৯ খৃ: ১৬.০৬.১৯৬১ খ্রি. (সংশোধিত) সঅ-০১, তারিখ: ০৭.০৭.২০২৫ খ্রি.</p>
+            <p>নিবন্ধন নম্বর: ৩৪, ১৬.০৬.১৯৬১ খ্রি. (সংশোধিত) সঅ-০১, তারিখ: ০৭.০৭.২০২৫ খ্রি.</p>
 
             <p>ঠিকানা: সমবায় ব্যাংক ভবন (৮ম তলা), ৯/ডি, মতিঝিল বা/এ, ঢাকা-১০০০।</p>
 
-            <div class="badge-title">
+            <!-- <div class="badge-title">
+                সদস্য আবেদন ফরম
+            </div> -->
+
+        </div>
+
+        <div class="badge-title-container d-flex justify-content-center">
+            <div class="badge-title text-center w-25 ">
                 সদস্য আবেদন ফরম
             </div>
-
         </div>
 
         <div class="top-box <?= ($member->member_status != 'approved') ? 'invisible-box' : '' ?>">
@@ -744,8 +768,7 @@
                 <div class="sign-text">
 
                     <div class="text-center">
-                        <a href="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
-                            target="_blank">
+                        <a href="<?= base_url('assets/persident_editor_sign/e_sign.png'); ?>" target="_blank">
 
                             <img src="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
                                 width="60px">
@@ -812,11 +835,9 @@
 
             <div class="col-4">
                 <div class="text-center">
-                    <a href="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
-                        target="_blank">
+                    <a href="<?= base_url('assets/persident_editor_sign/o_sign.png'); ?>" target="_blank">
 
-                        <img src="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
-                            width="60px">
+                        <img src="<?= base_url('assets/persident_editor_sign/o_sign.png'); ?>" width="60px">
                     </a>
                 </div>
                 <p>স্বয়ংক্রিয়ভাবে প্রস্তুত</p>
@@ -844,11 +865,67 @@
             </div>
         </div>
 
+        <div class="border text-center mt-2">
+            <a href="<?= base_url('approval_update/' . $member->id); ?>" class="btn btn-success btn-sm active-button"
+                onclick="return confirm('Are you sure you want to approve this member?');">
+                <?= ($member->member_status == 'approved') ? 'Approved' : 'Approve Now'; ?>
+            </a>
+
+            <?php if ($member->member_status == 'approved'): ?>
+                <span class="badge bg-success"></span>
+            <?php else: ?>
+                <a href="<?= base_url('reject_member/' . $member->id); ?>" class="btn btn-danger btn-sm reject-button"
+                    onclick="return confirm('Are you sure you want to reject this member?');">Reject</a>
+            <?php endif; ?>
+            <?php if ($member->member_status == 'approved'): ?>
+                <span class="badge bg-success"></span>
+            <?php else: ?>
+                <a href=" <?= base_url('review_member/' . $member->id); ?>" class="btn btn-success btn-sm reject-button"
+                    onclick="return confirm('Are you sure you want to reject this member?');">
+                    Review</a>
+            <?php endif; ?>
+
+            <button class="btn btn-success btn-sm reject-button" onclick="comment()">
+                Add Comment
+            </button>
+        </div>
+
     </div>
+
+
+
+
 
 </body>
 
 </html>
+
+<form class="text-center  comment" action="<?php echo base_url('Admin/update_comment/' . $member->id); ?>" method="POST">
+    <div id="comment-box" class="form-group d-none">
+        <label>মন্তব্য লিখুন :</label><br>
+        <textarea name="comments" value="<?= $member->comments ?>"></textarea><br>
+        <button onclick="return confirm('Are you sure you ?');" type="submit"
+            class="btn btn-success btn-sm reject-button">Submit</button>
+        <button onclick="cancel()"
+            class="btn btn-success btn-sm reject-button">Cancel</button>
+    </div>
+</form>
+
+
+<script>
+
+    function comment() {
+        comment = document.getElementById('comment-box')
+        comment.classList.remove('d-none');
+    }
+
+    function cancel()
+    {
+        comment = document.getElementById('comment-box')
+        comment.classList.add('d-none');
+    }
+
+</script>
 
 
 

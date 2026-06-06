@@ -269,6 +269,10 @@
             visibility: hidden;
         }
 
+         .badge-title{
+                background-color: #FFDFB7;
+            }
+
 
         @media print {
 
@@ -289,6 +293,9 @@
                 font-weight: 700;
                 margin-top: 6px !important;
                 margin-bottom: 5px !important;
+            }
+            .border{
+                display: none;
             }
 
 
@@ -314,8 +321,11 @@
 
             .badge-title {
                 border: 2px solid black;
-
+                width: 50%;
+                
             }
+
+           
 
             .top-box {
 
@@ -417,6 +427,10 @@
 
             .footer p {
                 font-size: 16px !important;
+                color: black !important;
+            }
+            .footer a {
+                color: black !important;
             }
 
         }
@@ -434,11 +448,11 @@
                 <button onclick="window.print()" class="btn btn-sm btn-danger ">
                     <i class="fas fa-print"></i> Print
                 </button>
-                <a href="<?= base_url('approval_update/' . $member->id); ?>"
+                <!-- <a href="<?= base_url('approval_update/' . $member->id); ?>"
                     class="btn btn-success btn-sm active-button"
                     onclick="return confirm('Are you sure you want to approve this member?');">
                     <?= ($member->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
-                </a>
+                </a> -->
             </div>
 
             <h2>বাংলাদেশ জাতীয় সমবায় ইউনিয়ন</h2>
@@ -447,11 +461,17 @@
 
             <p>ঠিকানা: সমবায় ব্যাংক ভবন (৮ম তলা), ৯/ডি, মতিঝিল বা/এ, ঢাকা-১০০০।</p>
 
-            <div class="badge-title">
+            <!-- <div class="badge-title">
                 সদস্য আবেদন ফরম
-            </div>
+            </div> -->
 
         </div>
+
+       <div class="badge-title-container d-flex justify-content-center">
+          <div class="badge-title text-center w-25 ">
+                সদস্য আবেদন ফরম
+            </div>
+       </div>
 
         <div class="top-box <?= ($member->member_status != 'approved') ? 'invisible-box' : '' ?>">
 
@@ -744,7 +764,7 @@
                 <div class="sign-text">
 
                     <div class="text-center">
-                        <a href="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                        <a href="<?= base_url('assets/persident_editor_sign/e_sign.png'); ?>"
                             target="_blank">
 
                             <img src="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
@@ -812,10 +832,10 @@
 
             <div class="col-4">
                 <div class="text-center">
-                    <a href="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                    <a href="<?= base_url('assets/persident_editor_sign/o_sign.png'); ?>"
                         target="_blank">
 
-                        <img src="<?= base_url('./assets/uploads/project/members/i_sign/' . $member->i_sign) ?>"
+                        <img src="<?= base_url('assets/persident_editor_sign/o_sign.png'); ?>"
                             width="60px">
                     </a>
                 </div>
@@ -844,12 +864,19 @@
             </div>
         </div>
 
+        <div class="border text-center mt-2">
+        <a class="btn btn-success btn-sm active-button"
+            >
+            <?= ($member->member_status == 'approved') ? 'Approved' : 'Not Approve yet'; ?>
+        </a>
     </div>
+
+    </div>
+    
 
 </body>
 
 </html>
-
 
 
 

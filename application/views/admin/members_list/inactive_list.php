@@ -1,10 +1,13 @@
 <title>সদস্য ভর্তি তালিকা</title>
 
+
+ 
 <div class="content-wrapper">
     
 
     <div class="content-header">
         <div class="container-fluid">
+            <!-- Search / Filter Form -->
             <form method="get" action="<?= base_url('Admin/members_list') ?>">
                 <div class="row g-2 mb-3 align-items-center">
                     <div class="col-md-auto">
@@ -55,7 +58,9 @@
             </form>
         </div>
     </div>
-<section class="content">
+
+    <!-- Members Table -->
+    <section class="content">
         <div class="container-fluid">
             <div class="card shadow">
                 
@@ -94,7 +99,7 @@
 									</div>
                                      <div class="text-center headline">
                                                  <div class="card-header w-25 mt-2 mx-auto">
-                                                         <h5 class="mb-0 text-center">আবেদন তালিকা</h5>
+                                                         <h5 class="mb-0 text-center">সদস্য বন্ধ তালিকা</h5>
                                             </div>
                             </div>
 
@@ -112,23 +117,29 @@
 
                            <thead class="thead-dark">
                                 <tr>
-                                    <th>ক্র: নং</th>
-                                    <th>আবেদনকৃত <br> সমিতির নাম</th>
-                                    <th>সমিতির <br> ঠিকানা</th>
-                                    <th>সমিতির<br> নিবন্ধন নম্বর</th>
-                                    <th>নিবন্ধিত ঠিকানা</th>
-                                    <th>সদস্য আবেদনের<br> তারিখ</th>
-                                    <th>আবেদন<br> মঞ্জুর তারিখ</th>
-                                    <th>মোবাইল নম্বর</th>
-                                    <th>সমিতির <br>মেইল</th>
-                                    <th>প্রতিনিধির <br>নাম</th>
-                                    <th>প্রতিনিধির <br>মোবাইল নম্বর</th>
-                                    <th>প্রতিনিধির <br>মেইল</th>
-                                    <th>এসএমএস <br>প্রেরণ</th>
-                                    <th>মেইল <br>প্রেরণ</th>
-                                    <th>পেমেন্ট<br> স্ট্যাটাস</th>
-                                    <th>আবেদন<br> ফরম ভিউ</th>
+                                    <th rowspan="2">ক্র: নং</th>
+                                    <th rowspan="2">সদস্য সমিতির <br> নাম</th>
+                                    <th rowspan="2">সদস্য নম্বর</th>
+                                    <th rowspan="2">কার্যালয়ের ঠিকানা</th>
+                                    <th rowspan="2">নিবন্ধিত ঠিকানা</th>
+                                    <th rowspan="2">সদস্য ভর্তির তারিখ</th>
+                                    <th rowspan="2">মোবাইল <br> নম্বর</th>
+                                    <th rowspan="2">ইমেইল</th>
+                                    <th rowspan="2">প্রতিনিধির  <br>নাম</th>
+                                    <th rowspan="2">প্রতিনিধির  <br>পদবি</th>
+                                    <th rowspan="2">প্রতিনিধির <br>মোবাইল নম্বর <br>ও মেইল</th>
+                                    <th rowspan="2">সদস্য ভর্তির ফী <br> ও চাঁদা জমা রশিদ <br> ও ভিউ</th>
+                                    <th rowspan="2">সদস্য <br> সমিতির <br>জেলা</th>
+                                    <th rowspan="2">সদস্য<br> সমিতির<br> বিভাগ</th> 
+                                    <th rowspan="2">আবেদন <br>ফরম ভিউ</th>
+                                    <th colspan="2">বকেয়া তথ্য</th>
                                 </tr>
+                                <tr>
+                                    <th>বকেয়া বছর</th>
+                                    <th>বকেয়ার পরিমাণ</th>
+                                </tr>
+                                
+        
                                 <tr>
                                     <th>০১</th>
                                     <th>০২</th>
@@ -146,105 +157,39 @@
                                     <th>১৪</th>
                                     <th>১৫</th>
                                     <th>১৬</th>
+                                    <th>১৭</th>
                                 </tr>
+                                
                             </thead>
                             <tbody>
-                                <?php $i = 1;
-                                foreach ($members as $row): ?>
+                               
                                     <tr>
-                                        <td><?= $i++; ?></td>
-                                        <td><?= $row->association_name; ?></td>
-                                        <td><?= $row->a_address; ?></td>
-                                        <td><?= $row->registration_no; ?></td>
-                                        <td><?= $row->r_address ?></td>
-                                        <td><?= $row->created_at; ?></td>
-                                        <td><?= $row->approved_date; ?></td>
-                                        <td>0<?= $row->a_contact; ?></td>
-                                        <td><?= $row->a_email; ?></td>
-                                        <td><?= $row->issuer; ?></td>
-                                        <td>0<?= $row->i_contact; ?></td>
-                                        <td><?= $row->i_email; ?></td>
                                         <td></td>
                                         <td></td>
-                                        <td><?= $row->payment_status; ?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="comment-cell"></td>
+                                        <td></td>
+                                        <td></td>
+
+
+    
+                                        <td class="comment-cell" title="">
+                                        </td>
+                                        
                                         <td>
-                                            <a href="<?= base_url('Admin/form_view/' . $row->id); ?>"
+                                            <a href=""
                                             class=""><i class="fas fa-eye"></i></a>
                                         </td>
-                                        
-                                        
-                                    
-
-
-
-
-
-
-                                        <!-- <td>
-                                            <?php if ($row->active_status == 1): ?>
-                                                <span class="badge bg-success">Active</span>
-                                            <?php else: ?>
-                                                <span class="badge bg-danger">Inactive</span>
-                                            <?php endif; ?>
-                                        </td> -->
-
-
-                                        <!-- <td>
-                                            <form action="<?= base_url('member_active_status/' . $row->id); ?>"
-                                                method="post">
-                                                <select name="active_status" onchange="this.form.submit()"
-                                                    class="form-control form-control-sm">
-                                                    <option value=1 <?= $row->active_status == 1 ? 'selected' : '' ?>>Active
-                                                    </option>
-                                                    <option value=0 <?= $row->active_status == 0 ? 'selected' : '' ?>>Inactive
-                                                    </option>
-
-                                                </select>
-                                            </form>
-                                        </td> -->
-
-                                        <!-- <td><a href="<?= base_url('Admin/members_account/'); ?>"
-                                                class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a></td>
-                                                <td>
-                                            <?php if ($row->member_status == 'approved'): ?>
-                                                <span class="badge bg-success">Approved</span>
-                                            <?php else: ?>
-                                                <span class="badge bg-danger">Pending</span>
-                                            <?php endif; ?>
-                                        </td> -->
-
+                                        <td></td>
+                                        <td></td>
                                         <td>
-                                        
-                                        <!-- <a href="<?= base_url('Admin/view_member/' . $row->id); ?>"
-                                                class="btn btn-success btn-sm">Details</a> -->
-
-                                        
-
-
-                                        <!-- <a href="<?= base_url('Admin/delete_member/' . $row->id); ?>"
-                                            class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure?');">Delete</a> -->
-
-
-
-
-
-
-                                        <!-- <a href="<?= base_url('Admin/seed_members/' . $row->id); ?>"
-                                                class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure?');">add dummy</a> -->
-
-
-
-
-
-                                        <!-- <a href="javascript:void(0);" class="btn btn-success btn-sm active-button"
-                                                data-id="<?= $row->id; ?>">
-                                                <?= ($row->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
-                                            </a> -->
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                            <a href=""
+                                            class=""><i class="fas fa-eye"></i></a>
+                                        </td>                                       
                             </tbody>
                         </table>
                     </div>
@@ -259,6 +204,13 @@
 
 
 <style>
+
+      .comment-cell {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
     .header{
         background-color: #3BAAB7;
@@ -292,12 +244,17 @@
         }
         .headline{
             padding: 10px;
+            
         }
                                             
         .card-header{
         border: 1px solid black;
+        font-size: 16px !important;
         
     }
+
+
+
         table {
             width: 100%;
             border-collapse: collapse !important;
@@ -322,7 +279,6 @@
             font-size: 10px;
             text-align: center;
             vertical-align: middle;
-            color: #000;
         }
 
         tr {
