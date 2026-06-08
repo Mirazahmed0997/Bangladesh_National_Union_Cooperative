@@ -427,7 +427,7 @@ $inactive_member_count = $this->db->count_all_results('members_table');
                             </a>
                         </li>
                         <li class="nav-item has-treeview <?= active_open('applicant', $main_nav); ?>">
-                            <a href="#" class="nav-link <?= active_nav('applicant', $main_nav); ?>">
+                            <a href="<?php echo base_url('deposite_costs') ?>" class="nav-link <?= active_nav('applicant', $main_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     জমা-খরচ
@@ -461,7 +461,7 @@ $inactive_member_count = $this->db->count_all_results('members_table');
                             </a>
                         </li>
                         <li class="nav-item has-treeview <?= active_open('applicant', $main_nav); ?>">
-                            <a href="#" class="nav-link <?= active_nav('applicant', $main_nav); ?>">
+                            <a href="<?php echo base_url('details_list') ?>" class="nav-link <?= active_nav('applicant', $main_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     ডিটেল লিস্ট

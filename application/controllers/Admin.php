@@ -563,6 +563,18 @@ class Admin extends CI_Controller
 		$path = 'admin/accounts/expanse_invoice';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
+	public function details_list()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		$path = 'admin/details_list/details_list';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+	public function deposite_costs()
+	{
+		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
+		$path = 'admin/details_list/deposite_costs';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
 
 	// 	public function members_list()
 // {

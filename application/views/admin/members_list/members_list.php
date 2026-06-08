@@ -216,7 +216,7 @@
                                             <?php endif; ?>
                                         </td> -->
 
-                                        <td>
+                                        <!-- <td> -->
                                         
                                         <!-- <a href="<?= base_url('Admin/view_member/' . $row->id); ?>"
                                                 class="btn btn-success btn-sm">Details</a> -->
@@ -245,7 +245,7 @@
                                                 data-id="<?= $row->id; ?>">
                                                 <?= ($row->member_status == 'approved') ? 'approved' : 'Approve Now'; ?>
                                             </a> -->
-                                        </td>
+                                        <!-- </td> -->
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

@@ -109,10 +109,6 @@ class Admin_login extends CI_Controller
     }
 
 
-
-
-
-
     // ------------------------------------------password reset-----------------------------
     public function reset_email_form()
     {

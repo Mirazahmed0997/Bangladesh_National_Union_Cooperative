@@ -903,7 +903,7 @@
 <form class="text-center  comment" action="<?php echo base_url('Admin/update_comment/' . $member->id); ?>" method="POST">
     <div id="comment-box" class="form-group d-none">
         <label>মন্তব্য লিখুন :</label><br>
-        <textarea name="comments" value="<?= $member->comments ?>"></textarea><br>
+        <textarea name="comments" ></textarea><br>
         <button onclick="return confirm('Are you sure you ?');" type="submit"
             class="btn btn-success btn-sm reject-button">Submit</button>
         <button onclick="cancel()"
